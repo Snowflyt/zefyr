@@ -1,0 +1,64 @@
+{
+  "name": "zefyr",
+  "version": "0.0.1-alpha.1",
+  "description": "Configurable and typesafe monkey patching for TypeScript",
+  "keywords": [],
+  "homepage": "https://github.com/Snowfly-T/zefyr",
+  "bugs": {
+    "url": "https://github.com/Snowfly-T/zefyr/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Snowfly-T/zefyr"
+  },
+  "license": "MIT",
+  "author": "Snowflyt <gaoge011022@gmail.com>",
+  "type": "module",
+  "main": "./index.js",
+  "module": "./index.js",
+  "types": "./index.d.ts",
+  "scripts": {
+    "prebuild": "npm run clean",
+    "build": "tsc -p ./tsconfig.build.json && cpy ./dist/**/* ./build/ && rimraf dist && cpy ./package.json ./build/ && cpy ./README.md ./build/ && cpy ./LICENSE ./build/",
+    "postbuild": "prettier --loglevel=silent --write ./build/",
+    "clean": "rimraf dist build",
+    "format": "prettier --write {src,test}/**/*.{json,js,jsx,ts,tsx}",
+    "lint": "eslint {src,test}/**/*.{js,jsx,ts,tsx}",
+    "lint:fix": "eslint --fix {src,test}/**/*.{js,jsx,ts,tsx}",
+    "test": "vitest run",
+    "test:cov": "vitest run --coverage",
+    "test:ui": "vitest --ui --coverage.enabled=true",
+    "test:watch": "vitest",
+    "test:watch-cov": "vitest --coverage"
+  },
+  "dependencies": {
+    "@types/lodash-es": "^4.17.9",
+    "date-fns": "^2.30.0",
+    "fraction.js": "^4.3.4",
+    "lodash-es": "^4.17.21"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.4.1",
+    "@typescript-eslint/parser": "^6.4.1",
+    "@vitest/coverage-v8": "^0.34.2",
+    "@vitest/ui": "^0.34.3",
+    "cpy-cli": "^5.0.0",
+    "eslint": "^8.47.0",
+    "eslint-config-prettier": "^8.10.0",
+    "eslint-import-resolver-typescript": "^3.6.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-sort-destructure-keys": "^1.5.0",
+    "prettier": "^2.8.8",
+    "prettier-plugin-packagejson": "^2.4.5",
+    "rimraf": "^5.0.1",
+    "ts-toolbelt": "^9.6.0",
+    "type-fest": "^4.3.1",
+    "typescript": "^5.1.6",
+    "vite": "^4.4.9",
+    "vite-plugin-dts": "^3.5.2",
+    "vite-plugin-linter": "^2.0.5",
+    "vite-tsconfig-paths": "^4.2.0",
+    "vitest": "^0.34.2"
+  }
+}
