@@ -7,7 +7,7 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface Array<T> {
     /**
-     * The last element of the ArrayT.
+     * The last element of the array.
      *
      * @example
      * ```typescript
@@ -21,7 +21,7 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface ReadonlyArray<T> {
     /**
-     * The last element of the ArrayT.
+     * The last element of the array.
      *
      * @example
      * ```typescript

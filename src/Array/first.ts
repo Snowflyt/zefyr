@@ -3,7 +3,7 @@ export type First<AS extends readonly unknown[]> = number extends AS['length']
   : AS[0];
 
 /**
- * Returns the first element of the ArrayT.
+ * Returns the first element of the array.
  * @param array The array to get the first element of.
  *
  * @example
