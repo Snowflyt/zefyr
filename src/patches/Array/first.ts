@@ -1,10 +1,7 @@
 import first from '../../Array/first';
 import { patch } from '../../utils/patch';
 
-import type { First } from '../../Array/first';
-
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface Array<T> {
     /**
      * The first element of the array.
@@ -15,7 +12,8 @@ declare global {
      * arr.first; // => 1
      * ```
      */
-    first: First<this>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    first: any[] extends this ? T | undefined : T;
   }
 
   interface ReadonlyArray<T> {
@@ -28,8 +26,7 @@ declare global {
      * arr.first; // => 1
      * ```
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    first: readonly any[] extends this ? T | undefined : T;
+    first: T | undefined;
   }
 }
 

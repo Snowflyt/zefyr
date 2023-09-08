@@ -2,7 +2,6 @@ import last from '../../Array/last';
 import { patch } from '../../utils/patch';
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface Array<T> {
     /**
      * The last element of the array.
@@ -14,7 +13,7 @@ declare global {
      * ```
      */
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    last: readonly any[] extends this ? T | undefined : T;
+    last: any[] extends this ? T | undefined : T;
   }
 
   interface ReadonlyArray<T> {
@@ -27,8 +26,7 @@ declare global {
      * arr.last; // => 3
      * ```
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    last: readonly any[] extends this ? T | undefined : T;
+    last: T | undefined;
   }
 }
 
