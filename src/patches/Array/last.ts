@@ -7,30 +7,30 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface Array<T> {
     /**
-     * Returns the last element of the array.
+     * The last element of the array.
      *
      * @example
      * ```typescript
      * const arr = [1, 2, 3];
-     * arr.last(); // => 3
+     * arr.last; // => 3
      * ```
      */
-    last(): Last<this>;
+    last: Last<this>;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface ReadonlyArray<T> {
     /**
-     * Returns the last element of the array.
+     * The last element of the array.
      *
      * @example
      * ```typescript
      * const arr = [1, 2, 3];
-     * arr.last(); // => 3
+     * arr.last; // => 3
      * ```
      */
-    last(): Last<this>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    last: readonly any[] extends this ? T | undefined : T;
   }
 }
 
-patch(Array).with({ last });
+patch(Array).withGetter({ last });

@@ -7,30 +7,30 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface Array<T> {
     /**
-     * Returns the first element of the array.
+     * The first element of the array.
      *
      * @example
      * ```typescript
      * const arr = [1, 2, 3];
-     * arr.first(); // => 1
+     * arr.first; // => 1
      * ```
      */
-    first(): First<this>;
+    first: First<this>;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface ReadonlyArray<T> {
     /**
-     * Returns the first element of the array.
+     * The first element of the array.
      *
      * @example
      * ```typescript
      * const arr = [1, 2, 3];
-     * arr.first(); // => 1
+     * arr.first; // => 1
      * ```
      */
-    first(): First<this>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    first: readonly any[] extends this ? T | undefined : T;
   }
 }
 
-patch(Array).with({ first });
+patch(Array).withGetter({ first });

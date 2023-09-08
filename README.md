@@ -12,8 +12,8 @@ console.log(blueAndGreen); // ['green', 'blue']
 new Date().format('yyyy-MM-dd'); // => '2023-09-01'
 ((3).days + (2).hours).ago() // => Date(2023-08-29T21:00:00.000Z)
 
-const arr = [1, 2, true, 'a'] as const;
-arr.last(); // => 'a'. Also inferred as exactly 'a' in TypeScript
+const arr = [1, 2, true, 'a'];
+arr.last; // => 'a'
 const wrongResult = [1, 2, false].sum(); // Throws an error at runtime. wrongResult :: never
 const rightResult = [1, 2, 3].sum(); // => 6. rightResult :: number
 
