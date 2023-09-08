@@ -5,6 +5,7 @@ import './first';
 import './last';
 import './mean';
 import './median';
+import './reject';
 import './sum';
 import './unique';
 import './without';

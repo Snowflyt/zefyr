@@ -5,6 +5,7 @@ export { default as first } from './first';
 export { default as last } from './last';
 export { default as mean } from './mean';
 export { default as median } from './median';
+export { default as reject } from './reject';
 export { default as sum } from './sum';
 export { default as unique } from './unique';
 export { default as without } from './without';
