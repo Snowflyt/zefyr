@@ -1,10 +1,10 @@
+import { patch } from '../../.internal/utils/patch';
 import isEven from '../../Number/isEven';
-import { patch } from '../../utils/patch';
 
 declare global {
   interface Number {
     /**
-     * Returns true if the number is even.
+     * Returns `true` if the number is even.
      *
      * @example
      * ```typescript

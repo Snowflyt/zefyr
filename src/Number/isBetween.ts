@@ -1,5 +1,5 @@
 /**
- * Returns true if the number is between the given numbers, inclusive.
+ * Returns `true` if the number is between the given numbers, inclusive.
  *
  * @example
  * ```typescript

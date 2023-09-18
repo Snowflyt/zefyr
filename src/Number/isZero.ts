@@ -1,5 +1,5 @@
 /**
- * Returns true if the number is zero.
+ * Returns `true` if the number is zero.
  *
  * @example
  * ```typescript

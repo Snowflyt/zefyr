@@ -1,5 +1,5 @@
+import { patch } from '../../.internal/utils/patch';
 import strictKeys from '../../ObjectConstructor/strictKeys';
-import { patch } from '../../utils/patch';
 
 import type { StrictKeys } from '../../ObjectConstructor/strictKeys';
 

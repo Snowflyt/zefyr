@@ -1,5 +1,5 @@
 /**
- * Returns true if the number is negative (using `Math.sign`).
+ * Returns `true` if the number is negative (using `Math.sign`).
  *
  * @example
  * ```typescript

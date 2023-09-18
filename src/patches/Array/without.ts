@@ -1,5 +1,5 @@
+import { patch } from '../../.internal/utils/patch';
 import without from '../../Array/without';
-import { patch } from '../../utils/patch';
 
 import type { Without } from '../../Array/without';
 
@@ -7,18 +7,16 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface Array<T> {
     /**
-     * Returns a new array excluding all given values using
-     * [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
-     * for equality comparisons (using `_.without`).
+     * Returns a new array excluding all given values (using `equals` for equality comparisons).
      * @param values The values to exclude.
      *
      * @example
      * ```typescript
-     * const arr = [1, 2, 3, 1, 2, 3];
-     * arr.without(1, 2); // => [3, 3]
+     * const arr = [1, 2, 3, 1, 2, 3, [1, 2, { b: 10 }]];
+     * arr.without(1, 2, [1, 2, { b: 10 }]); // => [3, 3]
      * ```
      *
-     * @see {@link _.without}
+     * @see {@link equals}
      */
     without<
       const AS extends readonly unknown[],
@@ -32,18 +30,16 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface ReadonlyArray<T> {
     /**
-     * Returns a new array excluding all given values using
-     * [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
-     * for equality comparisons (using `_.without`).
+     * Returns a new array excluding all given values (using `equals` for equality comparisons).
      * @param values The values to exclude.
      *
      * @example
      * ```typescript
-     * const arr = [1, 2, 3, 1, 2, 3];
-     * arr.without(1, 2); // => [3, 3]
+     * const arr = [1, 2, 3, 1, 2, 3, [1, 2, { b: 10 }]];
+     * arr.without(1, 2, [1, 2, { b: 10 }]); // => [3, 3]
      * ```
      *
-     * @see {@link _.without}
+     * @see {@link equals}
      */
     without<
       const AS extends readonly unknown[],

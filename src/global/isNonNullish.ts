@@ -4,7 +4,7 @@
 export type NonNullish<T> = Exclude<T, null | undefined>;
 
 /**
- * Returns true if the value is not null or undefined.
+ * Returns `true` if the value is not null or undefined.
  * @param value The value to check.
  *
  * @example

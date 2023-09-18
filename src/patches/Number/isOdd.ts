@@ -1,10 +1,10 @@
+import { patch } from '../../.internal/utils/patch';
 import isOdd from '../../Number/isOdd';
-import { patch } from '../../utils/patch';
 
 declare global {
   interface Number {
     /**
-     * Returns true if the number is odd.
+     * Returns `true` if the number is odd.
      *
      * @example
      * ```typescript

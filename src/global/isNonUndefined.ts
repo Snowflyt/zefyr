@@ -4,7 +4,7 @@
 export type NonUndefined<T> = Exclude<T, undefined>;
 
 /**
- * Returns true if the value is not undefined.
+ * Returns `true` if the value is not undefined.
  * @param value The value to check.
  *
  * @example

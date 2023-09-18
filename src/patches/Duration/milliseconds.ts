@@ -1,5 +1,5 @@
+import { patch } from '../../.internal/utils/patch';
 import milliseconds from '../../Duration/milliseconds';
-import { patch } from '../../utils/patch';
 
 declare global {
   interface Number {

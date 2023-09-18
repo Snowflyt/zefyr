@@ -1,9 +1,9 @@
+import { patch } from '../../.internal/utils/patch';
 import isTruthy from '../../global/isTruthy';
-import { patch } from '../../utils/patch';
 
 declare global {
   /**
-   * Returns true if the value is truthy. (i.e. not `false`, `0`, `-0`, `0n`, `NaN`, `''`, `null`, or `undefined`)
+   * Returns `true` if the value is truthy. (i.e. not `false`, `0`, `-0`, `0n`, `NaN`, `''`, `null`, or `undefined`)
    * @param value The value to check.
    *
    * @example

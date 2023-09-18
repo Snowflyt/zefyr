@@ -1,10 +1,10 @@
+import { patch } from '../../.internal/utils/patch';
 import isNonzero from '../../Number/isNonzero';
-import { patch } from '../../utils/patch';
 
 declare global {
   interface Number {
     /**
-     * Returns true if the number is not zero.
+     * Returns `true` if the number is not zero.
      *
      * @example
      * ```typescript

@@ -1,6 +1,6 @@
-import _ from 'lodash';
+import equals from '../global/equals';
 
-import type { IsExact } from '../types/assertion';
+import type { IsExact } from '../.internal/types/assertion';
 
 export type Without<
   AS extends readonly unknown[],
@@ -47,19 +47,17 @@ type WillBeExcluded<A, TS extends readonly unknown[]> = ExcludeBySequence<
   : boolean;
 
 /**
- * Returns a new array excluding all given values using
- * [`SameValueZero`](http://ecma-international.org/ecma-262/6.0/#sec-samevaluezero)
- * for equality comparisons (using `_.without`).
+ * Returns a new array excluding all given values (using `equals` for equality comparisons).
  * @param array The array to get the values of.
  * @param values The values to exclude.
  *
  * @example
  * ```typescript
- * const arr = [1, 2, 3, 1, 2, 3];
- * without(arr, 1, 2); // => [3, 3]
+ * const arr = [1, 2, 3, 1, 2, 3, [1, 2, { b: 10 }]];
+ * arr.without(1, 2, [1, 2, { b: 10 }]); // => [3, 3]
  * ```
  *
- * @see {@link _.without}
+ * @see {@link equals}
  */
 const without = <
   const AS extends readonly unknown[],
@@ -67,6 +65,7 @@ const without = <
 >(
   array: AS,
   ...values: BS
-): Without<AS, BS> => _.without(array, ...values) as Without<AS, BS>;
+): Without<AS, BS> =>
+  array.filter((a) => !values.some((b) => equals(a, b))) as Without<AS, BS>;
 
 export default without;

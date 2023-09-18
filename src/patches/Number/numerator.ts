@@ -1,5 +1,5 @@
+import { patch } from '../../.internal/utils/patch';
 import numerator from '../../Number/numerator';
-import { patch } from '../../utils/patch';
 
 declare global {
   interface Number {

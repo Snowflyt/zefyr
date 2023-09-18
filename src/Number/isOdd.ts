@@ -1,5 +1,5 @@
 /**
- * Returns true if the number is odd.
+ * Returns `true` if the number is odd.
  *
  * @example
  * ```typescript

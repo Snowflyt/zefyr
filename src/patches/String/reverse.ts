@@ -1,5 +1,5 @@
+import { patch } from '../../.internal/utils/patch';
 import reverse from '../../String/reverse';
-import { patch } from '../../utils/patch';
 
 declare global {
   interface String {

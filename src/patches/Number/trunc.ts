@@ -1,5 +1,5 @@
+import { patch } from '../../.internal/utils/patch';
 import trunc from '../../Number/trunc';
-import { patch } from '../../utils/patch';
 
 declare global {
   interface Number {

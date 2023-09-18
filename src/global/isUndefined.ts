@@ -1,5 +1,5 @@
 /**
- * Returns true if the value is undefined.
+ * Returns `true` if the value is undefined.
  * @param value The value to check.
  *
  * @example

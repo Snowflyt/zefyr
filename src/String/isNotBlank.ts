@@ -1,7 +1,7 @@
 import isNotEmpty from './isNotEmpty';
 
 /**
- * Returns true if the string is not empty and contains at least one non-blank character.
+ * Returns `true` if the string is not empty and contains at least one non-blank character.
  *
  * @example
  * ```typescript

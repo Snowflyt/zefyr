@@ -1,9 +1,9 @@
+import { patch } from '../../.internal/utils/patch';
 import isNull from '../../global/isNull';
-import { patch } from '../../utils/patch';
 
 declare global {
   /**
-   * Returns true if the value is null.
+   * Returns `true` if the value is null.
    * @param value The value to check.
    *
    * @example

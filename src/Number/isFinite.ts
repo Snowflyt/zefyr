@@ -1,5 +1,5 @@
 /**
- * Returns true if the number is finite — that is, the number is neither `Infinity`, `-Infinity`, nor `NaN` (using `Number.isFinite`).
+ * Returns `true` if the number is finite — that is, the number is neither `Infinity`, `-Infinity`, nor `NaN` (using `Number.isFinite`).
  *
  * @example
  * ```typescript

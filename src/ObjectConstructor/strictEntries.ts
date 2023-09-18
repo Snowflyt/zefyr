@@ -1,4 +1,4 @@
-import type { ListOf } from '../types/union';
+import type { ListOf } from '../.internal/types/union';
 
 declare global {
   interface ObjectConstructor {

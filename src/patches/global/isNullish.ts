@@ -1,5 +1,5 @@
+import { patch } from '../../.internal/utils/patch';
 import isNullish from '../../global/isNullish';
-import { patch } from '../../utils/patch';
 
 declare global {
   /**
@@ -8,7 +8,7 @@ declare global {
   type Nullish = null | undefined;
 
   /**
-   * Returns true if the value is null or undefined.
+   * Returns `true` if the value is null or undefined.
    * @param value The value to check.
    *
    * @example

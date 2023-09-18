@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import type { Median } from './median';
-import type { Expect, ToBe } from '../types/test-helper';
+import type { Expect, ToBe } from '../.internal/types/test-helper';
 
 // @ts-expect-error - Test case
 type cases = [

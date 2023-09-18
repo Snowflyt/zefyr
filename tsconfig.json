@@ -27,6 +27,6 @@
     "declarationMap": true,
     "typeRoots": ["node_modules/@types", "src/index.d.ts"]
   },
-  "include": ["src", "test"],
+  "include": ["src", "test", "src/.internal/utils"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

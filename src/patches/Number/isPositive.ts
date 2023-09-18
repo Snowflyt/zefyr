@@ -1,10 +1,10 @@
+import { patch } from '../../.internal/utils/patch';
 import isPositive from '../../Number/isPositive';
-import { patch } from '../../utils/patch';
 
 declare global {
   interface Number {
     /**
-     * Returns true if the number is positive (using `Math.sign`).
+     * Returns `true` if the number is positive (using `Math.sign`).
      *
      * @example
      * ```typescript

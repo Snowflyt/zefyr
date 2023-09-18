@@ -1,10 +1,10 @@
+import { patch } from '../../.internal/utils/patch';
 import isBetween from '../../Number/isBetween';
-import { patch } from '../../utils/patch';
 
 declare global {
   interface Number {
     /**
-     * Returns true if the number is between the given numbers, inclusive.
+     * Returns `true` if the number is between the given numbers, inclusive.
      *
      * @example
      * ```typescript

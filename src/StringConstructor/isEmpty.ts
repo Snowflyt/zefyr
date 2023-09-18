@@ -1,5 +1,5 @@
 /**
- * Returns true if value is null, undefined, or an empty
+ * Returns `true` if value is null, undefined, or an empty
  *
  * @example
  * ```typescript

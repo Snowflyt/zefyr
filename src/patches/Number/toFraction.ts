@@ -1,5 +1,5 @@
+import { patch } from '../../.internal/utils/patch';
 import toFraction from '../../Number/toFraction';
-import { patch } from '../../utils/patch';
 
 import type Fraction from 'fraction.js';
 

@@ -1,5 +1,5 @@
+import { patch } from '../../.internal/utils/patch';
 import asDays from '../../Duration/asDays';
-import { patch } from '../../utils/patch';
 
 declare global {
   interface BigInt {

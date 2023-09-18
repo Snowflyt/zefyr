@@ -1,5 +1,5 @@
 /**
- * Returns true if the string is empty.
+ * Returns `true` if the string is empty.
  *
  * @example
  * ```typescript

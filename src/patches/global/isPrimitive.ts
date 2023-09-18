@@ -1,5 +1,5 @@
+import { patch } from '../../.internal/utils/patch';
 import isPrimitive from '../../global/isPrimitive';
-import { patch } from '../../utils/patch';
 
 declare global {
   /**
@@ -15,7 +15,7 @@ declare global {
     | null;
 
   /**
-   * Returns true if the value is a primitive.
+   * Returns `true` if the value is a primitive.
    * @value The value to check.
    *
    * @example

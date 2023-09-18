@@ -1,5 +1,5 @@
+import { patch } from '../../.internal/utils/patch';
 import isFalsy from '../../global/isFalsy';
-import { patch } from '../../utils/patch';
 
 declare global {
   /**
@@ -10,7 +10,7 @@ declare global {
   type Falsy = false | 0 | 0n | '' | null | undefined;
 
   /**
-   * Returns true if the value is falsy. (i.e. `false`, `0`, `-0`, `0n`, `NaN`, `''`, `null`, or `undefined`)
+   * Returns `true` if the value is falsy. (i.e. `false`, `0`, `-0`, `0n`, `NaN`, `''`, `null`, or `undefined`)
    * @param value The value to check.
    *
    * @example

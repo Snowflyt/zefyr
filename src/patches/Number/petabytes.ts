@@ -1,5 +1,5 @@
+import { patch } from '../../.internal/utils/patch';
 import petabytes from '../../Number/petabytes';
-import { patch } from '../../utils/patch';
 
 declare global {
   interface Number {

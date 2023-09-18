@@ -1,10 +1,10 @@
+import { patch } from '../../.internal/utils/patch';
 import isNaN from '../../Number/isNaN';
-import { patch } from '../../utils/patch';
 
 declare global {
   interface Number {
     /**
-     * Returns true if the number is NaN (using `Number.isNaN`).
+     * Returns `true` if the number is NaN (using `Number.isNaN`).
      *
      * @example
      * ```typescript

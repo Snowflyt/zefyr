@@ -1,5 +1,5 @@
+import { patch } from '../../.internal/utils/patch';
 import trimIndent from '../../String/trimIndent';
-import { patch } from '../../utils/patch';
 
 declare global {
   interface String {

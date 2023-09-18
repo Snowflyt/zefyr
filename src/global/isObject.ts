@@ -1,5 +1,5 @@
 /**
- * Returns true if the value is an object. (i.e. not a primitive)
+ * Returns `true` if the value is an object. (i.e. not a primitive)
  * @param value The value to check.
  *
  * @example

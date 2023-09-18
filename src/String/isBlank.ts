@@ -1,7 +1,7 @@
 import isEmpty from './isEmpty';
 
 /**
- * Returns true if the string is empty or contains only blank characters.
+ * Returns `true` if the string is empty or contains only blank characters.
  *
  * @example
  * ```typescript

@@ -1,10 +1,10 @@
+import { patch } from '../../.internal/utils/patch';
 import isInteger from '../../Number/isInteger';
-import { patch } from '../../utils/patch';
 
 declare global {
   interface Number {
     /**
-     * Returns true if the number is integer (using `Number.isInteger`).
+     * Returns `true` if the number is integer (using `Number.isInteger`).
      *
      * @example
      * ```typescript

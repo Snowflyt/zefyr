@@ -1,5 +1,5 @@
+import { patch } from '../../.internal/utils/patch';
 import strictValues from '../../ObjectConstructor/strictValues';
-import { patch } from '../../utils/patch';
 
 import type { StrictValues } from '../../ObjectConstructor/strictValues';
 

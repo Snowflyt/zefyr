@@ -1,5 +1,5 @@
+import { patch } from '../../.internal/utils/patch';
 import format from '../../Date/format';
-import { patch } from '../../utils/patch';
 
 import type { format as formatDate } from 'date-fns';
 

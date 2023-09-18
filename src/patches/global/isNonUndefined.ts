@@ -1,5 +1,5 @@
+import { patch } from '../../.internal/utils/patch';
 import isNonUndefined from '../../global/isNonUndefined';
-import { patch } from '../../utils/patch';
 
 declare global {
   /**
@@ -8,7 +8,7 @@ declare global {
   type NonUndefined<T> = Exclude<T, undefined>;
 
   /**
-   * Returns true if the value is not undefined.
+   * Returns `true` if the value is not undefined.
    * @param value The value to check.
    *
    * @example

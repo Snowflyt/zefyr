@@ -1,7 +1,7 @@
 type Falsy = false | 0 | 0n | '' | null | undefined;
 
 /**
- * Returns true if the value is truthy. (i.e. not `false`, `0`, `-0`, `0n`, `NaN`, `''`, `null`, or `undefined`)
+ * Returns `true` if the value is truthy. (i.e. not `false`, `0`, `-0`, `0n`, `NaN`, `''`, `null`, or `undefined`)
  * @param value The value to check.
  *
  * @example

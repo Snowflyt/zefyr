@@ -1,5 +1,5 @@
+import { patch } from '../../.internal/utils/patch';
 import toChar from '../../Number/toChar';
-import { patch } from '../../utils/patch';
 
 declare global {
   interface Number {

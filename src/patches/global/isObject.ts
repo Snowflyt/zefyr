@@ -1,9 +1,9 @@
+import { patch } from '../../.internal/utils/patch';
 import isObject from '../../global/isObject';
-import { patch } from '../../utils/patch';
 
 declare global {
   /**
-   * Returns true if the value is an object. (i.e. not a primitive)
+   * Returns `true` if the value is an object. (i.e. not a primitive)
    * @param value The value to check.
    *
    * @example

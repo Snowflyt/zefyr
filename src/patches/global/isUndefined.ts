@@ -1,9 +1,9 @@
+import { patch } from '../../.internal/utils/patch';
 import isUndefined from '../../global/isUndefined';
-import { patch } from '../../utils/patch';
 
 declare global {
   /**
-   * Returns true if the value is undefined.
+   * Returns `true` if the value is undefined.
    * @param value The value to check.
    *
    * @example

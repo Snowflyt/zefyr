@@ -1,5 +1,5 @@
 /**
- * Returns true if the number is integer (using `Number.isInteger`).
+ * Returns `true` if the number is integer (using `Number.isInteger`).
  *
  * @example
  * ```typescript

@@ -1,5 +1,5 @@
+import { patch } from '../../.internal/utils/patch';
 import mean from '../../Array/mean';
-import { patch } from '../../utils/patch';
 
 import type { Mean } from '../../Array/mean';
 

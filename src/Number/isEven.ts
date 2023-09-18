@@ -1,5 +1,5 @@
 /**
- * Returns true if the number is even.
+ * Returns `true` if the number is even.
  *
  * @example
  * ```typescript

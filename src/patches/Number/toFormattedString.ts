@@ -1,5 +1,5 @@
+import { patch } from '../../.internal/utils/patch';
 import toFormattedString from '../../Number/toFormattedString';
-import { patch } from '../../utils/patch';
 
 import type {
   FormatCurrencyOptions,

@@ -1,5 +1,5 @@
 /**
- * Returns true if the number is a safe integer (using `Number.isSafeInteger`).
+ * Returns `true` if the number is a safe integer (using `Number.isSafeInteger`).
  *
  * @example
  * ```typescript

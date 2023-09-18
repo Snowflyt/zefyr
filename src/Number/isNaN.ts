@@ -1,5 +1,5 @@
 /**
- * Returns true if the number is NaN (using `Number.isNaN`).
+ * Returns `true` if the number is NaN (using `Number.isNaN`).
  *
  * @example
  * ```typescript

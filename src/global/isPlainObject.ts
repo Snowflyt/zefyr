@@ -1,3 +1,5 @@
+import getTag from '../.internal/_getTag';
+
 /**
  * Checks if the value is a plain object, that is, an object created by the `Object` constructor or one with a
  * `[[Prototype]]` of `null`.
@@ -20,11 +22,7 @@ const isPlainObject = (
   value: unknown,
 ): value is Record<string | number | symbol, unknown> => {
   if (value === null || value === undefined) return false;
-  if (
-    typeof value !== 'object' ||
-    Object.prototype.toString.call(value) !== '[object Object]'
-  )
-    return false;
+  if (typeof value !== 'object' || getTag(value) !== 'Object') return false;
   if (Object.getPrototypeOf(value) === null) return true;
   let proto = value;
   while (Object.getPrototypeOf(proto) !== null)

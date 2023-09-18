@@ -11,7 +11,7 @@ export type Primitive =
   | null;
 
 /**
- * Returns true if the value is a primitive.
+ * Returns `true` if the value is a primitive.
  * @value The value to check.
  *
  * @example

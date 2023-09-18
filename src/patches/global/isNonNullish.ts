@@ -1,5 +1,5 @@
+import { patch } from '../../.internal/utils/patch';
 import isNonNullish from '../../global/isNonNullish';
-import { patch } from '../../utils/patch';
 
 declare global {
   /**
@@ -8,7 +8,7 @@ declare global {
   type NonNullish<T> = Exclude<T, null | undefined>;
 
   /**
-   * Returns true if the value is not null or undefined.
+   * Returns `true` if the value is not null or undefined.
    * @param value The value to check.
    *
    * @example

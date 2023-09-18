@@ -1,5 +1,5 @@
 /**
- * Returns true if the number is infinite — that is, the number is `Infinity` or `-Infinity`.
+ * Returns `true` if the number is infinite — that is, the number is `Infinity` or `-Infinity`.
  *
  * @example
  * ```typescript

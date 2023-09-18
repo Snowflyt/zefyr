@@ -1,10 +1,10 @@
+import { patch } from '../../.internal/utils/patch';
 import isFinite from '../../Number/isFinite';
-import { patch } from '../../utils/patch';
 
 declare global {
   interface Number {
     /**
-     * Returns true if the number is finite — that is, the number is neither `Infinity`, `-Infinity`, nor `NaN` (using `Number.isFinite`).
+     * Returns `true` if the number is finite — that is, the number is neither `Infinity`, `-Infinity`, nor `NaN` (using `Number.isFinite`).
      *
      * @example
      * ```typescript

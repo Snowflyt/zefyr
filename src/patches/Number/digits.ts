@@ -1,5 +1,5 @@
+import { patch } from '../../.internal/utils/patch';
 import digits from '../../Number/digits';
-import { patch } from '../../utils/patch';
 
 import type { CallableArray } from '../../CallableArray';
 

@@ -1,5 +1,5 @@
+import { patch } from '../../.internal/utils/patch';
 import ceil from '../../Number/ceil';
-import { patch } from '../../utils/patch';
 
 declare global {
   interface Number {

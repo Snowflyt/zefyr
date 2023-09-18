@@ -1,5 +1,5 @@
 /**
- * Returns true if the value is null.
+ * Returns `true` if the value is null.
  * @param value The value to check.
  *
  * @example

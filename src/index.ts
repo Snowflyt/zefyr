@@ -1,1 +1,1 @@
-export { patch } from './utils/patch';
+export { patch } from './.internal/utils/patch';

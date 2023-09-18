@@ -1,10 +1,10 @@
+import { patch } from '../../.internal/utils/patch';
 import isNotBlank from '../../String/isNotBlank';
-import { patch } from '../../utils/patch';
 
 declare global {
   interface String {
     /**
-     * Returns true if the string is not empty and contains at least one non-blank character.
+     * Returns `true` if the string is not empty and contains at least one non-blank character.
      *
      * @example
      * ```typescript

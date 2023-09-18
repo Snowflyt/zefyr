@@ -1,10 +1,10 @@
+import { patch } from '../../.internal/utils/patch';
 import isNotEmpty from '../../StringConstructor/isNotEmpty';
-import { patch } from '../../utils/patch';
 
 declare global {
   interface StringConstructor {
     /**
-     * Returns true if value is not null, undefined, or an empty string.
+     * Returns `true` if value is not null, undefined, or an empty string.
      *
      * @example
      * ```typescript

@@ -4,7 +4,7 @@
 type Nullish = null | undefined;
 
 /**
- * Returns true if the value is null or undefined.
+ * Returns `true` if the value is null or undefined.
  * @param value The value to check.
  *
  * @example
