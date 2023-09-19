@@ -1,24 +1,5 @@
 import type { ListOf } from '../.internal/types/union';
 
-declare global {
-  interface ObjectConstructor {
-    /**
-     * Returns an array of key/values of the enumerable properties of an object (using `Object.entries`, but with stricter TypeScript typings).
-     * @param o Object that contains the properties and methods. This can be an object that you created or an existing Document Object Model (DOM) object.
-     *
-     * @example
-     * ```typescript
-     * const obj = { a: 1, b: 2, c: true, 5: 42, [Symbol()]: 'symbol' };
-     * Object.strictEntries(obj); // => [['5', 42], ['a', 1], ['b', 2], ['c', true]]
-     * const entries = Object.strictEntries(obj); // entries :: (['5', number] | ['a', number] | ['b', number] | ['c', boolean])[]
-     * ```
-     *
-     * @see {@link Object.entries}
-     */
-    entries<T extends object>(o: T): StrictEntries<T>;
-  }
-}
-
 export type StrictEntries<T extends object> = keyof T extends symbol
   ? []
   : string extends keyof T
@@ -57,6 +38,6 @@ type _StrictEntries<
  * @see {@link Object.entries}
  */
 const entriesS = <T extends object>(o: T): StrictEntries<T> =>
-  Object.entries(o);
+  Object.entries(o) as StrictEntries<T>;
 
 export default entriesS;
