@@ -9,21 +9,21 @@ export type StrictKeys<T extends object> = keyof T extends symbol
  * @example
  * ```typescript
  * const obj = { a: 1, b: 2, c: 3, 5: 42, [Symbol()]: 'symbol' };
- * strictKeys(obj); // => ['5', 'a', 'b', 'c']
- * const keys = strictKeys(obj); // keys :: ('5' | 'a' | 'b' | 'c')[]
+ * keysS(obj); // => ['5', 'a', 'b', 'c']
+ * const keys = keysS(obj); // keys :: ('5' | 'a' | 'b' | 'c')[]
  * ```
  *
  * @example
  * ```typescript
  * const obj = { a: 1, b: 2, c: 3, 5: 42, [Symbol()]: 'symbol' };
- * for (const key of strictKeys(obj)) {
+ * for (const key of keysS(obj)) {
  *   console.log(obj[key]); // No type error
  * }
  * ```
  *
  * @see {@link Object.keys}
  */
-const strictKeys = <T extends object>(o: T): StrictKeys<T> =>
+const keysS = <T extends object>(o: T): StrictKeys<T> =>
   Object.keys(o) as StrictKeys<T>;
 
-export default strictKeys;
+export default keysS;

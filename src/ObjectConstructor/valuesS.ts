@@ -9,13 +9,13 @@ export type StrictValues<T extends object> = keyof T extends symbol
  * @example
  * ```typescript
  * const obj = { a: 1, b: 2, c: 3, 5: 42, [Symbol()]: 'symbol' };
- * strictValues(obj); // => [42, 1, 2, 3]
- * const values = strictValues(obj); // values :: number[]
+ * valuesS(obj); // => [42, 1, 2, 3]
+ * const values = valuesS(obj); // values :: number[]
  * ```
  *
  * @see {@link Object.values}
  */
-const strictValues = <T extends object>(o: T): StrictValues<T> =>
+const valuesS = <T extends object>(o: T): StrictValues<T> =>
   Object.values(o) as StrictValues<T>;
 
-export default strictValues;
+export default valuesS;

@@ -1,4 +1,4 @@
 export { default as isEmpty } from './isEmpty';
-export { default as strictEntries } from './strictEntries';
-export { default as strictKeys } from './strictKeys';
-export { default as strictValues } from './strictValues';
+export { default as entriesS } from './entriesS';
+export { default as keysS } from './keysS';
+export { default as valuesS } from './valuesS';

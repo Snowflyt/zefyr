@@ -1,7 +1,7 @@
 import { patch } from '../../.internal/utils/patch';
-import strictValues from '../../ObjectConstructor/strictValues';
+import valuesS from '../../ObjectConstructor/valuesS';
 
-import type { StrictValues } from '../../ObjectConstructor/strictValues';
+import type { StrictValues } from '../../ObjectConstructor/valuesS';
 
 declare global {
   interface ObjectConstructor {
@@ -12,14 +12,14 @@ declare global {
      * @example
      * ```typescript
      * const obj = { a: 1, b: 2, c: 3, 5: 42, [Symbol()]: 'symbol' };
-     * Object.strictValues(obj); // => [42, 1, 2, 3]
-     * const values = Object.strictValues(obj); // values :: number[]
+     * Object.valuesS(obj); // => [42, 1, 2, 3]
+     * const values = Object.valuesS(obj); // values :: number[]
      * ```
      *
      * @see {@link Object.values}
      */
-    strictValues<T extends object>(o: T): StrictValues<T>;
+    valuesS<T extends object>(o: T): StrictValues<T>;
   }
 }
 
-patch(Object).withStatic({ strictValues });
+patch(Object).withStatic({ valuesS });

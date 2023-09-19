@@ -1,7 +1,7 @@
 import { patch } from '../../.internal/utils/patch';
-import strictKeys from '../../ObjectConstructor/strictKeys';
+import keysS from '../../ObjectConstructor/keysS';
 
-import type { StrictKeys } from '../../ObjectConstructor/strictKeys';
+import type { StrictKeys } from '../../ObjectConstructor/keysS';
 
 declare global {
   interface ObjectConstructor {
@@ -12,22 +12,22 @@ declare global {
      * @example
      * ```typescript
      * const obj = { a: 1, b: 2, c: 3, 5: 42, [Symbol()]: 'symbol' };
-     * Object.strictKeys(obj); // => ['5', 'a', 'b', 'c']
+     * Object.keysS(obj); // => ['5', 'a', 'b', 'c']
      * const keys = Object.strictKeys(obj); // keys :: ('5' | 'a' | 'b' | 'c')[]
      * ```
      *
      * @example
      * ```typescript
      * const obj = { a: 1, b: 2, c: 3, 5: 42, [Symbol()]: 'symbol' };
-     * for (const key of Object.strictKeys(obj)) {
+     * for (const key of Object.keysS(obj)) {
      *   console.log(obj[key]); // No type error
      * }
      * ```
      *
      * @see {@link Object.keys}
      */
-    strictKeys<T extends object>(o: T): StrictKeys<T>;
+    keysS<T extends object>(o: T): StrictKeys<T>;
   }
 }
 
-patch(Object).withStatic({ strictKeys });
+patch(Object).withStatic({ keysS });

@@ -1,4 +1,4 @@
 import './isEmpty';
-import './strictEntries';
-import './strictKeys';
-import './strictValues';
+import './entriesS';
+import './keysS';
+import './valuesS';

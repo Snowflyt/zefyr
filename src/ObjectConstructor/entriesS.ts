@@ -15,7 +15,7 @@ declare global {
      *
      * @see {@link Object.entries}
      */
-    strictEntries<T extends object>(o: T): StrictEntries<T>;
+    entries<T extends object>(o: T): StrictEntries<T>;
   }
 }
 
@@ -50,13 +50,13 @@ type _StrictEntries<
  * @example
  * ```typescript
  * const obj = { a: 1, b: 2, c: true, 5: 42, [Symbol()]: 'symbol' };
- * strictEntries(obj); // => [['5', 42], ['a', 1], ['b', 2], ['c', true]]
- * const entries = strictEntries(obj); // entries :: (['5', number] | ['a', number] | ['b', number] | ['c', boolean])[]
+ * entriesS(obj); // => [['5', 42], ['a', 1], ['b', 2], ['c', true]]
+ * const entries = entriesS(obj); // entries :: (['5', number] | ['a', number] | ['b', number] | ['c', boolean])[]
  * ```
  *
  * @see {@link Object.entries}
  */
-const strictEntries = <T extends object>(o: T): StrictEntries<T> =>
-  Object.entries(o) as StrictEntries<T>;
+const entriesS = <T extends object>(o: T): StrictEntries<T> =>
+  Object.entries(o);
 
-export default strictEntries;
+export default entriesS;

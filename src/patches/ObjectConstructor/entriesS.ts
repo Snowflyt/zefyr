@@ -1,7 +1,7 @@
 import { patch } from '../../.internal/utils/patch';
-import strictEntries from '../../ObjectConstructor/strictEntries';
+import entriesS from '../../ObjectConstructor/entriesS';
 
-import type { StrictEntries } from '../../ObjectConstructor/strictEntries';
+import type { StrictEntries } from '../../ObjectConstructor/entriesS';
 
 declare global {
   interface ObjectConstructor {
@@ -12,14 +12,14 @@ declare global {
      * @example
      * ```typescript
      * const obj = { a: 1, b: 2, c: true, 5: 42, [Symbol()]: 'symbol' };
-     * Object.strictEntries(obj); // => [['5', 42], ['a', 1], ['b', 2], ['c', true]]
-     * const entries = Object.strictEntries(obj); // entries :: (['5', number] | ['a', number] | ['b', number] | ['c', boolean])[]
+     * Object.entriesS(obj); // => [['5', 42], ['a', 1], ['b', 2], ['c', true]]
+     * const entries = Object.entriesS(obj); // entries :: (['5', number] | ['a', number] | ['b', number] | ['c', boolean])[]
      * ```
      *
      * @see {@link Object.entries}
      */
-    strictEntries<T extends object>(o: T): StrictEntries<T>;
+    entriesS<T extends object>(o: T): StrictEntries<T>;
   }
 }
 
-patch(Object).withStatic({ strictEntries });
+patch(Object).withStatic({ entriesS });
