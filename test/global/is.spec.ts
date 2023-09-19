@@ -29,4 +29,10 @@ describe('is', () => {
     const bar = { a: 1 };
     expect(is(foo, bar)).toBe(false);
   });
+
+  it('should work with currying', () => {
+    expect([1, 2, 3, 2].filter(is(2))).toEqual([2, 2]);
+    expect([1, [], 3, []].filter(is([]))).toEqual([]);
+    expect([1, { a: 1 }, 3].filter(is({ a: 1 }))).toEqual([]);
+  });
 });

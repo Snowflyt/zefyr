@@ -33,12 +33,11 @@ export type Primitive =
  * @see {@link isObject}
  */
 const isPrimitive = (value: unknown): value is Primitive =>
+  value == null ||
   typeof value === 'string' ||
   typeof value === 'number' ||
   typeof value === 'boolean' ||
   typeof value === 'bigint' ||
-  typeof value === 'symbol' ||
-  value === undefined ||
-  value === null;
+  typeof value === 'symbol';
 
 export default isPrimitive;

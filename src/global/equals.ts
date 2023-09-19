@@ -252,6 +252,15 @@ const _equals = <T>(a: T, b: T, stackA: T[], stackB: T[]) => {
  * equals(a, b); //=> true
  * ```
  */
-const equals = <T>(a: T, b: T): boolean => _equals(a, b, [], []);
+const equals: {
+  <T>(a: unknown, b: T): a is T;
+  <T>(b: T): (a: unknown) => a is T;
+} = ((...args: unknown[]) =>
+  args.length === 1
+    ? (a: unknown) => _equals(a, args[0], [], [])
+    : _equals(args[0], args[1], [], [])) as {
+  <T>(a: unknown, b: T): a is T;
+  <T>(b: T): (a: unknown) => a is T;
+};
 
 export default equals;

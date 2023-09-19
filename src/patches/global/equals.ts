@@ -23,7 +23,8 @@ declare global {
    * equals(a, b); //=> true
    * ```
    */
-  function equals<T>(a: T, b: T): boolean;
+  function equals<T>(a: unknown, b: T): a is T;
+  function equals<T>(b: T): (a: unknown) => a is T;
 }
 
 patch(globalThis).withStatic({ equals });

@@ -17,4 +17,10 @@ describe('equals', () => {
     Object.assign(b, { v: b });
     expect(equals(a, b)).toBe(true);
   });
+
+  it('should work with currying', () => {
+    expect([1, 2, 3, 2].filter(equals(2))).toEqual([2, 2]);
+    expect([1, [], 3, []].filter(equals([]))).toEqual([[], []]);
+    expect([1, { a: 1 }, 3].filter(equals({ a: 1 }))).toEqual([{ a: 1 }]);
+  });
 });

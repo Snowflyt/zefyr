@@ -43,6 +43,7 @@ declare global {
    * @see {@link Object.is}
    */
   function is<T>(a: unknown, b: T): a is T;
+  function is<T>(b: T): (a: unknown) => a is T;
 }
 
 patch(globalThis).withStatic({ is });
