@@ -18,6 +18,7 @@ import './isEven';
 import './isFinite';
 import './isInfinite';
 import './isInteger';
+import './isLength';
 import './isNaN';
 import './isNegative';
 import './isNonzero';

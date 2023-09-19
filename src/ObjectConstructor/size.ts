@@ -1,4 +1,5 @@
 import isPrototype from '../.internal/_isPrototype';
+import isArrayLike from '../global/isArrayLike';
 
 import type { ListOf } from '../.internal/types/union';
 
@@ -34,16 +35,7 @@ export type Size<O extends object> = O extends { length: number }
  */
 const size = <const O extends object>(o: O): Size<O> => {
   // For array-like objects, return the "length" property
-  if ('length' in o) {
-    const length = o.length;
-    if (
-      typeof length === 'number' &&
-      length > -1 &&
-      length % 1 === 0 &&
-      length <= Number.MAX_SAFE_INTEGER
-    )
-      return length as Size<O>;
-  }
+  if (isArrayLike(o)) return o.length as Size<O>;
 
   // For maps and sets, return the "size" property
   const tag = Object.prototype.toString.call(o);

@@ -6,12 +6,14 @@ export { default as words } from './words';
 
 export { default as is } from './is';
 export { default as isArray } from './isArray';
+export { default as isArrayLike } from './isArrayLike';
 export { default as isBigInt } from './isBigInt';
 export { default as isBigIntPrimitive } from './isBigIntPrimitive';
 export { default as isBoolean } from './isBoolean';
 export { default as isBooleanPrimitive } from './isBooleanPrimitive';
 export { default as isFalsy } from './isFalsy';
 export { default as isFunction } from './isFunction';
+export { default as isLength } from './isLength';
 export { default as isNonNull } from './isNonNull';
 export { default as isNonNullish } from './isNonNullish';
 export { default as isNonUndefined } from './isNonUndefined';

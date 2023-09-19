@@ -6,6 +6,7 @@ import './words';
 
 import './is';
 import './isArray';
+import './isArrayLike';
 import './isBigInt';
 import './isBigIntPrimitive';
 import './isBoolean';

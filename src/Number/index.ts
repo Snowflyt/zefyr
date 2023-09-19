@@ -18,6 +18,7 @@ export { default as isEven } from './isEven';
 export { default as isFinite } from './isFinite';
 export { default as isInfinite } from './isInfinite';
 export { default as isInteger } from './isInteger';
+export { default as isLength } from './isLength';
 export { default as isNaN } from './isNaN';
 export { default as isNegative } from './isNegative';
 export { default as isNonzero } from './isNonzero';
