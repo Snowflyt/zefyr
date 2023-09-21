@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import _ from 'lodash-es';
 
 /**
  * Returns a shallow clone of value (using `_.clone`).
