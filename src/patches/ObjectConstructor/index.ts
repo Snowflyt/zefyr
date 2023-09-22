@@ -1,5 +1,6 @@
 import './isEmpty';
 import './entriesS';
+import './filter';
 import './keysS';
 import './map';
 import './mapKeys';

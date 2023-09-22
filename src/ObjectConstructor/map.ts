@@ -1,9 +1,9 @@
 import type { StrictEntries } from './entriesS';
 
 /**
- * Calls a defined callback function on each key/value pair of an object, and returns an object that contains the results.
+ * Calls a defined callback function on each enumerable key/value pair of an object, and returns an object that contains the results.
  * @param o Object that contains the properties and methods. This can be an object that you created or an existing Document Object Model (DOM) object.
- * @param callbackfn A function that accepts up to three arguments. The map method calls the callbackfn function one time for each key/value pair in the object.
+ * @param callbackfn A function that accepts up to three arguments. The map function calls the callbackfn function one time for each key/value pair in the object.
  * @param thisArg An object to which the this keyword can refer in the callbackfn function. If thisArg is omitted, undefined is used as the this value.
  *
  * @example
