@@ -22,11 +22,18 @@ const map = <
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   thisArg?: any,
 ): { [P in R[0]]: R[1] } => {
-  const entries = Object.entries(o);
-  const mappedEntries = entries.map(function (this: unknown, entry, index) {
-    return callbackfn.call(this, entry as StrictEntries<O>[number], index, o);
-  }, thisArg);
-  return Object.fromEntries(mappedEntries as never) as { [P in R[0]]: R[1] };
+  const result: Record<PropertyKey, unknown> = {};
+  let index = -1;
+  for (const key in o) {
+    const newEntry = callbackfn.call(
+      thisArg,
+      [key, o[key]] as StrictEntries<O>[number],
+      ++index,
+      o,
+    );
+    result[newEntry[0]] = newEntry[1];
+  }
+  return result as { [P in R[0]]: R[1] };
 };
 
 export default map;

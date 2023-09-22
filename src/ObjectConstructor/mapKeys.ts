@@ -20,11 +20,18 @@ const mapKeys = <const O extends object, R extends string>(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   thisArg?: any,
 ): { [P in R]: StrictValues<O>[number] } => {
-  const keys = Object.keys(o);
-  const mappedKeys = keys.map(function (this: unknown, key, index) {
-    return callbackfn.call(this, key as StrictKeys<O>[number], index, o);
-  }, thisArg);
-  return Object.fromEntries(mappedKeys as never) as {
+  const result: Record<PropertyKey, unknown> = {};
+  let index = -1;
+  for (const key in o) {
+    const newKey = callbackfn.call(
+      thisArg,
+      key as StrictKeys<O>[number],
+      ++index,
+      o,
+    );
+    result[newKey] = o[key];
+  }
+  return result as {
     [P in R]: StrictValues<O>[number];
   };
 };
