@@ -5,5 +5,6 @@ import './keysS';
 import './map';
 import './mapKeys';
 import './mapValues';
+import './reduce';
 import './size';
 import './valuesS';
