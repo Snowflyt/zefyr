@@ -1,6 +1,7 @@
 import './clear';
 import './clone';
 import './compact';
+import './contains';
 import './first';
 import './last';
 import './mean';

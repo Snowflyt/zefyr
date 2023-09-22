@@ -1,7 +1,7 @@
 /**
  * A type that is either null or undefined.
  */
-type Nullish = null | undefined;
+export type Nullish = null | undefined;
 
 /**
  * Returns `true` if the value is null or undefined.

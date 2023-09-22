@@ -2,8 +2,9 @@ import './clone';
 import './cloneDeep';
 import './curried';
 import './equals';
-import './prop';
+import './list';
 import './path';
+import './prop';
 import './words';
 
 import './is';
