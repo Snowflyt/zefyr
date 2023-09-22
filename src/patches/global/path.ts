@@ -1,7 +1,7 @@
 import { patch } from '../../.internal/utils/patch';
 import path from '../../global/path';
 
-import type { Path } from '../../global/path';
+import type { BasePath, BasePathArray, Path } from '../../global/path';
 
 declare global {
   /**
@@ -27,7 +27,12 @@ declare global {
    * objs.filter(path(['a', 'b', '0']).eq(1)); // => [{ a: { b: [1, 2, 3] } }]
    * ```
    */
-  const path: Path;
+  function path<
+    const O extends object,
+    const P extends object extends O
+      ? string | readonly string[]
+      : BasePath<O> | BasePathArray<O>,
+  >(path: P): Path<O, P>;
 }
 
 patch(globalThis).withStatic({ path } as never);

@@ -1,10 +1,7 @@
+import { zTag } from '../.internal/zTag';
+
 import equals from './equals';
 import is from './is';
-
-type PropFn<
-  O extends object,
-  P extends object extends O ? PropertyKey : keyof O,
-> = (o: O) => P extends keyof O ? O[P] : undefined;
 
 type PropExtension<P extends PropertyKey> = <O extends object>(
   value: P extends keyof O ? O[P] : never,
@@ -365,12 +362,15 @@ type PropExtensions<P extends PropertyKey> = {
  * objs.filter(prop('a').eq(1)); // => [{ a: 1, b: 2 }]
  * ```
  */
-export type Prop = <
-  O extends object,
-  P extends object extends O ? PropertyKey : keyof O,
->(
-  prop: P,
-) => PropFn<O, P> & PropExtensions<P>;
+export type Prop<
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  O extends object = any,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  P extends object extends O ? PropertyKey : keyof O = any,
+> = ((o: O) => P extends keyof O ? O[P] : undefined) &
+  PropExtensions<P> & {
+    [zTag]: 'Prop';
+  };
 
 /**
  * Returns a function that when given an object returns the value of the specified property.
@@ -392,7 +392,12 @@ export type Prop = <
  * objs.filter(prop('a').eq(1)); // => [{ a: 1, b: 2 }]
  * ```
  */
-const prop: Prop = ((prop: string) => {
+const prop = <
+  const O extends object,
+  P extends object extends O ? PropertyKey : keyof O,
+>(
+  prop: P,
+): Prop<O, P> => {
   const result = (o: object) => o[prop as keyof typeof o];
 
   const _satisfies = (pred: (value: unknown) => boolean) => (o: object) =>
@@ -462,7 +467,7 @@ const prop: Prop = ((prop: string) => {
     lteW: _lteW,
   };
 
-  return Object.assign(result, extensions);
-}) as Prop;
+  return Object.assign(result, { ...extensions, [zTag]: 'Prop' }) as Prop<O, P>;
+};
 
 export default prop;

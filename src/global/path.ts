@@ -1,3 +1,5 @@
+import { zTag } from '../.internal/zTag';
+
 import equals from './equals';
 import is from './is';
 
@@ -204,7 +206,7 @@ const parsePath = <const P extends string>(path: P): ParsePath<P> => {
   return result as ParsePath<P>;
 };
 
-type BasePath<O extends object> = _BasePath<
+export type BasePath<O extends object> = _BasePath<
   Distribute<[O]>[0]
 > extends `.${infer R}`
   ? R
@@ -243,7 +245,9 @@ type _BasePathOfObjectLike<O extends object> = ValueOf<{
     : never;
 }>;
 
-type BasePathArray<O extends object> = _BasePathArray<Distribute<[O]>[0]>;
+export type BasePathArray<O extends object> = _BasePathArray<
+  Distribute<[O]>[0]
+>;
 type _BasePathArray<O> = __BasePathArray<Distribute<[O]>[0]>;
 type __BasePathArray<O> = O extends object
   ? undefined extends _BasePathArrayOfObjectLike<O>
@@ -300,10 +304,6 @@ type __GetByPath<
   : L extends keyof O
   ? _GetByPath<O[L], R>
   : undefined;
-
-type PathFn<O extends object, P> = (
-  o: O,
-) => P extends BasePath<O> | BasePathArray<O> ? GetByPath<O, P> : undefined;
 
 type PathExtension<P> = <O extends object>(
   value: P extends BasePath<O> | BasePathArray<O> ? GetByPath<O, P> : never,
@@ -669,14 +669,12 @@ type PathExtensions<P> = {
  * objs.filter(path(['a', 'b', '0']).eq(1)); // => [{ a: { b: [1, 2, 3] } }]
  * ```
  */
-export type Path = <
-  O extends object,
-  const P extends object extends O
-    ? string | readonly string[]
-    : BasePath<O> | BasePathArray<O>,
->(
-  path: P,
-) => PathFn<O, P> & PathExtensions<P>;
+export type Path<O extends object, P> = ((
+  o: O,
+) => P extends BasePath<O> | BasePathArray<O> ? GetByPath<O, P> : undefined) &
+  PathExtensions<P> & {
+    [zTag]: 'Path';
+  };
 
 /**
  * Returns a function that when given an object returns the value of the specified path.
@@ -701,9 +699,18 @@ export type Path = <
  * objs.filter(path(['a', 'b', '0']).eq(1)); // => [{ a: { b: [1, 2, 3] } }]
  * ```
  */
-const path: Path = ((path: string | string[]) => {
+const path = <
+  const O extends object,
+  const P extends object extends O
+    ? string | readonly string[]
+    : BasePath<O> | BasePathArray<O>,
+>(
+  path: P,
+): Path<O, P> => {
   const result = (o: object): unknown => {
-    const parsedPath: string[] = Array.isArray(path) ? path : parsePath(path);
+    const parsedPath: string[] = Array.isArray(path)
+      ? path
+      : parsePath(path as string);
     let result: unknown = o;
     for (const key of parsedPath) {
       try {
@@ -776,7 +783,7 @@ const path: Path = ((path: string | string[]) => {
     lteW: _lteW,
   };
 
-  return Object.assign(result, extensions);
-}) as Path;
+  return Object.assign(result, { ...extensions, [zTag]: 'Path' }) as Path<O, P>;
+};
 
 export default path;
