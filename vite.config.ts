@@ -17,4 +17,13 @@ export default defineConfig((configEnv) => ({
       include: ['src/'],
     }),
   ],
+  build: {
+    lib: {
+      entry: path.resolve('src', 'index.min.ts'),
+      name: 'zefyr',
+      formats: ['es', 'umd'],
+      fileName: (format) =>
+        format === 'es' ? 'index.min.js' : `index.${format}.min.js`,
+    },
+  },
 }));
