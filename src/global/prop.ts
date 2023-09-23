@@ -437,6 +437,7 @@ const prop = <const T, P extends object extends T ? PropertyKey : keyof T>(
   const _lteW = (value: unknown) => _lte(value);
 
   const extensions = {
+    prop,
     satisfies: _satisfies,
     eq: _eq,
     eqW: _eqW,

@@ -1,20 +1,24 @@
-export type Inc<N extends number> = `${N}` extends keyof IncMap
-  ? IncMap[`${N}`]
-  : IncMap['__'];
+export type Inc<N extends number | string> = N extends number
+  ? `${N}` extends keyof IncMap
+    ? IncMap[`${N}`]
+    : IncMap['__']
+  : `${N}` extends keyof IncMap
+  ? `${IncMap[`${N}`]}`
+  : `${IncMap['__']}`;
 
-export type Dec<N extends number> = `${N}` extends keyof DecMap
-  ? DecMap[`${N}`]
-  : DecMap['__'];
+export type Dec<N extends number | string> = N extends number
+  ? `${N}` extends keyof DecMap
+    ? DecMap[`${N}`]
+    : DecMap['__']
+  : `${N}` extends keyof DecMap
+  ? `${DecMap[`${N}`]}`
+  : `${DecMap['__']}`;
 
-export type Range<S extends number, E extends number> = _Range<
-  S,
-  Dec<E>,
-  []
->;
+export type Range<S extends number, E extends number> = _Range<S, Dec<E>, []>;
 type _Range<
   S extends number,
   E extends number,
-  R extends number[]
+  R extends number[],
 > = S extends E ? [...R, S] : _Range<Inc<S>, E, [...R, S]>;
 
 /* Maps */

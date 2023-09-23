@@ -5,6 +5,7 @@ import is from './is';
 
 import type { Primitive } from './isPrimitive';
 import type { Distribute } from '../.internal/types/distribute';
+import type { Dec } from '../.internal/types/number';
 
 type Escape<
   S extends string | number,
@@ -273,6 +274,49 @@ type _BasePathArrayOfObjectLike<O extends object> = ValueOf<{
       : readonly []
     : readonly [];
 }>;
+
+export type OmitByPath<O extends object, P> = _OmitByPath<
+  Distribute<[O]>[0],
+  P extends string ? ParsePath<P> : P extends readonly string[] ? P : never
+>;
+type _DropByIndex<
+  AS extends readonly unknown[],
+  I extends string,
+> = I extends '0'
+  ? AS extends readonly [unknown, ...infer R]
+    ? R
+    : AS
+  : AS extends readonly [infer L, ...infer R]
+  ? [L, ..._DropByIndex<R, Dec<I>>]
+  : AS;
+type _Omit<T, K extends keyof T> = T extends readonly unknown[]
+  ? number extends T['length']
+    ? T
+    : K extends keyof T
+    ? K extends `${number}`
+      ? _DropByIndex<T, K>
+      : T
+    : T
+  : K extends keyof T
+  ? Omit<T, K>
+  : T;
+type _OmitByPath<O, P extends readonly unknown[]> = P extends readonly [infer L]
+  ? L extends keyof O
+    ? _Omit<O, L>
+    : O
+  : P extends readonly [infer L, ...infer R]
+  ? undefined extends O
+    ? L extends keyof Exclude<O, undefined>
+      ?
+          | (_Omit<Exclude<O, undefined>, L> & {
+              [K in L]: _OmitByPath<Exclude<O, undefined>[L], R>;
+            })
+          | undefined
+      : O
+    : L extends keyof O
+    ? _Omit<O, L> & { [K in L]: _OmitByPath<O[L], R> }
+    : O
+  : never;
 
 type GetByPath<O extends object, P> = _GetByPath<
   Distribute<[O]>[0],
@@ -669,7 +713,8 @@ type PathExtensions<P> = {
  * objs.filter(path(['a', 'b', '0']).eq(1)); // => [{ a: { b: [1, 2, 3] } }]
  * ```
  */
-export type Path<O extends object, P> = ((
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type Path<O extends object = any, P = any> = ((
   o: O,
 ) => P extends BasePath<O> | BasePathArray<O> ? GetByPath<O, P> : undefined) &
   PathExtensions<P> & {
@@ -707,12 +752,13 @@ const path = <
 >(
   path: P,
 ): Path<O, P> => {
+  const parsedPath = (
+    Array.isArray(path) ? path : parsePath(path as string)
+  ) as P extends string ? ParsePath<P> : P;
+
   const result = (o: object): unknown => {
-    const parsedPath: string[] = Array.isArray(path)
-      ? path
-      : parsePath(path as string);
     let result: unknown = o;
-    for (const key of parsedPath) {
+    for (const key of parsedPath as string[]) {
       try {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
         result = (result as any)[key];
@@ -756,6 +802,7 @@ const path = <
   const _lteW = (value: unknown) => _lte(value);
 
   const extensions = {
+    parsed: parsedPath,
     satisfies: _satisfies,
     eq: _eq,
     eqW: _eqW,
