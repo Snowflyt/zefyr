@@ -2,6 +2,7 @@ import './Array';
 import './BigInt';
 import './Date';
 import './Duration';
+import './ExtendedObject';
 import './global';
 import './Math';
 import './Number';
