@@ -53,7 +53,7 @@ type _MethodKey<T, AS extends readonly (keyof T)[]> = AS extends readonly [
  * method<typeof obj, 'c'>('c')(obj); // => 3
  * ```
  */
-const method =
+const invoke =
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore - TODO: Fix this
 
@@ -65,4 +65,4 @@ const method =
         x[name as unknown as keyof T] as (...args: unknown[]) => unknown
       )() as never;
 
-export default method;
+export default invoke;

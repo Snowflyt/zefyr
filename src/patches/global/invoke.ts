@@ -1,7 +1,7 @@
 import { patch } from '../../.internal/utils/patch';
-import method from '../../global/method';
+import invoke from '../../global/invoke';
 
-import type { MethodKey } from '../../global/method';
+import type { MethodKey } from '../../global/invoke';
 
 declare global {
   /**
@@ -19,10 +19,10 @@ declare global {
    */
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore - TODO: Fix this
-  function method<const T, const P extends MethodKey<T>>(
+  function invoke<const T, const P extends MethodKey<T>>(
     name: P,
     // @ts-expect-error - TS doesn't know T[P] is a function
   ): (x: T) => ReturnType<T[P]>;
 }
 
-patch(globalThis).withStatic({ method });
+patch(globalThis).withStatic({ invoke });
