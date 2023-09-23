@@ -2,7 +2,7 @@ import './clone';
 import './cloneDeep';
 import './curried';
 import './equals';
-import './invoke';
+import './iv';
 import './list';
 import './path';
 import './prop';

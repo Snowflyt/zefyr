@@ -2,7 +2,7 @@ export { default as clone } from './clone';
 export { default as cloneDeep } from './cloneDeep';
 export { default as curried } from './curried';
 export { default as equals } from './equals';
-export { default as invoke } from './invoke';
+export { default as iv } from './iv';
 export { default as list } from './list';
 export { default as path } from './path';
 export { default as prop } from './prop';
