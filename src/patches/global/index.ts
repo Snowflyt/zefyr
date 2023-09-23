@@ -3,6 +3,7 @@ import './cloneDeep';
 import './curried';
 import './equals';
 import './list';
+import './method';
 import './path';
 import './prop';
 import './words';

@@ -3,12 +3,12 @@ import { zTag } from '../.internal/zTag';
 import equals from './equals';
 import is from './is';
 
-type PropExtension<P extends PropertyKey> = <O extends object>(
-  value: P extends keyof O ? O[P] : never,
-) => (o: O) => boolean;
-type PropExtensionW<P extends PropertyKey> = <O extends object>(
-  value: P extends keyof O ? unknown : never,
-) => (o: O) => boolean;
+type PropExtension<P extends PropertyKey> = <T>(
+  value: P extends keyof T ? T[P] : never,
+) => (o: T) => boolean;
+type PropExtensionW<P extends PropertyKey> = <T>(
+  value: P extends keyof T ? unknown : never,
+) => (o: T) => boolean;
 
 type PropExtensions<P extends PropertyKey> = {
   /**
@@ -364,10 +364,10 @@ type PropExtensions<P extends PropertyKey> = {
  */
 export type Prop<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  O extends object = any,
+  T = any,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  P extends object extends O ? PropertyKey : keyof O = any,
-> = ((o: O) => P extends keyof O ? O[P] : undefined) &
+  P extends unknown extends T ? PropertyKey : keyof T = any,
+> = ((o: T) => P extends keyof T ? T[P] : undefined) &
   PropExtensions<P> & {
     [zTag]: 'Prop';
   };
@@ -392,12 +392,9 @@ export type Prop<
  * objs.filter(prop('a').eq(1)); // => [{ a: 1, b: 2 }]
  * ```
  */
-const prop = <
-  const O extends object,
-  P extends object extends O ? PropertyKey : keyof O,
->(
+const prop = <const T, P extends object extends T ? PropertyKey : keyof T>(
   prop: P,
-): Prop<O, P> => {
+): Prop<T, P> => {
   const result = (o: object) => o[prop as keyof typeof o];
 
   const _satisfies = (pred: (value: unknown) => boolean) => (o: object) =>
@@ -467,7 +464,7 @@ const prop = <
     lteW: _lteW,
   };
 
-  return Object.assign(result, { ...extensions, [zTag]: 'Prop' }) as Prop<O, P>;
+  return Object.assign(result, { ...extensions, [zTag]: 'Prop' }) as Prop<T, P>;
 };
 
 export default prop;

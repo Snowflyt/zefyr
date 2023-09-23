@@ -24,10 +24,9 @@ declare global {
    * objs.filter(prop('a').eq(1)); // => [{ a: 1, b: 2 }]
    * ```
    */
-  function prop<
-    const O extends object,
-    P extends object extends O ? PropertyKey : keyof O,
-  >(prop: P): Prop<O, P>;
+  function prop<const T, P extends unknown extends T ? PropertyKey : keyof T>(
+    prop: P,
+  ): Prop<T, P>;
 }
 
 patch(globalThis).withStatic({ prop });

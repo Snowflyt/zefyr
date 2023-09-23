@@ -2,8 +2,10 @@ export { default as clone } from './clone';
 export { default as cloneDeep } from './cloneDeep';
 export { default as curried } from './curried';
 export { default as equals } from './equals';
-export { default as prop } from './prop';
+export { default as list } from './list';
+export { default as method } from './method';
 export { default as path } from './path';
+export { default as prop } from './prop';
 export { default as words } from './words';
 
 export { default as is } from './is';
