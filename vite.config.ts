@@ -15,15 +15,17 @@ export default defineConfig((configEnv) => ({
     }),
     dts({
       include: ['src/'],
+      exclude: ['src/index.ts'],
+      rollupTypes: true,
     }),
   ],
   build: {
     lib: {
-      entry: path.resolve('src', 'index.min.ts'),
+      entry: path.resolve('src', 'zefyr.min.ts'),
       name: 'zefyr',
       formats: ['es', 'umd'],
       fileName: (format) =>
-        format === 'es' ? 'index.min.js' : `index.${format}.min.js`,
+        format === 'es' ? 'zefyr.min.js' : `zefyr.${format}.min.js`,
     },
   },
 }));

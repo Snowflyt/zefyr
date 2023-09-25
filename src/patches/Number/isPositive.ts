@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import isPositive from '../../Number/isPositive';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   interface Number {

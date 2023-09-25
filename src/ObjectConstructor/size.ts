@@ -1,7 +1,7 @@
-import isPrototype from '../.internal/_isPrototype';
 import isArrayLike from '../global/isArrayLike';
+import isPrototype from '../internal/_isPrototype';
 
-import type { ListOf } from '../.internal/types/union';
+import type { ListOf } from '../internal/types/union';
 
 export type Size<O extends object> = O extends { length: number }
   ? O['length']

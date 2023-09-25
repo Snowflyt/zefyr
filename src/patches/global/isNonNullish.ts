@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import isNonNullish from '../../global/isNonNullish';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   /**

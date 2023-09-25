@@ -1,4 +1,4 @@
-import getTag from '../.internal/_getTag';
+import getTag from '../internal/_getTag';
 
 import isObject from './isObject';
 

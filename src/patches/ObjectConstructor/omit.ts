@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import omit from '../../ObjectConstructor/omit';
+import { patch } from '../../internal/utils/patch';
 
 import type {
   BasePath,

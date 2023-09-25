@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import mapKeys from '../../ObjectConstructor/mapKeys';
+import { patch } from '../../internal/utils/patch';
 
 import type { StrictKeys } from '../../ObjectConstructor/keysS';
 import type { StrictValues } from '../../ObjectConstructor/valuesS';

@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import isPlainObject from '../../global/isPlainObject';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   /**

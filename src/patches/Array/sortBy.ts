@@ -1,7 +1,7 @@
-import { patch } from '../../.internal/utils/patch';
 import sortBy from '../../Array/sortBy';
+import { patch } from '../../internal/utils/patch';
 
-import type { Ord } from '../../.internal/types/alias';
+import type { Ord } from '../../internal/types/alias';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

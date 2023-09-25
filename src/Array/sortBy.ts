@@ -1,4 +1,4 @@
-import type { Ord } from '../.internal/types/alias';
+import type { Ord } from '../internal/types/alias';
 
 /**
  * Returns a new array that is sorted by the given functions.

@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import toJSON from '../../BigInt/toJSON';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   interface BigInt {

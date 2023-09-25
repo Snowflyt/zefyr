@@ -1,11 +1,11 @@
-import { zTag } from '../.internal/zTag';
+import { zTag } from '../internal/zTag';
 
 import equals from './equals';
 import is from './is';
 
 import type { Primitive } from './isPrimitive';
-import type { Distribute } from '../.internal/types/distribute';
-import type { Dec } from '../.internal/types/number';
+import type { Distribute } from '../internal/types/distribute';
+import type { Dec } from '../internal/types/number';
 
 type Escape<
   S extends string | number,

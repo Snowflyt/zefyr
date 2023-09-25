@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import lcm from '../../Math/lcm';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   interface Math {

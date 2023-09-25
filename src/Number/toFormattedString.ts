@@ -1,4 +1,4 @@
-import { locale as environmentLocale } from '../.internal/utils/locale';
+import { locale as environmentLocale } from '../internal/utils/locale';
 
 type Locale =
   | 'en-US'

@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import isNaN from '../../Number/isNaN';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   interface Number {

@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import isBlank from '../../String/isBlank';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   interface String {

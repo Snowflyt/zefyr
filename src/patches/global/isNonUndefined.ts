@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import isNonUndefined from '../../global/isNonUndefined';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   /**

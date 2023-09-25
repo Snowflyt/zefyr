@@ -1,4 +1,4 @@
-import type { ListOf } from '../.internal/types/union';
+import type { ListOf } from '../internal/types/union';
 
 export type StrictEntries<T extends object> = keyof T extends symbol
   ? []

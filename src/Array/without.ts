@@ -1,6 +1,6 @@
 import equals from '../global/equals';
 
-import type { IsExact } from '../.internal/types/assertion';
+import type { IsExact } from '../internal/types/assertion';
 
 export type Without<
   AS extends readonly unknown[],

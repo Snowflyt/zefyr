@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import sign from '../../Number/sign';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   interface Number {

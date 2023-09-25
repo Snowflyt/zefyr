@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import words from '../../global/words';
+import { patch } from '../../internal/utils/patch';
 
 import type { Words } from '../../global/words';
 

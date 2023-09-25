@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import type { Compact } from './compact';
-import type { Expect, ToBe, ToCover } from '../.internal/types/test-helper';
+import type { Expect, ToBe, ToCover } from '../internal/types/test-helper';
 
 // @ts-expect-error - Test case
 type cases = [

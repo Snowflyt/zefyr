@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import fortnights from '../../Duration/fortnights';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   interface Number {

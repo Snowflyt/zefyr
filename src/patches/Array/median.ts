@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import median from '../../Array/median';
+import { patch } from '../../internal/utils/patch';
 
 import type { Median } from '../../Array/median';
 

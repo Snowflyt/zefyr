@@ -1,4 +1,4 @@
-import type { ListOf } from '../.internal/types/union';
+import type { ListOf } from '../internal/types/union';
 
 export type MethodKey<T> = T extends string
   ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment

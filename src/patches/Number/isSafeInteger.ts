@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import isSafeInteger from '../../Number/isSafeInteger';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   interface Number {

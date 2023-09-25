@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import cloneDeep from '../../global/cloneDeep';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   /**

@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import size from '../../ObjectConstructor/size';
+import { patch } from '../../internal/utils/patch';
 
 import type { Size } from '../../ObjectConstructor/size';
 

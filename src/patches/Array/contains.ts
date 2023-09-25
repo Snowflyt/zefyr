@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import contains from '../../Array/contains';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

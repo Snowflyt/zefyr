@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import entriesS from '../../ObjectConstructor/entriesS';
+import { patch } from '../../internal/utils/patch';
 
 import type { StrictEntries } from '../../ObjectConstructor/entriesS';
 

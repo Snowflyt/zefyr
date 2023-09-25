@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import isBetween from '../../Number/isBetween';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   interface Number {

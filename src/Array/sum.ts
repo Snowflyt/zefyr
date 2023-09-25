@@ -1,4 +1,4 @@
-import type { ListOf } from '../.internal/types/union';
+import type { ListOf } from '../internal/types/union';
 
 export type Sum<AS extends readonly unknown[]> = AS extends [] | readonly []
   ? 0

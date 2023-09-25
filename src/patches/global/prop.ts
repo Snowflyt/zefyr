@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import prop from '../../global/prop';
+import { patch } from '../../internal/utils/patch';
 
 import type { Prop } from '../../global/prop';
 

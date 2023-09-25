@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import isEmpty from '../../StringConstructor/isEmpty';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   interface StringConstructor {

@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import isSymbol from '../../global/isSymbol';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   /**

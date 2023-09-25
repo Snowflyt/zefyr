@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import without from '../../Array/without';
+import { patch } from '../../internal/utils/patch';
 
 import type { Without } from '../../Array/without';
 

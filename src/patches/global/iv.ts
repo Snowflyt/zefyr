@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import iv from '../../global/iv';
+import { patch } from '../../internal/utils/patch';
 
 import type { MethodKey } from '../../global/iv';
 

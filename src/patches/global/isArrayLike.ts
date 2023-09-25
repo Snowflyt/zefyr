@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import isArrayLike from '../../global/isArrayLike';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   /**

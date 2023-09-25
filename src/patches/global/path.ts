@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import path from '../../global/path';
+import { patch } from '../../internal/utils/patch';
 
 import type { BasePath, BasePathArray, Path } from '../../global/path';
 

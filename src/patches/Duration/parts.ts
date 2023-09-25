@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import parts from '../../Duration/parts';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   interface BigInt {

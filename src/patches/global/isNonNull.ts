@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import isNonNull from '../../global/isNonNull';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   /**

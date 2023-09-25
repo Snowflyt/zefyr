@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import isBooleanPrimitive from '../../global/isBooleanPrimitive';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   /**

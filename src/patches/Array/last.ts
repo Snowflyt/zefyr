@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import last from '../../Array/last';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   interface Array<T> {

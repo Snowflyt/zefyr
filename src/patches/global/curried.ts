@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import curried from '../../global/curried';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   /**

@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import isZero from '../../Number/isZero';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   interface Number {

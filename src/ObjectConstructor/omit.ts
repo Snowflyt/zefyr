@@ -1,4 +1,4 @@
-import { zTag } from '../.internal/zTag';
+import { zTag } from '../internal/zTag';
 
 import type { BasePath, BasePathArray, OmitByPath, Path } from '../global/path';
 import type { Prop } from '../global/prop';

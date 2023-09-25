@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import gcd from '../../Math/gcd';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   interface Math {

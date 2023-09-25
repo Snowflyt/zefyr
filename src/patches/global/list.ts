@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import list from '../../global/list';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   /**

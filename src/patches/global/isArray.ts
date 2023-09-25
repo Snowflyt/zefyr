@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import isArray from '../../global/isArray';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   /**

@@ -1,4 +1,4 @@
-import getTag from '../.internal/_getTag';
+import getTag from '../internal/_getTag';
 
 /**
  * Checks if the value is a plain object, that is, an object created by the `Object` constructor or one with a

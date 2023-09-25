@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import isBigIntPrimitive from '../../global/isBigIntPrimitive';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   /**

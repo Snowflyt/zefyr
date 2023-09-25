@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import filter from '../../ObjectConstructor/filter';
+import { patch } from '../../internal/utils/patch';
 
 import type { StrictEntries } from '../../ObjectConstructor/entriesS';
 import type { StrictKeys } from '../../ObjectConstructor/keysS';

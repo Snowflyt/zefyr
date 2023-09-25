@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import { ex } from '../../ExtendedObject';
+import { patch } from '../../internal/utils/patch';
 
 import type { ExtendedObject } from '../../ExtendedObject';
 

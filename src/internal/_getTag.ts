@@ -1,8 +1,7 @@
-
 /**
  * Returns the tag of the value (`Symbol.toStringTag` is omitted to get the raw tag).
  * @param value The value to get the tag of.
- * 
+ *
  * @example
  * ```typescript
  * getTag({}); // => 'Object'
@@ -30,6 +29,7 @@ const getTag = (value: unknown): string => {
     try {
       value[Symbol.toStringTag as keyof typeof value] = undefined as never;
       unmasked = true;
+      // eslint-disable-next-line no-empty
     } catch (e) {}
 
     const result = Object.prototype.toString.call(value).slice(8, -1);

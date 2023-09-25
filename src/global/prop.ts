@@ -1,4 +1,4 @@
-import { zTag } from '../.internal/zTag';
+import { zTag } from '../internal/zTag';
 
 import equals from './equals';
 import is from './is';

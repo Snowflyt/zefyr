@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import isLength from '../../Number/isLength';
+import { patch } from '../../internal/utils/patch';
 
 declare global {
   interface Number {

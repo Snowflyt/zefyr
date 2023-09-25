@@ -1,4 +1,4 @@
-import type { Dec } from '../.internal/types/number';
+import type { Dec } from '../internal/types/number';
 
 export type Last<AS extends readonly unknown[]> = number extends AS['length']
   ? AS[0] | undefined

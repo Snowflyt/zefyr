@@ -1,5 +1,5 @@
-import { patch } from '../../.internal/utils/patch';
 import compact from '../../Array/compact';
+import { patch } from '../../internal/utils/patch';
 
 import type { Compact } from '../../Array/compact';
 
