@@ -1,6 +1,7 @@
-export { default as isEmpty } from './isEmpty';
 export { default as entriesS } from './entriesS';
 export { default as filter } from './filter';
+export { default as groupBy } from './groupBy';
+export { default as isEmpty } from './isEmpty';
 export { default as keysS } from './keysS';
 export { default as map } from './map';
 export { default as mapKeys } from './mapKeys';

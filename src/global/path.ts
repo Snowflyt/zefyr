@@ -207,9 +207,7 @@ const parsePath = <const P extends string>(path: P): ParsePath<P> => {
   return result as ParsePath<P>;
 };
 
-export type BasePath<O extends object> = _BasePath<
-  Distribute<[O]>[0]
-> extends `.${infer R}`
+export type BasePath<O> = _BasePath<Distribute<[O]>[0]> extends `.${infer R}`
   ? R
   : _BasePath<Distribute<[O]>[0]>;
 type _BasePath<O> = __BasePath<Distribute<[O]>[0]>;
@@ -246,9 +244,7 @@ type _BasePathOfObjectLike<O extends object> = ValueOf<{
     : never;
 }>;
 
-export type BasePathArray<O extends object> = _BasePathArray<
-  Distribute<[O]>[0]
->;
+export type BasePathArray<O> = _BasePathArray<Distribute<[O]>[0]>;
 type _BasePathArray<O> = __BasePathArray<Distribute<[O]>[0]>;
 type __BasePathArray<O> = O extends object
   ? undefined extends _BasePathArrayOfObjectLike<O>
@@ -318,7 +314,7 @@ type _OmitByPath<O, P extends readonly unknown[]> = P extends readonly [infer L]
     : O
   : never;
 
-type GetByPath<O extends object, P> = _GetByPath<
+export type GetByPath<O, P> = _GetByPath<
   Distribute<[O]>[0],
   P extends string ? ParsePath<P> : P extends readonly string[] ? P : never
 >;
@@ -714,7 +710,7 @@ type PathExtensions<P> = {
  * ```
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type Path<O extends object = any, P = any> = ((
+export type Path<O = any, P = any> = ((
   o: O,
 ) => P extends BasePath<O> | BasePathArray<O> ? GetByPath<O, P> : undefined) &
   PathExtensions<P> & {
