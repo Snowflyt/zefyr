@@ -1,6 +1,11 @@
+import type { IsAny } from '../internal/types/assertion';
 import type { ListOf } from '../internal/types/union';
 
-export type MethodKey<T> = T extends string
+export type MethodKey<T> = IsAny<T> extends true
+  ? PropertyKey
+  : [T] extends [never]
+  ? never
+  : T extends string
   ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore - TODO: Fix this
     | _MethodKey<
@@ -26,14 +31,14 @@ export type MethodKey<T> = T extends string
       | 'reverse'
       | 'trimIndent'
   : _MethodKey<T, ListOf<keyof T>>;
-type _MethodKey<T, AS extends readonly (keyof T)[]> = AS extends readonly [
+type _MethodKey<T, AS extends readonly PropertyKey[]> = AS extends readonly [
   infer A,
   ...infer B,
 ]
   ? A extends keyof T
-    ? B extends readonly (keyof T)[]
+    ? B extends readonly PropertyKey[]
       ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        T[A] extends (...args: any[]) => any
+        T[A] extends () => any
         ? _MethodKey<T, B> | A
         : _MethodKey<T, B>
       : never

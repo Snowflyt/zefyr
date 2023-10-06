@@ -79,6 +79,10 @@ type LiteralChecks<T, LiteralUnionType> = IsNotFalse<
 >;
 export type IsNever<T> = [T] extends [never] ? true : false;
 
+export type IsAny<T> = boolean extends (T extends never ? true : false)
+  ? true
+  : false;
+
 /* Helper types */
 
 type Numeric = number | bigint;
