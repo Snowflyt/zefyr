@@ -1,6 +1,6 @@
 import { zTag } from '../internal/zTag';
 
-import type { StrictEntries } from './entriesS';
+import type { StrictEntries } from '../ObjectConstructor/entriesS';
 import type { BasePath, BasePathArray, GetByPath, Path } from '../global/path';
 import type { Prop } from '../global/prop';
 import type { Cast } from '../internal/types/assertion';

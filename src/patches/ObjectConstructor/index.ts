@@ -1,6 +1,5 @@
 import './entriesS';
 import './filter';
-import './groupBy';
 import './isEmpty';
 import './keysS';
 import './map';

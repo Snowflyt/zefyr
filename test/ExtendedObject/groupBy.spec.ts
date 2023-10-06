@@ -2,9 +2,9 @@ import { describe, expect, it } from 'vitest';
 
 import '../../src/patches/global/path';
 import '../../src/patches/global/prop';
-import '../../src/patches/ObjectConstructor/groupBy';
+import '../../src/patches/ExtendedObject/ex';
 
-describe('Object.groupBy', () => {
+describe('groupBy', () => {
   it('should group', () => {
     const obj = { a: 1, b: 2, 5: 42 };
     const obj2 = {
@@ -13,26 +13,26 @@ describe('Object.groupBy', () => {
       c: { value: 2, nested: { v: 3 } },
     };
     expect(
-      Object.groupBy(obj, ([, value]) => (value % 2 === 0 ? 'even' : 'odd')),
+      ex(obj).groupBy(([, value]) => (value % 2 === 0 ? 'even' : 'odd')),
     ).toEqual({
       odd: [1],
       even: [42, 2],
     });
-    expect(Object.groupBy(obj2, 'value')).toEqual({
+    expect(ex(obj2).groupBy('value')).toEqual({
       1: [{ value: 1, nested: { v: 1 } }],
       2: [
         { value: 2, nested: { v: 2 } },
         { value: 2, nested: { v: 3 } },
       ],
     });
-    expect(Object.groupBy(obj2, prop('value'))).toEqual({
+    expect(ex(obj2).groupBy(prop('value'))).toEqual({
       1: [{ value: 1, nested: { v: 1 } }],
       2: [
         { value: 2, nested: { v: 2 } },
         { value: 2, nested: { v: 3 } },
       ],
     });
-    expect(Object.groupBy(obj2, path('nested.v'))).toEqual({
+    expect(ex(obj2).groupBy(path('nested.v'))).toEqual({
       1: [{ value: 1, nested: { v: 1 } }],
       2: [{ value: 2, nested: { v: 2 } }],
       3: [{ value: 2, nested: { v: 3 } }],

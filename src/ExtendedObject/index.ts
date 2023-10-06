@@ -1,6 +1,5 @@
 import {
   filter,
-  groupBy,
   isEmpty,
   map,
   mapKeys,
@@ -9,6 +8,8 @@ import {
   reduce,
   size,
 } from '../ObjectConstructor';
+
+import groupBy from './groupBy';
 
 import type { StrictEntries } from '../ObjectConstructor/entriesS';
 import type { StrictKeys } from '../ObjectConstructor/keysS';
@@ -394,3 +395,5 @@ export const ex = <const O extends object>(o: O): ExtendedObject<O> =>
       ex(omit(o, ...keys)) as never,
     groupBy: (fn: unknown) => ex(groupBy(o, fn as never)) as never,
   });
+
+export { default as groupBy } from './groupBy';
