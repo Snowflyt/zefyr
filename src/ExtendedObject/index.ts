@@ -33,6 +33,35 @@ declare const omitPropFallback: unique symbol;
  */
 export type ExtendedObject<O extends object> = O & {
   /**
+   * Returns the object itself, but hide all additional methods in TS.
+   *
+   * It does **not** actually hide the methods, it just makes them invisible in TS. If you want to hide them also in JS, use `purify` instead.
+   * @example
+   * ```typescript
+   * const obj = { a: 1 };
+   * const obj2 = { ...ex(obj).filter(([, v]) => v > 0) }; // obj2 :: { a?: number | undefined, keys: () => ..., values: () => ..., ... }
+   * const obj3 = { ...ex(obj).filter(([, v]) => v > 0).mask() }; // obj3 :: { a?: number | undefined }
+   * ```
+   *
+   * @see {@link ExtendedObject#purify}
+   */
+  mask: () => O;
+  /**
+   * Returns a new object with all additional methods removed.
+   *
+   * Compared to `mask`, it actually removes the methods and returns a new one, but it also means this is less performant.
+   * @example
+   * ```typescript
+   * const obj = { a: 1 };
+   * const obj2 = { ...ex(obj).filter(([, v]) => v > 0) }; // obj2 :: { a?: number | undefined, keys: () => ..., values: () => ..., ... }
+   * const obj3 = { ...ex(obj).filter(([, v]) => v > 0).purify() }; // obj3 :: { a?: number | undefined }
+   * ```
+   *
+   * @see {@link ExtendedObject#mask}
+   */
+  purify: () => O;
+
+  /**
    * Returns the names of the enumerable string properties and methods of the object (using `Object.keysS`).
    *
    * @example
@@ -322,6 +351,9 @@ const mixin = <const O extends object, const M extends object>(
  */
 export const ex = <const O extends object>(o: O): ExtendedObject<O> =>
   mixin(o, {
+    mask: () => o,
+    purify: () => ({ ...o }),
+
     keys: () => Object.keys(o) as StrictKeys<O>,
     values: () => Object.values(o) as StrictValues<O>,
     entries: () => Object.entries(o) as StrictEntries<O>,
