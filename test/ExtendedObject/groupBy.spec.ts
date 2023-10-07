@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
+import '../../src/patches/ExtendedObject/ex';
 import '../../src/patches/global/path';
 import '../../src/patches/global/prop';
-import '../../src/patches/ExtendedObject/ex';
 
 describe('groupBy', () => {
   it('should group', () => {

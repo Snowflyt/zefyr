@@ -3,6 +3,7 @@ import './clone';
 import './compact';
 import './contains';
 import './first';
+import './groupBy';
 import './last';
 import './mean';
 import './median';
