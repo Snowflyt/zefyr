@@ -17,6 +17,7 @@ import './isBoolean';
 import './isBooleanPrimitive';
 import './isFalsy';
 import './isFunction';
+import './isLength';
 import './isNonNull';
 import './isNonNullish';
 import './isNonUndefined';
