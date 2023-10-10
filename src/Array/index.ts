@@ -3,6 +3,8 @@ export { default as clone } from './clone';
 export { default as compact } from './compact';
 export { default as first } from './first';
 export { default as groupBy } from './groupBy';
+export { default as isEmpty } from './isEmpty';
+export { default as isNotEmpty } from './isNotEmpty';
 export { default as last } from './last';
 export { default as mean } from './mean';
 export { default as median } from './median';

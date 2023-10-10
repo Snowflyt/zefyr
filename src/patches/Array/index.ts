@@ -4,6 +4,8 @@ import './compact';
 import './contains';
 import './first';
 import './groupBy';
+import './isEmpty';
+import './isNotEmpty';
 import './last';
 import './mean';
 import './median';
