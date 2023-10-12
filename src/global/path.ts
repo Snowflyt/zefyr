@@ -5,7 +5,7 @@ import is from './is';
 
 import type { Primitive } from './isPrimitive';
 import type { Distribute } from '../internal/types/distribute';
-import type { Dec } from '../internal/types/number';
+import type { Int, List } from '../internal/types/tools';
 
 type Escape<
   S extends string | number,
@@ -275,22 +275,12 @@ export type OmitByPath<O extends object, P> = _OmitByPath<
   Distribute<[O]>[0],
   P extends string ? ParsePath<P> : P extends readonly string[] ? P : never
 >;
-type _DropByIndex<
-  AS extends readonly unknown[],
-  I extends string,
-> = I extends '0'
-  ? AS extends readonly [unknown, ...infer R]
-    ? R
-    : AS
-  : AS extends readonly [infer L, ...infer R]
-  ? [L, ..._DropByIndex<R, Dec<I>>]
-  : AS;
 type _Omit<T, K extends keyof T> = T extends readonly unknown[]
   ? number extends T['length']
     ? T
     : K extends keyof T
     ? K extends `${number}`
-      ? _DropByIndex<T, K>
+      ? List.DropIndex<T, Int.Of<K>>
       : T
     : T
   : K extends keyof T
@@ -710,7 +700,7 @@ type PathExtensions<P> = {
  * ```
  */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type Path<O = any, P = any> = ((
+export type PathFn<O = any, P = any> = ((
   o: O,
 ) => P extends BasePath<O> | BasePathArray<O> ? GetByPath<O, P> : undefined) &
   PathExtensions<P> & {
@@ -747,7 +737,7 @@ const path = <
     : BasePath<O> | BasePathArray<O>,
 >(
   path: P,
-): Path<O, P> => {
+): PathFn<O, P> => {
   const parsedPath = (
     Array.isArray(path) ? path : parsePath(path as string)
   ) as P extends string ? ParsePath<P> : P;
@@ -826,7 +816,10 @@ const path = <
     lteW: _lteW,
   };
 
-  return Object.assign(result, { ...extensions, [zTag]: 'Path' }) as Path<O, P>;
+  return Object.assign(result, { ...extensions, [zTag]: 'Path' }) as PathFn<
+    O,
+    P
+  >;
 };
 
 export default path;

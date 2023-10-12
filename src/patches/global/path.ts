@@ -1,7 +1,7 @@
 import path from '../../global/path';
 import { patch } from '../../internal/utils/patch';
 
-import type { BasePath, BasePathArray, Path } from '../../global/path';
+import type { BasePath, BasePathArray, PathFn } from '../../global/path';
 
 declare global {
   /**
@@ -32,7 +32,7 @@ declare global {
     const P extends object extends O
       ? string | readonly string[]
       : BasePath<O> | BasePathArray<O>,
-  >(path: P): Path<O, P>;
+  >(path: P): PathFn<O, P>;
 }
 
 patch(globalThis).withStatic({ path } as never);

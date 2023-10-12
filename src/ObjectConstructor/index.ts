@@ -9,3 +9,5 @@ export { default as omit } from './omit';
 export { default as reduce } from './reduce';
 export { default as size } from './size';
 export { default as valuesS } from './valuesS';
+export { default as objWith } from './with';
+export { default as objWithW } from './withW';

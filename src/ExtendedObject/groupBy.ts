@@ -1,8 +1,13 @@
 import { zTag } from '../internal/zTag';
 
 import type { StrictEntries } from '../ObjectConstructor/entriesS';
-import type { BasePath, BasePathArray, GetByPath, Path } from '../global/path';
-import type { Prop } from '../global/prop';
+import type {
+  BasePath,
+  BasePathArray,
+  GetByPath,
+  PathFn,
+} from '../global/path';
+import type { PropFn } from '../global/prop';
 import type { Cast } from '../internal/types/assertion';
 import type { ListOf } from '../internal/types/union';
 
@@ -32,7 +37,7 @@ const groupBy: {
     const PP extends BasePath<O[keyof O]> | BasePathArray<O[keyof O]> = never,
   >(
     o: O,
-    fn: K | Prop<O[keyof O], K> | Path<O[keyof O], PP>,
+    fn: K | PropFn<O[keyof O], K> | PathFn<O[keyof O], PP>,
   ): ListOf<K>['length'] extends 1
     ? { [P in Cast<O[keyof O][K], PropertyKey>]: O[keyof O] }
     : GetByPath<O[keyof O], PP> extends PropertyKey
@@ -55,8 +60,8 @@ const groupBy: {
   o: O,
   fn:
     | K
-    | Prop<O[keyof O], K>
-    | Path<O[keyof O], PP>
+    | PropFn<O[keyof O], K>
+    | PathFn<O[keyof O], PP>
     | ((entry: StrictEntries<O>[number], index: number, object: O) => R),
 ) => {
   let processedFn: (

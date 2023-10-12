@@ -9,3 +9,5 @@ import './omit';
 import './reduce';
 import './size';
 import './valuesS';
+import './with';
+import './withW';

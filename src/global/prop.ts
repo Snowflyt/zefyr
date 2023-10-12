@@ -362,7 +362,7 @@ type PropExtensions<P extends PropertyKey> = {
  * objs.filter(prop('a').eq(1)); // => [{ a: 1, b: 2 }]
  * ```
  */
-export type Prop<
+export type PropFn<
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   T = any,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -394,7 +394,7 @@ export type Prop<
  */
 const prop = <const T, P extends object extends T ? PropertyKey : keyof T>(
   prop: P,
-): Prop<T, P> => {
+): PropFn<T, P> => {
   const result = (o: object) => o[prop as keyof typeof o];
 
   const _satisfies = (pred: (value: unknown) => boolean) => (o: object) =>
@@ -465,7 +465,10 @@ const prop = <const T, P extends object extends T ? PropertyKey : keyof T>(
     lteW: _lteW,
   };
 
-  return Object.assign(result, { ...extensions, [zTag]: 'Prop' }) as Prop<T, P>;
+  return Object.assign(result, { ...extensions, [zTag]: 'Prop' }) as PropFn<
+    T,
+    P
+  >;
 };
 
 export default prop;

@@ -4,6 +4,8 @@ import {
   map,
   mapKeys,
   mapValues,
+  objWith,
+  objWithW,
   omit,
   reduce,
   size,
@@ -20,10 +22,11 @@ import type {
   BasePathArray,
   GetByPath,
   OmitByPath,
-  Path,
+  PathFn,
 } from '../global/path';
-import type { Prop } from '../global/prop';
+import type { PropFn } from '../global/prop';
 import type { Cast } from '../internal/types/assertion';
+import type { List, Obj, Path } from '../internal/types/tools';
 import type { ListOf } from '../internal/types/union';
 
 declare const omitPropFallback: unique symbol;
@@ -266,7 +269,7 @@ export type ExtendedObject<O extends object> = O & {
     const PP extends BasePath<O> | BasePathArray<O> = never,
   >(
     // @ts-expect-error - P must be keyof O, since emitPropFallback is not exported
-    ...keys: readonly (P | Prop<O, P> | Path<O, PP>)[]
+    ...keys: readonly (P | PropFn<O, P> | PathFn<O, PP>)[]
   ) => // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore - TODO: Fix this
   ExtendedObject<
@@ -276,11 +279,10 @@ export type ExtendedObject<O extends object> = O & {
         : Omit<O, P>
       : OmitByPath<typeof omitPropFallback extends P ? O : Omit<O, P>, PP>
   >;
+
   /**
    * Returns an object composed of keys generated from the results of running each element of the object through `fn`.
    * The corresponding value of each key is an array of the elements responsible for generating the key.
-   *
-   * @param o Object that contains the properties and methods. This can be an object that you created or an existing Document Object Model (DOM) object.
    * @param fn Prop, Path, a property name or a function that accepts up to three arguments. The groupBy function calls the fn function one time for each key/value pair in the object.
    *
    * @example
@@ -300,7 +302,7 @@ export type ExtendedObject<O extends object> = O & {
       }[keyof O[keyof O]],
       const PP extends BasePath<O[keyof O]> | BasePathArray<O[keyof O]> = never,
     >(
-      fn: K | Prop<O[keyof O], K> | Path<O[keyof O], PP>,
+      fn: K | PropFn<O[keyof O], K> | PathFn<O[keyof O], PP>,
     ): ExtendedObject<
       ListOf<K>['length'] extends 1
         ? { [P in Cast<O[keyof O][K], PropertyKey>]: O[keyof O] }
@@ -313,6 +315,137 @@ export type ExtendedObject<O extends object> = O & {
     ): ExtendedObject<{
       [P in R]: O[keyof O];
     }>;
+  };
+
+  with: {
+    /**
+     * Returns a new object with the specified property set to the given value.
+     * @param prop Property name or `prop` function representing the property to set.
+     * @param value Value to set.
+     *
+     * @example
+     * ```typescript
+     * const obj = { a: 1, b: 2, c: { d: [{ e: 3 }] } };
+     * ex(obj).with('a', 2); // => { a: 2, b: 2, c: { d: [{ e: 3 }] } }
+     * ex(obj).with(prop('a'), 2); // => { a: 2, b: 2, c: { d: [{ e: 3 }] } }
+     * ex(obj).with(path('c.d[0].e'), 4); // => { a: 1, b: 2, c: { d: [{ e: 4 }] } }
+     * ex(obj).with(['c', 'd', '0', 'e'], 4); // => { a: 1, b: 2, c: { d: [{ e: 4 }] } }
+     * ```
+     */
+    <
+      const K extends {
+        [P in keyof O]: O[P] extends PropertyKey ? P : never;
+      }[keyof O],
+    >(
+      prop: K | PropFn<O, K>,
+      value: O[K],
+    ): ExtendedObject<O>;
+    /**
+     * Returns a new object with the specified property set to the given value.
+     * @param path Property path or `path` function representing the property to set.
+     * @param value Value to set.
+     *
+     * @example
+     * ```typescript
+     * const obj = { a: 1, b: 2, c: { d: [{ e: 3 }] } };
+     * ex(obj).with('a', 2); // => { a: 2, b: 2, c: { d: [{ e: 3 }] } }
+     * ex(obj).with(prop('a'), 2); // => { a: 2, b: 2, c: { d: [{ e: 3 }] } }
+     * ex(obj).with(path('c.d[0].e'), 4); // => { a: 1, b: 2, c: { d: [{ e: 4 }] } }
+     * ex(obj).with(['c', 'd', '0', 'e'], 4); // => { a: 1, b: 2, c: { d: [{ e: 4 }] } }
+     * ```
+     */
+    <const PP extends BasePath<O> | BasePathArray<O>>(
+      path: PathFn<O, PP>,
+      value: Obj.Get<O, Path<PP> extends List<PropertyKey> ? Path<PP> : never>,
+    ): ExtendedObject<O>;
+    /**
+     * Returns a new object with the specified property set to the given value.
+     * @param path Property path or `path` function representing the property to set.
+     * @param value Value to set.
+     *
+     * @example
+     * ```typescript
+     * const obj = { a: 1, b: 2, c: { d: [{ e: 3 }] } };
+     * ex(obj).with('a', 2); // => { a: 2, b: 2, c: { d: [{ e: 3 }] } }
+     * ex(obj).with(prop('a'), 2); // => { a: 2, b: 2, c: { d: [{ e: 3 }] } }
+     * ex(obj).with(path('c.d[0].e'), 4); // => { a: 1, b: 2, c: { d: [{ e: 4 }] } }
+     * ex(obj).with(['c', 'd', '0', 'e'], 4); // => { a: 1, b: 2, c: { d: [{ e: 4 }] } }
+     * ```
+     */
+    <const PP extends BasePathArray<O>>(
+      path: PP,
+      value: Obj.Get<O, Path<PP> extends List<PropertyKey> ? Path<PP> : never>,
+    ): ExtendedObject<O>;
+  };
+  withW: {
+    /**
+     * Returns a new object with the specified property set to the given value.
+     *
+     * It is the same as `ExtendedObject#with`, but with looser type restrictions. The `W` postfix stands for "wide".
+     * @param prop Property name or `prop` function representing the property to set.
+     * @param value Value to set.
+     *
+     * @example
+     * ```typescript
+     * const obj = { a: 1, b: 2, c: { d: [{ e: 3 }] } };
+     * ex(obj).withW('a', 2); // => { a: 2, b: 2, c: { d: [{ e: 3 }] } }
+     * ex(obj).withW(prop('a'), 2); // => { a: 2, b: 2, c: { d: [{ e: 3 }] } }
+     * ex(obj).withW(path('c.d[0].e'), 4); // => { a: 1, b: 2, c: { d: [{ e: 4 }] } }
+     * ex(obj).withW(['c', 'd', '0', 'e'], 4); // => { a: 1, b: 2, c: { d: [{ e: 4 }] } }
+     * ```
+     *
+     * @see {@link ExtendedObject#with}
+     */
+    <const K extends PropertyKey, const V>(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      prop: K | PropFn<any, K>,
+      value: V,
+    ): Obj.With<O, K, Obj.WritableDeep<V>>;
+    /**
+     * Returns a new object with the specified property set to the given value.
+     *
+     * It is the same as `ExtendedObject#with`, but with looser type restrictions. The `W` postfix stands for "wide".
+     * @param path Property path or `path` function representing the property to set.
+     * @param value Value to set.
+     *
+     * @example
+     * ```typescript
+     * const obj = { a: 1, b: 2, c: { d: [{ e: 3 }] } };
+     * ex(obj).withW('a', 2); // => { a: 2, b: 2, c: { d: [{ e: 3 }] } }
+     * ex(obj).withW(prop('a'), 2); // => { a: 2, b: 2, c: { d: [{ e: 3 }] } }
+     * ex(obj).withW(path('c.d[0].e'), 4); // => { a: 1, b: 2, c: { d: [{ e: 4 }] } }
+     * ex(obj).withW(['c', 'd', '0', 'e'], 4); // => { a: 1, b: 2, c: { d: [{ e: 4 }] } }
+     * ```
+     *
+     * @see {@link ExtendedObject#with}
+     */
+    <const PP extends string | readonly PropertyKey[], const V>(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      path: PathFn<any, PP>,
+      value: V,
+    ): Obj.With<O, Path<PP>, Obj.WritableDeep<V>>;
+    /**
+     * Returns a new object with the specified property set to the given value.
+     *
+     * It is the same as `ExtendedObject#with`, but with looser type restrictions. The `W` postfix stands for "wide".
+     * @param path Property path or `path` function representing the property to set.
+     * @param value Value to set.
+     *
+     * @example
+     * ```typescript
+     * const obj = { a: 1, b: 2, c: { d: [{ e: 3 }] } };
+     * ex(obj).withW('a', 2); // => { a: 2, b: 2, c: { d: [{ e: 3 }] } }
+     * ex(obj).withW(prop('a'), 2); // => { a: 2, b: 2, c: { d: [{ e: 3 }] } }
+     * ex(obj).withW(path('c.d[0].e'), 4); // => { a: 1, b: 2, c: { d: [{ e: 4 }] } }
+     * ex(obj).withW(['c', 'd', '0', 'e'], 4); // => { a: 1, b: 2, c: { d: [{ e: 4 }] } }
+     * ```
+     *
+     * @see {@link ExtendedObject#with}
+     */
+    <const PP extends readonly PropertyKey[], const V>(
+      path: PP,
+      value: V,
+    ): Obj.With<O, Path<PP>, Obj.WritableDeep<V>>;
   };
 };
 
@@ -350,6 +483,7 @@ const mixin = <const O extends object, const M extends object>(
  * ```
  */
 export const ex = <const O extends object>(o: O): ExtendedObject<O> =>
+  // @ts-expect-error - TS cannot correctly process object with special properties like `with`
   mixin(o, {
     mask: () => o,
     purify: () => ({ ...o }),
@@ -421,11 +555,16 @@ export const ex = <const O extends object>(o: O): ExtendedObject<O> =>
       const PP extends BasePath<O> | BasePathArray<O> = never,
     >(
       // @ts-expect-error - P must be keyof O, since emitPropFallback is not exported
-      ...keys: readonly (P | Prop<O, P> | Path<O, PP>)[]
+      ...keys: readonly (P | PropFn<O, P> | PathFn<O, PP>)[]
     ) =>
       // @ts-expect-error - TS doesn't know that `keys` is valid
       ex(omit(o, ...keys)) as never,
+
     groupBy: (fn: unknown) => ex(groupBy(o, fn as never)) as never,
+
+    with: (k: unknown, v: unknown) =>
+      ex(objWith(o, k as never, v as never)) as never,
+    withW: (k: unknown, v: unknown) => ex(objWithW(o, k as never, v as never)),
   });
 
 export { default as groupBy } from './groupBy';

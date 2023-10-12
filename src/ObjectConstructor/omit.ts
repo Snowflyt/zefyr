@@ -1,7 +1,12 @@
 import { zTag } from '../internal/zTag';
 
-import type { BasePath, BasePathArray, OmitByPath, Path } from '../global/path';
-import type { Prop } from '../global/prop';
+import type {
+  BasePath,
+  BasePathArray,
+  OmitByPath,
+  PathFn,
+} from '../global/path';
+import type { PropFn } from '../global/prop';
 
 declare const omitPropFallback: unique symbol;
 
@@ -25,7 +30,7 @@ const omit = <
 >(
   o: O,
   // @ts-expect-error - P must be keyof O, since emitPropFallback is not exported
-  ...keys: readonly (P | Prop<O, P> | Path<O, PP>)[]
+  ...keys: readonly (P | PropFn<O, P> | PathFn<O, PP>)[]
 ): [PP] extends [never]
   ? typeof omitPropFallback extends P
     ? O

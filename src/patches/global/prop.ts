@@ -1,7 +1,7 @@
 import prop from '../../global/prop';
 import { patch } from '../../internal/utils/patch';
 
-import type { Prop } from '../../global/prop';
+import type { PropFn } from '../../global/prop';
 
 declare global {
   /**
@@ -26,7 +26,7 @@ declare global {
    */
   function prop<const T, P extends unknown extends T ? PropertyKey : keyof T>(
     prop: P,
-  ): Prop<T, P>;
+  ): PropFn<T, P>;
 }
 
 patch(globalThis).withStatic({ prop });
