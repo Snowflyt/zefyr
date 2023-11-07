@@ -13,5 +13,9 @@ describe('cloneDeep', () => {
     copy.d.push({ f: 5 } as never);
     expect(obj).toStrictEqual({ a: 1, b: { c: 2 }, d: [{ e: 3 }] });
     expect(copy).toStrictEqual({ a: 2, b: { c: 3 }, d: [{ e: 4 }, { f: 5 }] });
+
+    const objs = [{ a: 1 }, { b: 2 }];
+    const deep = cloneDeep(objs);
+    expect(deep[0] === objs[0]).toBe(false);
   });
 });

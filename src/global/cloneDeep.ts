@@ -1,33 +1,21 @@
-import _ from 'lodash-es';
-
-declare global {
-  /**
-   * Returns a deep clone of value (using `structuredClone` if available, otherwise using `_.cloneDeep`).
-   *
-   * This method is like `clone` except that it recursively clones value.
-   *
-   * @param value The value to recursively clone.
-   *
-   * @see {@link structuredClone}
-   * @see {@link _.cloneDeep}
-   */
-  function cloneDeep<T>(value: T): T;
-}
+import baseClone from '../internal/_baseClone';
 
 /**
- * Returns a deep clone of value (using `structuredClone` if available, otherwise using `_.cloneDeep`).
+ * Returns a deep clone of value.
  *
  * This method is like `clone` except that it recursively clones value.
  *
  * @param value The value to recursively clone.
  *
- * @see {@link structuredClone}
- * @see {@link _.cloneDeep}
+ * @example
+ * ```typescript
+ * const objs = [{ a: 1 }, { b: 2 }];
+ * const deep = cloneDeep(objs);
+ * deep[0] === objs[0]; // => false
+ * ```
+ *
+ * @see {@link clone}
  */
-const cloneDeep = <T>(value: T): T => {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
-  if ((globalThis as any).structuredClone) return structuredClone(value);
-  return _.cloneDeep(value);
-};
+const cloneDeep = <T>(value: T): T => baseClone(value, true);
 
 export default cloneDeep;

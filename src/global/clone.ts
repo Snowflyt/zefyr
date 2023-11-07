@@ -1,7 +1,7 @@
-import _ from 'lodash-es';
+import baseClone from '../internal/_baseClone';
 
 /**
- * Returns a shallow clone of value (using `_.clone`).
+ * Returns a shallow clone of value.
  *
  * Note: This method is loosely based on the structured clone algorithm and supports cloning arrays,
  * array buffers, booleans, date objects, maps, numbers, Object objects, regexes, sets, strings, symbols,
@@ -18,10 +18,12 @@ import _ from 'lodash-es';
  * copy.a = 2;
  * console.log(obj); // { a: 1 }
  * console.log(copy); // { a: 2 }
- * ```
  *
- * @see {@link _.clone}
+ * const objs = [{ a: 1 }, { b: 2 }];
+ * const shallow = clone(objs);
+ * shallow[0] === objs[0]; // => true
+ * ```
  */
-const clone = <T>(value: T): T => _.clone(value);
+const clone = <T>(value: T): T => baseClone(value, false);
 
 export default clone;

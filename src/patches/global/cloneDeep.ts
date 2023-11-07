@@ -3,14 +3,20 @@ import { patch } from '../../internal/utils/patch';
 
 declare global {
   /**
-   * Returns a deep clone of value (using `structuredClone` if available, otherwise using `_.cloneDeep`).
+   * Returns a deep clone of value.
    *
    * This method is like `clone` except that it recursively clones value.
    *
    * @param value The value to recursively clone.
    *
-   * @see {@link structuredClone}
-   * @see {@link _.cloneDeep}
+   * @example
+   * ```typescript
+   * const objs = [{ a: 1 }, { b: 2 }];
+   * const deep = cloneDeep(objs);
+   * deep[0] === objs[0]; // => false
+   * ```
+   *
+   * @see {@link clone}
    */
   function cloneDeep<T>(value: T): T;
 }

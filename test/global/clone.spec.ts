@@ -11,4 +11,10 @@ describe('clone', () => {
     expect(obj).toStrictEqual({ a: 1 });
     expect(copy).toStrictEqual({ a: 2 });
   });
+
+  it('should only clone shallowly', () => {
+    const objs = [{ a: 1 }, { b: 2 }];
+    const shallow = clone(objs);
+    expect(shallow[0] === objs[0]).toBe(true);
+  });
 });
