@@ -1,8 +1,10 @@
-import _ from 'lodash-es';
+import isArrayLike from '../global/isArrayLike';
+import getTag from '../internal/_getTag';
+import isPrototype from '../internal/_isPrototype';
 
 /**
  * Returns `true` if the value is an empty object. An object is considered empty unless it’s an arguments object, array, or
- * jQuery-like collection with a length greater than 0 or an object with own enumerable properties (using `_.isEmpty`).
+ * jQuery-like collection with a length greater than 0 or an object with own enumerable properties.
  * @param o — The value to check.
  *
  * @example
@@ -14,13 +16,29 @@ import _ from 'lodash-es';
  * isEmpty(new Map()); // => true
  * isEmpty(new Set()); // => true
  * ```
- *
- * @see {@link _.isEmpty}
  */
 const isEmpty: {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  (o: Map<any, any> | Set<any> | ArrayLike<any>): boolean;
+  (o: Map<unknown, unknown> | Set<unknown> | ArrayLike<unknown>): boolean;
   (o: object): boolean;
-} = (o: object) => _.isEmpty(o);
+} = (o: object) => {
+  // For array-like objects, check the "length" property
+  if (isArrayLike(o)) return o.length === 0;
+
+  // For maps and sets, check the "size" property
+  const tag = getTag(o);
+  if (tag === 'Map' || tag === 'Set')
+    return (o as Map<unknown, unknown> | Set<unknown>).size === 0;
+
+  // For prototypes, check the number of properties
+  if (isPrototype(o)) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    for (const _ in o) return false;
+    return true;
+  }
+
+  // For all other objects, check the number of own properties
+  for (const key in o) if (Object.hasOwnProperty.call(o, key)) return false;
+  return true;
+};
 
 export default isEmpty;

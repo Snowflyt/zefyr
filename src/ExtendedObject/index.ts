@@ -126,7 +126,7 @@ export type ExtendedObject<O extends object> = O & {
   size: () => Size<O>;
   /**
    * Returns `true` if the object is an empty object. An object is considered empty unless it’s an arguments object, array, or
-   * jQuery-like collection with a length greater than 0 or an object with own enumerable properties (using `_.isEmpty`).
+   * jQuery-like collection with a length greater than 0 or an object with own enumerable properties.
    *
    * @example
    * ```typescript
@@ -137,8 +137,6 @@ export type ExtendedObject<O extends object> = O & {
    * ex(new Map()).isEmpty(); // => true
    * ex(new Set()).isEmpty(); // => true
    * ```
-   *
-   * @see {@link _.isEmpty}
    */
   isEmpty: () => boolean;
 

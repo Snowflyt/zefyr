@@ -5,7 +5,7 @@ declare global {
   interface ObjectConstructor {
     /**
      * Returns `true` if the value is an empty object. An object is considered empty unless it’s an arguments object, array, or
-     * jQuery-like collection with a length greater than 0 or an object with own enumerable properties (using _.isEmpty).
+     * jQuery-like collection with a length greater than 0 or an object with own enumerable properties.
      * @param o — The value to check.
      *
      * @example
@@ -17,11 +17,10 @@ declare global {
      * isEmpty(new Map()); // => true
      * isEmpty(new Set()); // => true
      * ```
-     *
-     * @see {@link _.isEmpty}
      */
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    isEmpty(o: Map<any, any> | Set<any> | ArrayLike<any>): boolean;
+    isEmpty(
+      o: Map<unknown, unknown> | Set<unknown> | ArrayLike<unknown>,
+    ): boolean;
     isEmpty(o: object): boolean;
   }
 }
