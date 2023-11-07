@@ -27,7 +27,7 @@ declare global {
      * [1, 2, 3].isEmpty(); // => false
      * ```
      */
-    isEmpty<const AS extends readonly unknown[]>(this: AS): this is readonly [];
+    isEmpty(): this is readonly [];
   }
 }
 

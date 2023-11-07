@@ -29,9 +29,7 @@ declare global {
      * [1, 2, 3].isNotEmpty(); // => true
      * ```
      */
-    isNotEmpty<const AS extends readonly unknown[]>(
-      this: AS,
-    ): this is Exclude<AS, [] | readonly []>;
+    isNotEmpty(): this is Exclude<this, [] | readonly []>;
   }
 }
 

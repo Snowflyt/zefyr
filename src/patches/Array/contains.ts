@@ -27,14 +27,13 @@ declare global {
      *
      * @see {@link Array#includes}
      */
-    contains<const AS extends readonly unknown[]>(
+    contains<const AS extends unknown[]>(
       this: AS,
       searchElement: unknown,
       fromIndex?: number,
-    ): AS;
+    ): searchElement is AS[number];
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface ReadonlyArray<T> {
     /**
      * Determines whether the array contains a certain element, returning true or false as appropriate (using `Array#includes`).
@@ -59,11 +58,7 @@ declare global {
      *
      * @see {@link Array#includes}
      */
-    contains<const AS extends readonly unknown[]>(
-      this: AS,
-      searchElement: unknown,
-      fromIndex?: number,
-    ): searchElement is AS[number];
+    contains(searchElement: unknown, fromIndex?: number): searchElement is T;
   }
 }
 
