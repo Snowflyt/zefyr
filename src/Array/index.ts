@@ -5,6 +5,7 @@ export { default as contains } from './contains';
 export { default as count } from './count';
 export { default as drop } from './drop';
 export { default as dropUntil } from './dropUntil';
+export { default as dropWhile } from './dropWhile';
 export { default as first } from './first';
 export { default as groupBy } from './groupBy';
 export { default as isEmpty } from './isEmpty';
@@ -17,6 +18,7 @@ export { default as sortBy } from './sortBy';
 export { default as sum } from './sum';
 export { default as take } from './take';
 export { default as takeUntil } from './takeUntil';
+export { default as takeWhile } from './takeWhile';
 export { default as unique } from './unique';
 export { default as without } from './without';
 

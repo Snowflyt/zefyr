@@ -20,7 +20,7 @@ declare global {
    * a.v = a;
    * const b = {};
    * b.v = b;
-   * equals(a, b); //=> true
+   * equals(a, b); // => true
    * ```
    */
   function equals<T>(a: unknown, b: T): a is T;
