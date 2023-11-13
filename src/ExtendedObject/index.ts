@@ -17,13 +17,7 @@ import type { StrictEntries } from '../ObjectConstructor/entriesS';
 import type { StrictKeys } from '../ObjectConstructor/keysS';
 import type { Size } from '../ObjectConstructor/size';
 import type { StrictValues } from '../ObjectConstructor/valuesS';
-import type {
-  BasePath,
-  BasePathArray,
-  GetByPath,
-  OmitByPath,
-  PathFn,
-} from '../global/path';
+import type { BasePath, BasePathArray, GetByPath, OmitByPath, PathFn } from '../global/path';
 import type { PropFn } from '../global/prop';
 import type { Cast } from '../internal/types/assertion';
 import type { List, Obj, Path } from '../internal/types/tools';
@@ -153,11 +147,7 @@ export type ExtendedObject<O extends object> = O & {
    * ```
    */
   map: <R extends readonly [string, unknown]>(
-    callbackfn: (
-      entry: StrictEntries<O>[number],
-      index: number,
-      object: O,
-    ) => R,
+    callbackfn: (entry: StrictEntries<O>[number], index: number, object: O) => R,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     thisArg?: any,
   ) => ExtendedObject<{ [P in R[0]]: R[1] }>;
@@ -208,11 +198,7 @@ export type ExtendedObject<O extends object> = O & {
    * ```
    */
   filter: (
-    predicate: (
-      entry: StrictEntries<O>[number],
-      index: number,
-      object: O,
-    ) => boolean,
+    predicate: (entry: StrictEntries<O>[number], index: number, object: O) => boolean,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     thisArg?: any,
   ) => ExtendedObject<{
@@ -440,23 +426,19 @@ export type ExtendedObject<O extends object> = O & {
      *
      * @see {@link ExtendedObject#with}
      */
-    <const PP extends readonly PropertyKey[], const V>(
-      path: PP,
-      value: V,
-    ): Obj.With<O, Path<PP>, Obj.WritableDeep<V>>;
+    <const PP extends readonly PropertyKey[], const V>(path: PP, value: V): Obj.With<
+      O,
+      Path<PP>,
+      Obj.WritableDeep<V>
+    >;
   };
 };
 
-const mixin = <const O extends object, const M extends object>(
-  o: O,
-  mixins: M,
-): O & M => {
+const mixin = <const O extends object, const M extends object>(o: O, mixins: M): O & M => {
   const result = Array.isArray(o) ? [...o] : { ...o };
   for (const [n, value] of Object.entries(mixins)) {
     if (n in o) {
-      console.warn(
-        `Property "${String(n)}" already exists on \`${String(o)}\``,
-      );
+      console.warn(`Property "${String(n)}" already exists on \`${String(o)}\``);
       continue;
     }
     Object.defineProperty(result, n, {
@@ -494,11 +476,7 @@ export const ex = <const O extends object>(o: O): ExtendedObject<O> =>
     isEmpty: () => isEmpty(o),
 
     map: <R extends readonly [string, unknown]>(
-      callbackfn: (
-        entry: StrictEntries<O>[number],
-        index: number,
-        object: O,
-      ) => R,
+      callbackfn: (entry: StrictEntries<O>[number], index: number, object: O) => R,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       thisArg?: any,
     ) => ex(map(o, callbackfn, thisArg)),
@@ -508,20 +486,12 @@ export const ex = <const O extends object>(o: O): ExtendedObject<O> =>
       thisArg?: any,
     ) => ex(mapKeys(o, callbackfn, thisArg)),
     mapValues: <R>(
-      callbackfn: (
-        value: StrictValues<O>[number],
-        index: number,
-        object: O,
-      ) => R,
+      callbackfn: (value: StrictValues<O>[number], index: number, object: O) => R,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       thisArg?: any,
     ) => ex(mapValues(o, callbackfn, thisArg)),
     filter: (
-      predicate: (
-        entry: StrictEntries<O>[number],
-        index: number,
-        object: O,
-      ) => boolean,
+      predicate: (entry: StrictEntries<O>[number], index: number, object: O) => boolean,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       thisArg?: any,
     ) => ex(filter(o, predicate, thisArg)),
@@ -560,8 +530,7 @@ export const ex = <const O extends object>(o: O): ExtendedObject<O> =>
 
     groupBy: (fn: unknown) => ex(groupBy(o, fn as never)) as never,
 
-    with: (k: unknown, v: unknown) =>
-      ex(objWith(o, k as never, v as never)) as never,
+    with: (k: unknown, v: unknown) => ex(objWith(o, k as never, v as never)) as never,
     withW: (k: unknown, v: unknown) => ex(objWithW(o, k as never, v as never)),
   });
 

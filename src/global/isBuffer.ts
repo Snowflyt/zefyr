@@ -9,7 +9,6 @@
  * isBuffer(new Uint8Array(2)); // => false
  * ```
  */
-const isBuffer = (value: unknown): value is Buffer =>
-  Buffer ? Buffer.isBuffer(value) : false;
+const isBuffer = (value: unknown): value is Buffer => (Buffer ? Buffer.isBuffer(value) : false);
 
 export default isBuffer;

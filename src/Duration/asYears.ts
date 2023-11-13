@@ -12,7 +12,6 @@ import { SECONDS_PER_YEAR } from '.';
  * asYears(years(2) + months(3)); // => 2.25
  * ```
  */
-const asYears = (duration: bigint): number =>
-  asSeconds(duration) / SECONDS_PER_YEAR;
+const asYears = (duration: bigint): number => asSeconds(duration) / SECONDS_PER_YEAR;
 
 export default asYears;

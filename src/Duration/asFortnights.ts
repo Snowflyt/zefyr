@@ -12,7 +12,6 @@ import { SECONDS_PER_WEEK } from '.';
  * asFortnights(fortnights(2) + days(3)); // => 2.2142857142857144
  * ```
  */
-const asFortnights = (duration: bigint): number =>
-  asSeconds(duration) / SECONDS_PER_WEEK / 2;
+const asFortnights = (duration: bigint): number => asSeconds(duration) / SECONDS_PER_WEEK / 2;
 
 export default asFortnights;

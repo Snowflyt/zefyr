@@ -11,7 +11,6 @@
  * clamp(-5, 0, 10); // => 0
  * ```
  */
-const clamp = (n: number, min: number, max: number): number =>
-  Math.min(Math.max(n, min), max);
+const clamp = (n: number, min: number, max: number): number => Math.min(Math.max(n, min), max);
 
 export default clamp;

@@ -80,9 +80,7 @@ const objWith: {
 >(
   o: O,
   rawPath: K | PropFn<O, K> | PathFn<O, PP>,
-  value:
-    | O[K]
-    | Obj.Get<O, Path<PP> extends List<PropertyKey> ? Path<PP> : never>,
+  value: O[K] | Obj.Get<O, Path<PP> extends List<PropertyKey> ? Path<PP> : never>,
 ) => {
   if (typeof rawPath !== 'function' && !Array.isArray(rawPath))
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment

@@ -20,9 +20,7 @@ import isObject from './isObject';
  * isFunction(''); // => false
  * ```
  */
-const isFunction = (
-  value: unknown,
-): value is (...args: unknown[]) => unknown => {
+const isFunction = (value: unknown): value is (...args: unknown[]) => unknown => {
   if (!isObject(value)) return false;
   const tag = getTag(value);
   return (

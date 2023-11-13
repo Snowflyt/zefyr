@@ -27,7 +27,6 @@ export type NonUndefined<T> = Exclude<T, undefined>;
  *
  * @see {@link isUndefined}
  */
-const isNonUndefined = <T>(value: T): value is NonUndefined<T> =>
-  value !== undefined;
+const isNonUndefined = <T>(value: T): value is NonUndefined<T> => value !== undefined;
 
 export default isNonUndefined;

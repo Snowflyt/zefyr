@@ -52,11 +52,7 @@ declare global {
        *
        * @see {@link Object.with}
        */
-      <
-        O extends object,
-        const PP extends string | readonly PropertyKey[],
-        const V,
-      >(
+      <O extends object, const PP extends string | readonly PropertyKey[], const V>(
         o: O,
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         path: PathFn<any, PP>,

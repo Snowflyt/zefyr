@@ -15,10 +15,7 @@ import type { Ary, IfpList, List, Num, Yield1$ } from '../internal/types/tools';
 const take = <AS extends readonly unknown[], const N extends number>(
   array: AS,
   count: N,
-): IfpList<
-  AS,
-  Num.IfNat<N, List.Take$<N>, Ary.Mutate$<AS[number]>>,
-  Yield1$<AS>
-> => array.slice(0, count) as never;
+): IfpList<AS, Num.IfNat<N, List.Take$<N>, Ary.Mutate$<AS[number]>>, Yield1$<AS>> =>
+  array.slice(0, count) as never;
 
 export default take;

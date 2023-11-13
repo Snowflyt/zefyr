@@ -16,9 +16,7 @@ declare global {
    */
   function curried<A, R>(fn: (a: A) => R): (a: A) => R;
   function curried<A, B, R>(fn: (a: A, b: B) => R): (a: A) => (b: B) => R;
-  function curried<A, B, C, R>(
-    fn: (a: A, b: B, c: C) => R,
-  ): (a: A) => (b: B) => (c: C) => R;
+  function curried<A, B, C, R>(fn: (a: A, b: B, c: C) => R): (a: A) => (b: B) => (c: C) => R;
   function curried<A, B, C, D, R>(
     fn: (a: A, b: B, c: C, d: D) => R,
   ): (a: A) => (b: B) => (c: C) => (d: D) => R;
@@ -33,78 +31,33 @@ declare global {
   ): (a: A) => (b: B) => (c: C) => (d: D) => (e: E) => (f: F) => (g: G) => R;
   function curried<A, B, C, D, E, F, G, H, R>(
     fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H) => R,
-  ): (
-    a: A,
-  ) => (b: B) => (c: C) => (d: D) => (e: E) => (f: F) => (g: G) => (h: H) => R;
+  ): (a: A) => (b: B) => (c: C) => (d: D) => (e: E) => (f: F) => (g: G) => (h: H) => R;
   function curried<A, B, C, D, E, F, G, H, I, R>(
     fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I) => R,
-  ): (
-    a: A,
-  ) => (
-    b: B,
-  ) => (c: C) => (d: D) => (e: E) => (f: F) => (g: G) => (h: H) => (i: I) => R;
+  ): (a: A) => (b: B) => (c: C) => (d: D) => (e: E) => (f: F) => (g: G) => (h: H) => (i: I) => R;
   function curried<A, B, C, D, E, F, G, H, I, J, R>(
     fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I, j: J) => R,
   ): (
     a: A,
-  ) => (
-    b: B,
-  ) => (
-    c: C,
-  ) => (d: D) => (e: E) => (f: F) => (g: G) => (h: H) => (i: I) => (j: J) => R;
+  ) => (b: B) => (c: C) => (d: D) => (e: E) => (f: F) => (g: G) => (h: H) => (i: I) => (j: J) => R;
   function curried<A, B, C, D, E, F, G, H, I, J, K, R>(
     fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I, j: J, k: K) => R,
   ): (
     a: A,
   ) => (
     b: B,
-  ) => (
-    c: C,
-  ) => (
-    d: D,
-  ) => (e: E) => (f: F) => (g: G) => (h: H) => (i: I) => (j: J) => (k: K) => R;
+  ) => (c: C) => (d: D) => (e: E) => (f: F) => (g: G) => (h: H) => (i: I) => (j: J) => (k: K) => R;
   function curried<A, B, C, D, E, F, G, H, I, J, K, L, R>(
-    fn: (
-      a: A,
-      b: B,
-      c: C,
-      d: D,
-      e: E,
-      f: F,
-      g: G,
-      h: H,
-      i: I,
-      j: J,
-      k: K,
-      l: L,
-    ) => R,
+    fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I, j: J, k: K, l: L) => R,
   ): (
     a: A,
   ) => (
     b: B,
   ) => (
     c: C,
-  ) => (
-    d: D,
-  ) => (
-    e: E,
-  ) => (f: F) => (g: G) => (h: H) => (i: I) => (j: J) => (k: K) => (l: L) => R;
+  ) => (d: D) => (e: E) => (f: F) => (g: G) => (h: H) => (i: I) => (j: J) => (k: K) => (l: L) => R;
   function curried<A, B, C, D, E, F, G, H, I, J, K, L, M, R>(
-    fn: (
-      a: A,
-      b: B,
-      c: C,
-      d: D,
-      e: E,
-      f: F,
-      g: G,
-      h: H,
-      i: I,
-      j: J,
-      k: K,
-      l: L,
-      m: M,
-    ) => R,
+    fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I, j: J, k: K, l: L, m: M) => R,
   ): (
     a: A,
   ) => (
@@ -113,28 +66,9 @@ declare global {
     c: C,
   ) => (
     d: D,
-  ) => (
-    e: E,
-  ) => (
-    f: F,
-  ) => (g: G) => (h: H) => (i: I) => (j: J) => (k: K) => (l: L) => (m: M) => R;
+  ) => (e: E) => (f: F) => (g: G) => (h: H) => (i: I) => (j: J) => (k: K) => (l: L) => (m: M) => R;
   function curried<A, B, C, D, E, F, G, H, I, J, K, L, M, N, R>(
-    fn: (
-      a: A,
-      b: B,
-      c: C,
-      d: D,
-      e: E,
-      f: F,
-      g: G,
-      h: H,
-      i: I,
-      j: J,
-      k: K,
-      l: L,
-      m: M,
-      n: N,
-    ) => R,
+    fn: (a: A, b: B, c: C, d: D, e: E, f: F, g: G, h: H, i: I, j: J, k: K, l: L, m: M, n: N) => R,
   ): (
     a: A,
   ) => (
@@ -145,11 +79,7 @@ declare global {
     d: D,
   ) => (
     e: E,
-  ) => (
-    f: F,
-  ) => (
-    g: G,
-  ) => (h: H) => (i: I) => (j: J) => (k: K) => (l: L) => (m: M) => (n: N) => R;
+  ) => (f: F) => (g: G) => (h: H) => (i: I) => (j: J) => (k: K) => (l: L) => (m: M) => (n: N) => R;
   function curried<A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, R>(
     fn: (
       a: A,
@@ -180,11 +110,7 @@ declare global {
     e: E,
   ) => (
     f: F,
-  ) => (
-    g: G,
-  ) => (
-    h: H,
-  ) => (i: I) => (j: J) => (k: K) => (l: L) => (m: M) => (n: N) => (o: O) => R;
+  ) => (g: G) => (h: H) => (i: I) => (j: J) => (k: K) => (l: L) => (m: M) => (n: N) => (o: O) => R;
   function curried<A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, R>(
     fn: (
       a: A,
@@ -218,11 +144,7 @@ declare global {
     f: F,
   ) => (
     g: G,
-  ) => (
-    h: H,
-  ) => (
-    i: I,
-  ) => (j: J) => (k: K) => (l: L) => (m: M) => (n: N) => (o: O) => (p: P) => R;
+  ) => (h: H) => (i: I) => (j: J) => (k: K) => (l: L) => (m: M) => (n: N) => (o: O) => (p: P) => R;
   function curried<A, B, C, D, E, F, G, H, I, J, K, L, M, N, O, P, Q, R>(
     fn: (
       a: A,
@@ -259,14 +181,8 @@ declare global {
     g: G,
   ) => (
     h: H,
-  ) => (
-    i: I,
-  ) => (
-    j: J,
-  ) => (k: K) => (l: L) => (m: M) => (n: N) => (o: O) => (p: P) => (q: Q) => R;
-  function curried(
-    fn: (...args: unknown[]) => unknown,
-  ): (...args: unknown[]) => unknown;
+  ) => (i: I) => (j: J) => (k: K) => (l: L) => (m: M) => (n: N) => (o: O) => (p: P) => (q: Q) => R;
+  function curried(fn: (...args: unknown[]) => unknown): (...args: unknown[]) => unknown;
 }
 
 patch(globalThis).withStatic({ curried });

@@ -9,7 +9,6 @@
  * isStringPrimitive(0); // => false
  * ```
  */
-const isStringPrimitive = (value: unknown): value is string =>
-  typeof value === 'string';
+const isStringPrimitive = (value: unknown): value is string => typeof value === 'string';
 
 export default isStringPrimitive;

@@ -9,8 +9,6 @@
  *
  * @see {@link isEmpty}
  */
-const isNotEmpty = <const S extends string>(
-  str: string,
-): str is Exclude<S, ''> => str.length > 0;
+const isNotEmpty = <const S extends string>(str: string): str is Exclude<S, ''> => str.length > 0;
 
 export default isNotEmpty;

@@ -29,9 +29,7 @@ declare global {
    */
   function path<
     const O extends object,
-    const P extends object extends O
-      ? string | readonly string[]
-      : BasePath<O> | BasePathArray<O>,
+    const P extends object extends O ? string | readonly string[] : BasePath<O> | BasePathArray<O>,
   >(path: P): PathFn<O, P>;
 }
 

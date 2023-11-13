@@ -9,7 +9,6 @@
  * isSymbolPrimitive('foo'); // => false
  * ```
  */
-const isSymbolPrimitive = (value: unknown): value is symbol =>
-  typeof value === 'symbol';
+const isSymbolPrimitive = (value: unknown): value is symbol => typeof value === 'symbol';
 
 export default isSymbolPrimitive;

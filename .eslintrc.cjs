@@ -15,15 +15,12 @@ const config = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: true,
+    project: ['./tsconfig.json', './tsconfig.eslint.json'],
     tsconfigRootDir: __dirname,
   },
   plugins: ['sort-destructure-keys'],
   rules: {
-    '@typescript-eslint/consistent-type-imports': [
-      'error',
-      { prefer: 'type-imports' },
-    ],
+    '@typescript-eslint/consistent-type-imports': ['error', { prefer: 'type-imports' }],
     '@typescript-eslint/no-non-null-assertion': 'off',
     '@typescript-eslint/no-unsafe-call': 'off',
     '@typescript-eslint/no-unsafe-return': 'off',
@@ -37,19 +34,11 @@ const config = {
         alphabetize: {
           order: 'asc',
         },
-        groups: [
-          'builtin',
-          'external',
-          'internal',
-          'parent',
-          'sibling',
-          'index',
-          'object',
-          'type',
-        ],
+        groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index', 'object', 'type'],
         'newlines-between': 'always',
       },
     ],
+    'no-undef': 'off',
     'sort-destructure-keys/sort-destructure-keys': 'error',
     'sort-imports': [
       'error',

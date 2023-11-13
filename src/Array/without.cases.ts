@@ -7,10 +7,7 @@ import type { Expect, ToBe, ToCover } from '../internal/types/test-helper';
 type cases = [
   Expect<Without<number[], [number]>, ToBe<number[]>>,
   Expect<Without<(string | null)[], [null]>, ToBe<string[]>>,
-  Expect<
-    Without<(string | null | undefined)[], [null, undefined]>,
-    ToBe<string[]>
-  >,
+  Expect<Without<(string | null | undefined)[], [null, undefined]>, ToBe<string[]>>,
   Expect<Without<(string | boolean)[], [true]>, ToBe<(string | false)[]>>,
   Expect<Without<(string | boolean)[], [true, false]>, ToBe<string[]>>,
   Expect<Without<(string | number)[], [false]>, ToBe<(string | number)[]>>,
@@ -23,19 +20,10 @@ type cases = [
   >,
   Expect<Without<readonly number[], [number]>, ToBe<number[]>>,
   Expect<Without<readonly (string | null)[], [null]>, ToBe<string[]>>,
-  Expect<
-    Without<readonly (string | null | undefined)[], [null, undefined]>,
-    ToBe<string[]>
-  >,
-  Expect<
-    Without<readonly (string | boolean)[], [true]>,
-    ToBe<(string | false)[]>
-  >,
+  Expect<Without<readonly (string | null | undefined)[], [null, undefined]>, ToBe<string[]>>,
+  Expect<Without<readonly (string | boolean)[], [true]>, ToBe<(string | false)[]>>,
   Expect<Without<readonly (string | boolean)[], [true, false]>, ToBe<string[]>>,
-  Expect<
-    Without<readonly (string | number)[], [false]>,
-    ToBe<(string | number)[]>
-  >,
+  Expect<Without<readonly (string | number)[], [false]>, ToBe<(string | number)[]>>,
   Expect<
     Without<
       readonly ({ type: 'A'; value: number } | { type: 'C'; value: null })[],

@@ -25,7 +25,6 @@ export type Nullish = null | undefined;
  * }
  * ```
  */
-const isNullish = (value: unknown): value is Nullish =>
-  value === null || value === undefined;
+const isNullish = (value: unknown): value is Nullish => value === null || value === undefined;
 
 export default isNullish;

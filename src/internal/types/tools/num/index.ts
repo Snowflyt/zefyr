@@ -18,13 +18,7 @@ export namespace Num {
     new: (n: Assume<this['_1'], Num>) => isNeg<typeof n>;
   }
 
-  export type IsNat<T> = T extends
-    | string
-    | number
-    | bigint
-    | boolean
-    | null
-    | undefined
+  export type IsNat<T> = T extends string | number | bigint | boolean | null | undefined
     ? Pipe1<Str.ToChars<`${T}`>, List.Every$<Str.IsDigit$>>
     : False;
   export interface IsNat$ extends HKT1 {

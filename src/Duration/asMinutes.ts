@@ -12,7 +12,6 @@ import { SECONDS_PER_MINUTE } from '.';
  * asMinutes(minutes(2) + seconds(3)); // => 2.05
  * ```
  */
-const asMinutes = (duration: bigint): number =>
-  asSeconds(duration) / SECONDS_PER_MINUTE;
+const asMinutes = (duration: bigint): number => asSeconds(duration) / SECONDS_PER_MINUTE;
 
 export default asMinutes;

@@ -9,7 +9,6 @@
  * isBooleanPrimitive(0); // => false
  * ```
  */
-const isBooleanPrimitive = (value: unknown): value is boolean =>
-  value === true || value === false;
+const isBooleanPrimitive = (value: unknown): value is boolean => value === true || value === false;
 
 export default isBooleanPrimitive;

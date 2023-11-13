@@ -13,10 +13,7 @@ import type { StrictEntries } from './entriesS';
  * const mapped = map(obj, ([key, value]) => [`${key}_`, value * 2]); // mapped :: { '5_': number, 'a_': number, 'b_': number }
  * ```
  */
-const map = <
-  const O extends object,
-  const R extends readonly [string, unknown],
->(
+const map = <const O extends object, const R extends readonly [string, unknown]>(
   o: O,
   callbackfn: (entry: StrictEntries<O>[number], index: number, object: O) => R,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

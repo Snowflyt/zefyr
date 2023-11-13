@@ -22,9 +22,9 @@ declare global {
      * ```
      */
     groupBy: {
-      <const R extends PropertyKey = PropertyKey>(
-        fn: (value: T, index: number, array: T[]) => R,
-      ): { [P in R]: T[] };
+      <const R extends PropertyKey = PropertyKey>(fn: (value: T, index: number, array: T[]) => R): {
+        [P in R]: T[];
+      };
       <
         const K extends {
           [P in keyof T]: T[P] extends PropertyKey ? P : never;
@@ -53,9 +53,9 @@ declare global {
      * ```
      */
     groupBy: {
-      <const R extends PropertyKey = PropertyKey>(
-        fn: (value: T, index: number, array: T[]) => R,
-      ): { [P in R]: T[] };
+      <const R extends PropertyKey = PropertyKey>(fn: (value: T, index: number, array: T[]) => R): {
+        [P in R]: T[];
+      };
       <
         const K extends {
           [P in keyof T]: T[P] extends PropertyKey ? P : never;

@@ -12,7 +12,6 @@ import { SECONDS_PER_WEEK } from '.';
  * asWeeks(weeks(2) + days(3)); // => 2.4285714285714284
  * ```
  */
-const asWeeks = (duration: bigint): number =>
-  asSeconds(duration) / SECONDS_PER_WEEK;
+const asWeeks = (duration: bigint): number => asSeconds(duration) / SECONDS_PER_WEEK;
 
 export default asWeeks;

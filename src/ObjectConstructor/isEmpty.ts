@@ -26,8 +26,7 @@ const isEmpty: {
 
   // For maps and sets, check the "size" property
   const tag = getTag(o);
-  if (tag === 'Map' || tag === 'Set')
-    return (o as Map<unknown, unknown> | Set<unknown>).size === 0;
+  if (tag === 'Map' || tag === 'Set') return (o as Map<unknown, unknown> | Set<unknown>).size === 0;
 
   // For prototypes, check the number of properties
   if (isPrototype(o)) {

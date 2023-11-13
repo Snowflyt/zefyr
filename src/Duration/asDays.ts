@@ -12,7 +12,6 @@ import { SECONDS_PER_DAY } from '.';
  * asDays(days(2) + hours(3)); // => 2.125
  * ```
  */
-const asDays = (duration: bigint): number =>
-  asSeconds(duration) / SECONDS_PER_DAY;
+const asDays = (duration: bigint): number => asSeconds(duration) / SECONDS_PER_DAY;
 
 export default asDays;

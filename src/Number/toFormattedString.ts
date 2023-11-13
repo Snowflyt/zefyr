@@ -83,10 +83,7 @@ export interface FormatCurrencyOptions extends FormatRoundedOptions {
   locale?: Locale;
 }
 
-export const formatCurrency = (
-  n: number,
-  options?: FormatCurrencyOptions,
-): string => {
+export const formatCurrency = (n: number, options?: FormatCurrencyOptions): string => {
   const defaultUnit = (locale: Locale) => {
     switch (locale) {
       case 'zh-CN':
@@ -97,8 +94,7 @@ export const formatCurrency = (
   };
 
   const { locale = environmentLocale } = options ?? {};
-  const { format: positiveFormat = '%u%n', unit = defaultUnit(locale) } =
-    options ?? {};
+  const { format: positiveFormat = '%u%n', unit = defaultUnit(locale) } = options ?? {};
   const negativeFormat = options?.negativeFormat ?? `-${positiveFormat}`;
   const format = n < 0 ? negativeFormat : positiveFormat;
 
@@ -131,10 +127,7 @@ export interface FormatDelimitedOptions {
   pattern?: RegExp;
 }
 
-export const formatDelimited = (
-  n: number | string,
-  options?: FormatDelimitedOptions,
-): string => {
+export const formatDelimited = (n: number | string, options?: FormatDelimitedOptions): string => {
   const { groupSize = 3 } = options ?? {};
   const {
     delimiter = ',',
@@ -145,10 +138,7 @@ export const formatDelimited = (
   const numberString = String(n);
   if (!numberString.includes('e')) {
     const parts = numberString.split('.', 2);
-    return (
-      parts[0]!.replace(pattern, `$1${delimiter}`) +
-      (parts[1] ? separator + parts[1] : '')
-    );
+    return parts[0]!.replace(pattern, `$1${delimiter}`) + (parts[1] ? separator + parts[1] : '');
   }
 
   const num = Number(n);
@@ -224,10 +214,7 @@ export interface FormatHumanSizeOptions extends FormatRoundedOptions {
 
 const SIZE_UNITS = ['byte', 'kb', 'mb', 'gb', 'tb', 'pb', 'eb'] as const;
 
-export const formatHumanSize = (
-  n: number,
-  options?: FormatHumanSizeOptions,
-): string => {
+export const formatHumanSize = (n: number, options?: FormatHumanSizeOptions): string => {
   const defaultByteUnit = (locale: Locale) => {
     switch (locale) {
       case 'zh-CN':
@@ -251,10 +238,7 @@ export const formatHumanSize = (
     },
   } = options ?? {};
 
-  if (n < 1024)
-    return format
-      .replace('%n', n.toString())
-      .replace('%u', units[SIZE_UNITS[0]]);
+  if (n < 1024) return format.replace('%n', n.toString()).replace('%u', units[SIZE_UNITS[0]]);
 
   const max = SIZE_UNITS.length - 1;
   let exp = Math.trunc(Math.log(n) / Math.log(1024));
@@ -267,9 +251,7 @@ export const formatHumanSize = (
     ...options,
   });
 
-  return format
-    .replace('%n', numberToFormat)
-    .replace('%u', units[SIZE_UNITS[exp]!]);
+  return format.replace('%n', numberToFormat).replace('%u', units[SIZE_UNITS[exp]!]);
 };
 
 export interface FormatPercentageOptions extends FormatRoundedOptions {
@@ -283,10 +265,7 @@ export interface FormatPercentageOptions extends FormatRoundedOptions {
   delimiter?: string;
 }
 
-export const formatPercentage = (
-  n: number,
-  options?: FormatPercentageOptions,
-): string => {
+export const formatPercentage = (n: number, options?: FormatPercentageOptions): string => {
   const { format = '%n%' } = options ?? {};
   return format.replace('%n', formatRounded(n, { delimiter: '', ...options }));
 };
@@ -306,9 +285,7 @@ const formatPhone = (n: number, options?: FormatPhoneOptions): string => {
       case 'zh-CN':
         return /(\d{3})(\d{4})(\d{4})/g;
       default:
-        return areaCode
-          ? /(\d{1,3})(\d{3})(\d{4})/g
-          : /(\d{0,3})(\d{3})(\d{4})/g;
+        return areaCode ? /(\d{1,3})(\d{3})(\d{4})/g : /(\d{0,3})(\d{3})(\d{4})/g;
     }
   };
 
@@ -329,15 +306,10 @@ const formatPhone = (n: number, options?: FormatPhoneOptions): string => {
   )
     result += `+${countryCode}${delimiter}`;
 
-  if (areaCode)
-    result += n.toString().replace(pattern, `($1) $2${delimiter}$3`);
-  else
-    result += n.toString().replace(pattern, `$1${delimiter}$2${delimiter}$3`);
+  if (areaCode) result += n.toString().replace(pattern, `($1) $2${delimiter}$3`);
+  else result += n.toString().replace(pattern, `$1${delimiter}$2${delimiter}$3`);
 
-  if (
-    typeof extension === 'number' ||
-    (typeof extension === 'string' && !/^\s*$/.test(extension))
-  )
+  if (typeof extension === 'number' || (typeof extension === 'string' && !/^\s*$/.test(extension)))
     result += ` x ${extension}`;
 
   return result.trim().replace(new RegExp(`^${delimiter}`), '');
@@ -363,14 +335,7 @@ export interface FormatRoundedOptions extends FormatDelimitedOptions {
   /**
    * @default 'half_up'
    */
-  roundMode?:
-    | 'up'
-    | 'down'
-    | 'half_up'
-    | 'half_down'
-    | 'half_even'
-    | 'ceil'
-    | 'floor';
+  roundMode?: 'up' | 'down' | 'half_up' | 'half_down' | 'half_even' | 'ceil' | 'floor';
 }
 
 const convertToDecimal = (n: number) => {
@@ -385,10 +350,7 @@ const convertToDecimal = (n: number) => {
   return {
     n: bigIntNumber,
     decimalPlace: decimalPlace,
-    round: (
-      precision: number,
-      mode: FormatRoundedOptions['roundMode'] = 'half_up',
-    ): number => {
+    round: (precision: number, mode: FormatRoundedOptions['roundMode'] = 'half_up'): number => {
       if (!Number.isFinite(n)) return n;
       const scalingFactor = BigInt(10 ** precision);
       let roundedNumber: bigint;
@@ -400,21 +362,17 @@ const convertToDecimal = (n: number) => {
             BigInt(10 ** decimalPlace);
           break;
         case 'floor': // Round towards -Infinity
-          roundedNumber =
-            (bigIntNumber * scalingFactor) / BigInt(10 ** decimalPlace);
+          roundedNumber = (bigIntNumber * scalingFactor) / BigInt(10 ** decimalPlace);
           break;
         case 'up': // Round away from 0
           roundedNumber =
             bigIntNumber >= 0n
-              ? (bigIntNumber * scalingFactor +
-                  BigInt(10 ** decimalPlace) -
-                  1n) /
+              ? (bigIntNumber * scalingFactor + BigInt(10 ** decimalPlace) - 1n) /
                 BigInt(10 ** decimalPlace)
               : (bigIntNumber * scalingFactor) / BigInt(10 ** decimalPlace);
           break;
         case 'down': // Round towards 0 (truncate)
-          roundedNumber =
-            (bigIntNumber * scalingFactor) / BigInt(10 ** decimalPlace);
+          roundedNumber = (bigIntNumber * scalingFactor) / BigInt(10 ** decimalPlace);
           break;
         case 'half_up': // Round towards nearest neighbor. If equidistant, round away from 0
           roundedNumber =
@@ -423,18 +381,14 @@ const convertToDecimal = (n: number) => {
           break;
         case 'half_down': // Round towards nearest neighbor. If equidistant, round towards 0
           roundedNumber =
-            (bigIntNumber * scalingFactor * 2n - 1n) /
-            (BigInt(10 ** decimalPlace) * 2n);
+            (bigIntNumber * scalingFactor * 2n - 1n) / (BigInt(10 ** decimalPlace) * 2n);
           break;
         case 'half_even': // Round towards nearest neighbor. If equidistant, round towards the even neighbor
           // eslint-disable-next-line no-case-declarations
           const tentativeRounded =
             (bigIntNumber * scalingFactor * 2n + BigInt(10 ** decimalPlace)) /
             (BigInt(10 ** decimalPlace) * 2n);
-          roundedNumber =
-            tentativeRounded % 2n === 0n
-              ? tentativeRounded
-              : tentativeRounded - 1n;
+          roundedNumber = tentativeRounded % 2n === 0n ? tentativeRounded : tentativeRounded - 1n;
           break;
       }
 
@@ -474,10 +428,7 @@ const digitCount = (n: number) => {
   return decimalNumber.n.toString().length - decimalNumber.decimalPlace;
 };
 
-export const formatRounded = (
-  n: number,
-  options?: FormatRoundedOptions,
-): string => {
+export const formatRounded = (n: number, options?: FormatRoundedOptions): string => {
   let { precision = 3 } = options ?? {};
   const {
     roundMode = 'half_up',
@@ -490,10 +441,7 @@ export const formatRounded = (
     if (stripInsignificantZeros) {
       const escapedSeparator = separator.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       return n
-        .replace(
-          new RegExp(String.raw`(${escapedSeparator})(\d*[1-9])?0+$`),
-          '$1$2',
-        )
+        .replace(new RegExp(String.raw`(${escapedSeparator})(\d*[1-9])?0+$`), '$1$2')
         .replace(new RegExp(String.raw`${escapedSeparator}$`), '');
     }
     return n;
@@ -519,9 +467,7 @@ export const formatRounded = (
     formattedString = roundedNumber.toString();
   }
 
-  return formatNumber(
-    formatDelimited(formattedString, { delimiter: '', ...options }),
-  );
+  return formatNumber(formatDelimited(formattedString, { delimiter: '', ...options }));
 };
 
 const toFormattedString: {

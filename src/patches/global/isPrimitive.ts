@@ -5,14 +5,7 @@ declare global {
   /**
    * Primitive types in TypeScript.
    */
-  type Primitive =
-    | string
-    | number
-    | boolean
-    | bigint
-    | symbol
-    | undefined
-    | null;
+  type Primitive = string | number | boolean | bigint | symbol | undefined | null;
 
   /**
    * Returns `true` if the value is a primitive.

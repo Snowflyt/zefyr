@@ -7,10 +7,7 @@ import type { Expect, ToBe } from './test-helper';
 type cases_IsExact = [
   Expect<IsExact<1>, ToBe<true>>,
   Expect<IsExact<1 | 2>, ToBe<false>>,
-  Expect<
-    IsExact<{ a: 1; b: { c: readonly [4, 5, 6]; d: [true, false] } }>,
-    ToBe<true>
-  >,
+  Expect<IsExact<{ a: 1; b: { c: readonly [4, 5, 6]; d: [true, false] } }>, ToBe<true>>,
   Expect<IsExact<{ a: number }>, ToBe<false>>,
   Expect<IsExact<{ b: 4 | 5 }>, ToBe<false>>,
   Expect<IsExact<{ a: 1; b: 2 }>, ToBe<true>>,

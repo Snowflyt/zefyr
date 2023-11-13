@@ -8,10 +8,7 @@
  * type R = Distribute<[boolean]>; // R :: [true] | [false]
  * ```
  */
-export type Distribute<TUnions extends readonly unknown[]> = TUnions extends [
-  infer F,
-  ...infer R,
-]
+export type Distribute<TUnions extends readonly unknown[]> = TUnions extends [infer F, ...infer R]
   ? R extends unknown[]
     ? Distribute<R> extends infer DR extends unknown[]
       ? // eslint-disable-next-line @typescript-eslint/no-explicit-any

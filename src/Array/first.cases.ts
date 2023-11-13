@@ -8,10 +8,7 @@ type cases = [
   Expect<First<number[]>, ToBe<number | undefined>>,
   Expect<First<(string | number)[]>, ToBe<string | number | undefined>>,
   Expect<First<readonly number[]>, ToBe<number | undefined>>,
-  Expect<
-    First<readonly (string | number)[]>,
-    ToBe<string | number | undefined>
-  >,
+  Expect<First<readonly (string | number)[]>, ToBe<string | number | undefined>>,
   Expect<First<[]>, ToBe<undefined>>,
   Expect<First<[1, 2, 3]>, ToBe<1>>,
   Expect<First<[2, 3, null, undefined, 5]>, ToBe<2>>,

@@ -69,11 +69,7 @@ const initCloneArray = <T>(array: readonly T[]): T[] => {
   const result = new (array.constructor as ArrayConstructor)<T>(length);
 
   // Add properties assigned by `RegExp#exec`.
-  if (
-    length &&
-    typeof array[0] == 'string' &&
-    Object.hasOwnProperty.call(array, 'index')
-  ) {
+  if (length && typeof array[0] == 'string' && Object.hasOwnProperty.call(array, 'index')) {
     (result as unknown as { index: unknown }).index = (
       array as unknown as { index: unknown }
     ).index;
@@ -218,8 +214,7 @@ const getSymbols = !Object.getOwnPropertySymbols
  * @param to The object to copy symbols to.
  * @returns
  */
-const copySymbols = (from: object, to?: object) =>
-  copyObject(from, getSymbols(from) as never, to);
+const copySymbols = (from: object, to?: object) => copyObject(from, getSymbols(from) as never, to);
 
 /**
  * Creates a clone of `arrayBuffer`.
@@ -229,9 +224,7 @@ const copySymbols = (from: object, to?: object) =>
  * @returns The cloned array buffer.
  */
 const cloneArrayBuffer = (arrayBuffer: ArrayBuffer): ArrayBuffer => {
-  const result = new (arrayBuffer.constructor as ArrayBufferConstructor)(
-    arrayBuffer.byteLength,
-  );
+  const result = new (arrayBuffer.constructor as ArrayBufferConstructor)(arrayBuffer.byteLength);
   new Uint8Array(result).set(new Uint8Array(arrayBuffer));
   return result;
 };
@@ -261,10 +254,7 @@ const cloneDataView = (dataView: DataView, deep?: boolean): DataView => {
  * @param deep Specify a deep clone.
  * @returns The cloned typed array.
  */
-const cloneTypedArray = <A extends TypedArray>(
-  typedArray: A,
-  deep?: boolean,
-): A => {
+const cloneTypedArray = <A extends TypedArray>(typedArray: A, deep?: boolean): A => {
   const buffer = deep ? cloneArrayBuffer(typedArray.buffer) : typedArray.buffer;
   return new (typedArray.constructor as TypedArrayConstructor)(
     buffer,
@@ -311,11 +301,7 @@ const cloneSymbol = (symbol: symbol): symbol =>
  * @param deep Specify a deep clone.
  * @returns The initialized clone.
  */
-const initCloneByTag = <O extends object>(
-  o: O,
-  tag: string,
-  deep = false,
-): O => {
+const initCloneByTag = <O extends object>(o: O, tag: string, deep = false): O => {
   const Ctor = o.constructor as new (...args: never[]) => O;
   switch (tag) {
     case 'ArrayBuffer':
@@ -380,17 +366,12 @@ const getAllKeys = (o: object): Array<string | symbol> => {
  */
 function arrayEach(
   array: readonly unknown[],
-  iteratee: (
-    value: unknown,
-    index: number,
-    array: readonly unknown[],
-  ) => unknown,
+  iteratee: (value: unknown, index: number, array: readonly unknown[]) => unknown,
 ): unknown[] {
   let index = -1;
   const length = array.length;
 
-  while (++index < length)
-    if (iteratee(array[index], index, array) === false) break;
+  while (++index < length) if (iteratee(array[index], index, array) === false) break;
 
   return array as unknown[];
 }
@@ -429,13 +410,9 @@ const baseClone = <T>(
     if (tag === 'Object' || tag === 'Arguments' || (isFunc && !parent)) {
       result = isFunc ? ({} as T) : initCloneObject(value);
       if (!deep)
-        return copySymbols(
-          value,
-          copyObject(value, Object.keys(value) as never, result!),
-        ) as T;
+        return copySymbols(value, copyObject(value, Object.keys(value) as never, result!)) as T;
     } else {
-      if (!cloneableTags[tag as keyof typeof cloneableTags])
-        return parent ? value : ({} as T);
+      if (!cloneableTags[tag as keyof typeof cloneableTags]) return parent ? value : ({} as T);
 
       result = initCloneByTag(value, tag, deep);
     }
@@ -453,10 +430,7 @@ const baseClone = <T>(
     });
   else if (isMap(value))
     (value as Map<unknown, unknown>).forEach((subValue, key) => {
-      (result as Map<unknown, unknown>).set(
-        key,
-        baseClone(subValue, deep, value, stack),
-      );
+      (result as Map<unknown, unknown>).set(key, baseClone(subValue, deep, value, stack));
     });
 
   const props = isArr ? undefined : getAllKeys(value);

@@ -399,29 +399,21 @@ const prop = <const T, P extends object extends T ? PropertyKey : keyof T>(
 
   const _satisfies = (pred: (value: unknown) => boolean) => (o: object) =>
     pred(o[prop as keyof typeof o]);
-  const _eq = (value: unknown) => (o: object) =>
-    value === o[prop as keyof typeof o];
+  const _eq = (value: unknown) => (o: object) => value === o[prop as keyof typeof o];
   const _eqW = (value: unknown) => _eq(value);
-  const _notEq = (value: unknown) => (o: object) =>
-    value !== o[prop as keyof typeof o];
+  const _notEq = (value: unknown) => (o: object) => value !== o[prop as keyof typeof o];
   const _notEqW = (value: unknown) => _notEq(value);
-  const _looselyEq = (value: unknown) => (o: object) =>
-    o[prop as keyof typeof o] == value;
+  const _looselyEq = (value: unknown) => (o: object) => o[prop as keyof typeof o] == value;
   const _looselyEqW = (value: unknown) => _looselyEq(value);
-  const _notLooselyEq = (value: unknown) => (o: object) =>
-    o[prop as keyof typeof o] != value;
+  const _notLooselyEq = (value: unknown) => (o: object) => o[prop as keyof typeof o] != value;
   const _notLooselyEqW = (value: unknown) => _notLooselyEq(value);
-  const _equals = (value: unknown) => (o: object) =>
-    equals(value, o[prop as keyof typeof o]);
+  const _equals = (value: unknown) => (o: object) => equals(value, o[prop as keyof typeof o]);
   const _equalsW = (value: unknown) => _equals(value);
-  const _notEquals = (value: unknown) => (o: object) =>
-    !equals(value, o[prop as keyof typeof o]);
+  const _notEquals = (value: unknown) => (o: object) => !equals(value, o[prop as keyof typeof o]);
   const _notEqualsW = (value: unknown) => _notEquals(value);
-  const _is = (value: unknown) => (o: object) =>
-    is(value, o[prop as keyof typeof o]);
+  const _is = (value: unknown) => (o: object) => is(value, o[prop as keyof typeof o]);
   const _isW = (value: unknown) => _is(value);
-  const _isNot = (value: unknown) => (o: object) =>
-    !is(value, o[prop as keyof typeof o]);
+  const _isNot = (value: unknown) => (o: object) => !is(value, o[prop as keyof typeof o]);
   const _isNotW = (value: unknown) => _isNot(value);
   const _gt = (value: unknown) => (o: object) =>
     (o[prop as keyof typeof o] as number) > (value as number);
@@ -465,10 +457,7 @@ const prop = <const T, P extends object extends T ? PropertyKey : keyof T>(
     lteW: _lteW,
   };
 
-  return Object.assign(result, { ...extensions, [zTag]: 'Prop' }) as PropFn<
-    T,
-    P
-  >;
+  return Object.assign(result, { ...extensions, [zTag]: 'Prop' }) as PropFn<T, P>;
 };
 
 export default prop;

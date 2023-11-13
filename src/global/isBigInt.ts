@@ -16,7 +16,6 @@ import isObjectLike from './isObjectLike';
  */
 // eslint-disable-next-line @typescript-eslint/ban-types
 const isBigInt = (value: unknown): value is bigint | BigInt =>
-  typeof value === 'bigint' ||
-  (isObjectLike(value) && getTag(value) === 'BigInt');
+  typeof value === 'bigint' || (isObjectLike(value) && getTag(value) === 'BigInt');
 
 export default isBigInt;

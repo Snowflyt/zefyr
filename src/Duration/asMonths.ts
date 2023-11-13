@@ -12,7 +12,6 @@ import { SECONDS_PER_MONTH } from '.';
  * asMonths(months(2) + weeks(3)); // => 2.689952565761104
  * ```
  */
-const asMonths = (duration: bigint): number =>
-  asSeconds(duration) / SECONDS_PER_MONTH;
+const asMonths = (duration: bigint): number => asSeconds(duration) / SECONDS_PER_MONTH;
 
 export default asMonths;

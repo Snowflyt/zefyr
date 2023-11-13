@@ -5,11 +5,7 @@ import type { Apply1, Apply2, Assume, HKT1, HKT2, HKT3 } from './hkt';
 import type { Int, Nat, Num } from './num';
 
 export type List<T = unknown> = readonly T[];
-export type IsList<T> = T extends List
-  ? Num extends T['length']
-    ? False
-    : True
-  : False;
+export type IsList<T> = T extends List ? (Num extends T['length'] ? False : True) : False;
 export interface IsList$ extends HKT1 {
   new: (x: Assume<this['_1'], unknown>) => IsList<typeof x>;
 }
@@ -30,14 +26,8 @@ export interface IfList$$$ extends HKT3 {
     z: Assume<this['_3'], unknown>,
   ) => IfList<typeof x, typeof y, typeof z>;
 }
-export type IfpList<T, ThenFn extends HKT1, ElseFn extends HKT1> = Ifp<
-  T,
-  IsList$,
-  ThenFn,
-  ElseFn
->;
-export interface IfpList$<ThenFn extends HKT1, ElseFn extends HKT1>
-  extends HKT1 {
+export type IfpList<T, ThenFn extends HKT1, ElseFn extends HKT1> = Ifp<T, IsList$, ThenFn, ElseFn>;
+export interface IfpList$<ThenFn extends HKT1, ElseFn extends HKT1> extends HKT1 {
   new: (x: Assume<this['_1'], unknown>) => IfpList<typeof x, ThenFn, ElseFn>;
 }
 export interface IfpList$$<ElseFn extends HKT1> extends HKT2 {
@@ -191,10 +181,7 @@ export declare namespace List {
     new: (as: Assume<this['_1'], List>) => Map<typeof as, F>;
   }
   interface Map$$ extends HKT2 {
-    new: (
-      as: Assume<this['_1'], List>,
-      f: Assume<this['_2'], HKT1>,
-    ) => Map<typeof as, typeof f>;
+    new: (as: Assume<this['_1'], List>, f: Assume<this['_2'], HKT1>) => Map<typeof as, typeof f>;
   }
 
   type FlatMap<AS extends List, F extends HKT1> = Apply1<
@@ -226,10 +213,7 @@ export declare namespace List {
     new: (as: Assume<this['_1'], List>) => Filter<typeof as, F>;
   }
   interface Filter$$ extends HKT2 {
-    new: (
-      as: Assume<this['_1'], List>,
-      f: Assume<this['_2'], HKT1>,
-    ) => Filter<typeof as, typeof f>;
+    new: (as: Assume<this['_1'], List>, f: Assume<this['_2'], HKT1>) => Filter<typeof as, typeof f>;
   }
 
   type Reject<AS extends List, F extends HKT1> = Apply1<
@@ -244,16 +228,10 @@ export declare namespace List {
     new: (as: Assume<this['_1'], List>) => Reject<typeof as, F>;
   }
   interface Reject$$ extends HKT2 {
-    new: (
-      as: Assume<this['_1'], List>,
-      f: Assume<this['_2'], HKT1>,
-    ) => Reject<typeof as, typeof f>;
+    new: (as: Assume<this['_1'], List>, f: Assume<this['_2'], HKT1>) => Reject<typeof as, typeof f>;
   }
 
-  type Reduce<AS extends List, F extends HKT2, Z> = AS extends readonly [
-    infer Head,
-    ...infer Tail,
-  ]
+  type Reduce<AS extends List, F extends HKT2, Z> = AS extends readonly [infer Head, ...infer Tail]
     ? Reduce<Tail, F, Apply2<F, Z, Head>>
     : Z;
   interface Reduce$<F extends HKT2, Z> extends HKT1 {
@@ -266,10 +244,7 @@ export declare namespace List {
     ) => Reduce<typeof as, typeof f, Z>;
   }
 
-  type Append<AS extends List, T> = Apply1<
-    Ary.IfReadonly<AS, ToReadonly$, Identity$>,
-    [...AS, T]
-  >;
+  type Append<AS extends List, T> = Apply1<Ary.IfReadonly<AS, ToReadonly$, Identity$>, [...AS, T]>;
   interface Append$<T> extends HKT1 {
     new: (as: Assume<this['_1'], List>) => Append<typeof as, T>;
   }
@@ -280,10 +255,7 @@ export declare namespace List {
     ) => Append<typeof as, typeof x>;
   }
 
-  type Prepend<AS extends List, T> = Apply1<
-    Ary.IfReadonly<AS, ToReadonly$, Identity$>,
-    [T, ...AS]
-  >;
+  type Prepend<AS extends List, T> = Apply1<Ary.IfReadonly<AS, ToReadonly$, Identity$>, [T, ...AS]>;
   interface Prepend$<T> extends HKT1 {
     new: (as: Assume<this['_1'], List>) => Prepend<typeof as, T>;
   }
@@ -320,10 +292,7 @@ export declare namespace List {
     new: (as: Assume<this['_1'], List>) => Take<typeof as, N>;
   }
   interface Take$$ extends HKT2 {
-    new: (
-      as: Assume<this['_1'], List>,
-      n: Assume<this['_2'], Nat>,
-    ) => Take<typeof as, typeof n>;
+    new: (as: Assume<this['_1'], List>, n: Assume<this['_2'], Nat>) => Take<typeof as, typeof n>;
   }
 
   type TakeUntil<AS extends List, F extends HKT1> = Apply1<
@@ -346,20 +315,13 @@ export declare namespace List {
 
   type Drop<AS extends List, N extends Nat> = Apply1<
     Ary.IfReadonly<AS, ToReadonly$, Identity$>,
-    AS extends readonly [unknown, ...infer Tail]
-      ? N extends 0
-        ? AS
-        : Drop<Tail, Int.Dec<N>>
-      : []
+    AS extends readonly [unknown, ...infer Tail] ? (N extends 0 ? AS : Drop<Tail, Int.Dec<N>>) : []
   >;
   interface Drop$<N extends Nat> extends HKT1 {
     new: (as: Assume<this['_1'], List>) => Drop<typeof as, N>;
   }
   interface Drop$$ extends HKT2 {
-    new: (
-      as: Assume<this['_1'], List>,
-      n: Assume<this['_2'], Nat>,
-    ) => Drop<typeof as, typeof n>;
+    new: (as: Assume<this['_1'], List>, n: Assume<this['_2'], Nat>) => Drop<typeof as, typeof n>;
   }
 
   type DropIndex<AS extends List, I extends Nat> = Apply1<
@@ -400,10 +362,7 @@ export declare namespace List {
     ) => DropUntil<typeof as, typeof f>;
   }
 
-  type Every<AS extends List, F extends HKT1> = AS extends readonly [
-    infer Head,
-    ...infer Tail,
-  ]
+  type Every<AS extends List, F extends HKT1> = AS extends readonly [infer Head, ...infer Tail]
     ? Apply1<F, Head> extends True
       ? Every<Tail, F>
       : False
@@ -412,16 +371,10 @@ export declare namespace List {
     new: (as: Assume<this['_1'], List>) => Every<typeof as, F>;
   }
   interface Every$$ extends HKT2 {
-    new: (
-      as: Assume<this['_1'], List>,
-      f: Assume<this['_2'], HKT1>,
-    ) => Every<typeof as, typeof f>;
+    new: (as: Assume<this['_1'], List>, f: Assume<this['_2'], HKT1>) => Every<typeof as, typeof f>;
   }
 
-  type NoneMatch<AS extends List, F extends HKT1> = AS extends readonly [
-    infer Head,
-    ...infer Tail,
-  ]
+  type NoneMatch<AS extends List, F extends HKT1> = AS extends readonly [infer Head, ...infer Tail]
     ? Apply1<F, Head> extends True
       ? False
       : NoneMatch<Tail, F>
@@ -436,10 +389,7 @@ export declare namespace List {
     ) => NoneMatch<typeof as, typeof f>;
   }
 
-  type Some<AS extends List, F extends HKT1> = AS extends readonly [
-    infer Head,
-    ...infer Tail,
-  ]
+  type Some<AS extends List, F extends HKT1> = AS extends readonly [infer Head, ...infer Tail]
     ? Apply1<F, Head> extends True
       ? True
       : Apply1<F, Head> | Some<Tail, F>
@@ -448,10 +398,7 @@ export declare namespace List {
     new: (as: Assume<this['_1'], List>) => Some<typeof as, F>;
   }
   interface Some$$ extends HKT2 {
-    new: (
-      as: Assume<this['_1'], List>,
-      f: Assume<this['_2'], HKT1>,
-    ) => Some<typeof as, typeof f>;
+    new: (as: Assume<this['_1'], List>, f: Assume<this['_2'], HKT1>) => Some<typeof as, typeof f>;
   }
 
   type With<AS extends List, I extends Nat, T> = Apply1<
@@ -468,10 +415,7 @@ export declare namespace List {
     new: (as: Assume<this['_1'], List>) => With<typeof as, I, T>;
   }
   interface With$$<T> extends HKT2 {
-    new: (
-      as: Assume<this['_1'], List>,
-      i: Assume<this['_2'], Nat>,
-    ) => With<typeof as, typeof i, T>;
+    new: (as: Assume<this['_1'], List>, i: Assume<this['_2'], Nat>) => With<typeof as, typeof i, T>;
   }
   interface With$$$ extends HKT3 {
     new: (
@@ -512,16 +456,10 @@ export declare namespace List {
     new: (as: Assume<this['_1'], List>) => Get<typeof as, I>;
   }
   interface Get$$ extends HKT2 {
-    new: (
-      as: Assume<this['_1'], List>,
-      i: Assume<this['_2'], Nat>,
-    ) => Get<typeof as, typeof i>;
+    new: (as: Assume<this['_1'], List>, i: Assume<this['_2'], Nat>) => Get<typeof as, typeof i>;
   }
 
-  type Head<AS extends List> = AS extends readonly [
-    infer Head extends AS[0],
-    ...unknown[],
-  ]
+  type Head<AS extends List> = AS extends readonly [infer Head extends AS[0], ...unknown[]]
     ? Head
     : never;
   interface Head$ extends HKT1 {

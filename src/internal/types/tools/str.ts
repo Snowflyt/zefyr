@@ -9,9 +9,7 @@ export type Str = string;
 export namespace Str {
   export type Empty = '';
 
-  type Of<T> = T extends string | number | bigint | boolean | null | undefined
-    ? `${T}`
-    : never;
+  type Of<T> = T extends string | number | bigint | boolean | null | undefined ? `${T}` : never;
   export interface Of$ extends HKT1 {
     new: (x: Assume<this['_1'], unknown>) => Of<typeof x>;
   }

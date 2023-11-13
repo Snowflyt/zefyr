@@ -18,15 +18,12 @@ import getTag from '../internal/_getTag';
  * isPlainObject(Object.create(null)); // => true
  * ```
  */
-const isPlainObject = (
-  value: unknown,
-): value is Record<string | number | symbol, unknown> => {
+const isPlainObject = (value: unknown): value is Record<string | number | symbol, unknown> => {
   if (value === null || value === undefined) return false;
   if (typeof value !== 'object' || getTag(value) !== 'Object') return false;
   if (Object.getPrototypeOf(value) === null) return true;
   let proto = value;
-  while (Object.getPrototypeOf(proto) !== null)
-    proto = Object.getPrototypeOf(proto);
+  while (Object.getPrototypeOf(proto) !== null) proto = Object.getPrototypeOf(proto);
   return Object.getPrototypeOf(value) === proto;
 };
 

@@ -12,7 +12,6 @@ import { SECONDS_PER_HOUR } from '.';
  * asHours(hours(2) + minutes(3)); // => 2.05
  * ```
  */
-const asHours = (duration: bigint): number =>
-  asSeconds(duration) / SECONDS_PER_HOUR;
+const asHours = (duration: bigint): number => asSeconds(duration) / SECONDS_PER_HOUR;
 
 export default asHours;

@@ -1,14 +1,7 @@
 /**
  * Primitive types in TypeScript.
  */
-export type Primitive =
-  | string
-  | number
-  | boolean
-  | bigint
-  | symbol
-  | undefined
-  | null;
+export type Primitive = string | number | boolean | bigint | symbol | undefined | null;
 
 /**
  * Returns `true` if the value is a primitive.

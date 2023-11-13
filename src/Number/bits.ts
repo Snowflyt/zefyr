@@ -8,7 +8,6 @@
  * bits(0b1010)[0]; // => 0
  * ```
  */
-const bits = (n: number): number[] =>
-  n.toString(2).split('').reverse().map(Number);
+const bits = (n: number): number[] => n.toString(2).split('').reverse().map(Number);
 
 export default bits;

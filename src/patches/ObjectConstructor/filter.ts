@@ -21,11 +21,7 @@ declare global {
      */
     filter<const O extends object>(
       o: O,
-      predicate: (
-        entry: StrictEntries<O>[number],
-        index: number,
-        object: O,
-      ) => boolean,
+      predicate: (entry: StrictEntries<O>[number], index: number, object: O) => boolean,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       thisArg?: any,
     ): {

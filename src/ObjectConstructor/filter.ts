@@ -16,11 +16,7 @@ import type { StrictKeys } from './keysS';
  */
 const filter = <const O extends object>(
   o: O,
-  predicate: (
-    entry: StrictEntries<O>[number],
-    index: number,
-    object: O,
-  ) => boolean,
+  predicate: (entry: StrictEntries<O>[number], index: number, object: O) => boolean,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   thisArg?: any,
 ): {
@@ -30,14 +26,7 @@ const filter = <const O extends object>(
   const result: Record<PropertyKey, unknown> = {};
   let index = -1;
   for (const key in o)
-    if (
-      predicate.call(
-        thisArg,
-        [key, o[key]] as StrictEntries<O>[number],
-        ++index,
-        o,
-      )
-    )
+    if (predicate.call(thisArg, [key, o[key]] as StrictEntries<O>[number], ++index, o))
       result[key] = o[key];
   return result as never;
 };

@@ -9,10 +9,6 @@ const reject = <T>(
   predicate: (value: T, index: number, array: T[]) => boolean,
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   thisArg: any = undefined,
-): T[] =>
-  array.filter(
-    (value, index, array) => !predicate(value, index, array),
-    thisArg,
-  );
+): T[] => array.filter((value, index, array) => !predicate(value, index, array), thisArg);
 
 export default reject;

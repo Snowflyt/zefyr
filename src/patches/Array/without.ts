@@ -18,10 +18,7 @@ declare global {
      *
      * @see {@link equals}
      */
-    without<
-      const AS extends readonly unknown[],
-      const BS extends readonly AS[number][],
-    >(
+    without<const AS extends readonly unknown[], const BS extends readonly AS[number][]>(
       this: AS,
       ...values: BS
     ): Without<AS, BS>;
@@ -41,10 +38,7 @@ declare global {
      *
      * @see {@link equals}
      */
-    without<
-      const AS extends readonly unknown[],
-      const BS extends readonly AS[],
-    >(
+    without<const AS extends readonly unknown[], const BS extends readonly AS[]>(
       this: AS,
       ...values: BS
     ): Without<AS, BS>;

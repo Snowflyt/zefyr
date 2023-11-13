@@ -33,17 +33,9 @@ describe('Duration', () => {
 
   it('should be able to add durations', () => {
     const duration = (3).days + (2).hours + (15).minutes;
-    expect(duration.before(date)).toStrictEqual(
-      subMinutes(subHours(subDays(date, 3), 2), 15),
-    );
-    expect(duration.ago()).toStrictEqual(
-      subMinutes(subHours(subDays(date, 3), 2), 15),
-    );
-    expect(duration.after(date)).toStrictEqual(
-      addMinutes(addHours(addDays(date, 3), 2), 15),
-    );
-    expect(duration.fromNow()).toStrictEqual(
-      addMinutes(addHours(addDays(date, 3), 2), 15),
-    );
+    expect(duration.before(date)).toStrictEqual(subMinutes(subHours(subDays(date, 3), 2), 15));
+    expect(duration.ago()).toStrictEqual(subMinutes(subHours(subDays(date, 3), 2), 15));
+    expect(duration.after(date)).toStrictEqual(addMinutes(addHours(addDays(date, 3), 2), 15));
+    expect(duration.fromNow()).toStrictEqual(addMinutes(addHours(addDays(date, 3), 2), 15));
   });
 });

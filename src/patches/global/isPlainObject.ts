@@ -20,9 +20,7 @@ declare global {
    * isPlainObject(Object.create(null)); // => true
    * ```
    */
-  function isPlainObject(
-    value: unknown,
-  ): value is Record<string | number | symbol, unknown>;
+  function isPlainObject(value: unknown): value is Record<string | number | symbol, unknown>;
 }
 
 patch(globalThis).withStatic({ isPlainObject });

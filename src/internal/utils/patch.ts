@@ -114,8 +114,7 @@ export const patch = <C>(classType: C) => {
         : never;
     }) => {
       for (const [n, value] of Object.entries(namesAndValues)) {
-        if (typeof value !== 'function')
-          throw new Error('value is not a function');
+        if (typeof value !== 'function') throw new Error('value is not a function');
         const name = n as keyof T;
         const classT = classType as ClassType<T>;
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
@@ -124,9 +123,7 @@ export const patch = <C>(classType: C) => {
             value: named(
               typeof name === 'string' ? name : '',
               function (this: unknown, ...args: unknown[]) {
-                return (
-                  value as (target: unknown, ...args: unknown[]) => unknown
-                )(this, ...args);
+                return (value as (target: unknown, ...args: unknown[]) => unknown)(this, ...args);
               },
             ),
             configurable: true,
@@ -134,17 +131,13 @@ export const patch = <C>(classType: C) => {
             writable: true,
           });
         else
-          console.warn(
-            `Property "${String(name)}" already exists on \`${
-              classT.name
-            }.prototype\``,
-          );
+          console.warn(`Property "${String(name)}" already exists on \`${classT.name}.prototype\``);
       }
     },
     withGetter: (namesAndValues: {
-      [P in keyof T as P extends 'valueOf' | 'toString' | 'toLocaleString'
-        ? never
-        : P]?: (target: Unboxed<T>) => T[P];
+      [P in keyof T as P extends 'valueOf' | 'toString' | 'toLocaleString' ? never : P]?: (
+        target: Unboxed<T>,
+      ) => T[P];
     }) => {
       for (const [n, value] of Object.entries(namesAndValues)) {
         const name = n as keyof T;
@@ -159,11 +152,7 @@ export const patch = <C>(classType: C) => {
             enumerable: false,
           });
         else
-          console.warn(
-            `Property "${String(name)}" already exists on \`${
-              classT.name
-            }.prototype\``,
-          );
+          console.warn(`Property "${String(name)}" already exists on \`${classT.name}.prototype\``);
       }
     },
 
@@ -178,8 +167,7 @@ export const patch = <C>(classType: C) => {
         : never]?: C[P];
     }) => {
       for (const [n, value] of Object.entries(namesAndValues)) {
-        if (typeof value !== 'function')
-          throw new Error('value is not a function');
+        if (typeof value !== 'function') throw new Error('value is not a function');
         const name = n as keyof typeof classType;
         if (classType[name] === undefined)
           Object.defineProperty(classType, name, {
@@ -194,12 +182,10 @@ export const patch = <C>(classType: C) => {
         else
           console.warn(
             globalThis === classType
-              ? `Global ${
-                  typeof classType[name] === 'function' ? 'function' : 'value'
-                } \`${String(name)}\` already exists`
-              : `Property "${String(
+              ? `Global ${typeof classType[name] === 'function' ? 'function' : 'value'} \`${String(
                   name,
-                )}" already exists on ${stringRepresentation(classType)}`,
+                )}\` already exists`
+              : `Property "${String(name)}" already exists on ${stringRepresentation(classType)}`,
           );
       }
     },

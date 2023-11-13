@@ -19,12 +19,9 @@ export const createCallableArray = <
   let result = fn.bind(arr) as CallableArray<T, F>;
   result = Object.assign(
     result,
-    Object.entries(arr).reduce(
-      (acc, [index, digit]) => Object.assign(acc, { [index]: digit }),
-      {
-        toArray: () => arr,
-      },
-    ),
+    Object.entries(arr).reduce((acc, [index, digit]) => Object.assign(acc, { [index]: digit }), {
+      toArray: () => arr,
+    }),
   );
   Object.setPrototypeOf(result, Array.prototype);
   Object.defineProperty(result, 'length', {

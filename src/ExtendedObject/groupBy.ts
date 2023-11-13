@@ -1,12 +1,7 @@
 import { zTag } from '../internal/zTag';
 
 import type { StrictEntries } from '../ObjectConstructor/entriesS';
-import type {
-  BasePath,
-  BasePathArray,
-  GetByPath,
-  PathFn,
-} from '../global/path';
+import type { BasePath, BasePathArray, GetByPath, PathFn } from '../global/path';
 import type { PropFn } from '../global/prop';
 import type { Cast } from '../internal/types/assertion';
 import type { ListOf } from '../internal/types/union';
@@ -64,11 +59,7 @@ const groupBy: {
     | PathFn<O[keyof O], PP>
     | ((entry: StrictEntries<O>[number], index: number, object: O) => R),
 ) => {
-  let processedFn: (
-    entry: StrictEntries<O>[number],
-    index: number,
-    object: O,
-  ) => R;
+  let processedFn: (entry: StrictEntries<O>[number], index: number, object: O) => R;
   if (fn[zTag as keyof typeof fn] === 'Prop') {
     const prop = (fn as unknown as { prop: string }).prop;
     processedFn = ([, value]) => value[prop as keyof typeof value] as R;

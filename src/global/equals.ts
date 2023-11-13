@@ -9,11 +9,7 @@ const _arrayFromIterator = <T>(iter: Iterator<T>): T[] => {
   return result;
 };
 
-const _includesWith = <T>(
-  pred: (a: T[] | T, b: T) => boolean,
-  x: T[] | T,
-  list: T[] | T,
-) => {
+const _includesWith = <T>(pred: (a: T[] | T, b: T) => boolean, x: T[] | T, list: T[] | T) => {
   const len = (list as T[]).length;
   for (let i = 0; i < len; i++) if (pred(x, (list as T[])[i]!)) return true;
   return false;
@@ -37,14 +33,9 @@ const _uniqContentEquals = <T>(
 ) => {
   const a = _arrayFromIterator(aIterator);
   const b = _arrayFromIterator(bIterator);
-  const eq = (_a: T | T[], _b: T) =>
-    _equals(_a, _b, stackA.slice(), stackB.slice());
+  const eq = (_a: T | T[], _b: T) => _equals(_a, _b, stackA.slice(), stackB.slice());
   // if *a* array contains any element that is not included in *b*
-  return !_includesWith(
-    (b, aItem): boolean => !_includesWith(eq, aItem, b),
-    b,
-    a,
-  );
+  return !_includesWith((b, aItem): boolean => !_includesWith(eq, aItem, b), b, a);
 };
 
 const _equals = <T>(a: T, b: T, stackA: T[], stackB: T[]) => {
@@ -55,12 +46,8 @@ const _equals = <T>(a: T, b: T, stackA: T[], stackB: T[]) => {
 
   // For interoperability with fantasy-land
   if (
-    (isObject(a) &&
-      'fantasy-land/equals' in a &&
-      typeof a['fantasy-land/equals'] === 'function') ||
-    (isObject(b) &&
-      'fantasy-land/equals' in b &&
-      typeof b['fantasy-land/equals'] === 'function')
+    (isObject(a) && 'fantasy-land/equals' in a && typeof a['fantasy-land/equals'] === 'function') ||
+    (isObject(b) && 'fantasy-land/equals' in b && typeof b['fantasy-land/equals'] === 'function')
   )
     return (
       isObject(a) &&
@@ -104,12 +91,7 @@ const _equals = <T>(a: T, b: T, stackA: T[], stackB: T[]) => {
     case 'Boolean':
     case 'Number':
     case 'String':
-      if (
-        !(
-          typeof a === typeof b &&
-          Object.is((a as string).valueOf(), (b as string).valueOf())
-        )
-      )
+      if (!(typeof a === typeof b && Object.is((a as string).valueOf(), (b as string).valueOf())))
         return false;
       break;
 
@@ -119,8 +101,7 @@ const _equals = <T>(a: T, b: T, stackA: T[], stackB: T[]) => {
 
     case 'Error':
       return (
-        (a as Error).name === (b as Error).name &&
-        (a as Error).message === (b as Error).message
+        (a as Error).name === (b as Error).name && (a as Error).message === (b as Error).message
       );
 
     case 'RegExp':
@@ -150,10 +131,7 @@ const _equals = <T>(a: T, b: T, stackA: T[], stackB: T[]) => {
 
   switch (tagA) {
     case 'Map':
-      if (
-        (a as Map<unknown, unknown>).size !== (b as Map<unknown, unknown>).size
-      )
-        return false;
+      if ((a as Map<unknown, unknown>).size !== (b as Map<unknown, unknown>).size) return false;
 
       return _uniqContentEquals<T>(
         (a as Map<unknown, unknown>).entries() as Iterator<T>,

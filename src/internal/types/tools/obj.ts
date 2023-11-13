@@ -1,17 +1,7 @@
 import type { True } from '.';
 import type { Ary } from './ary';
 import type { And2, Covers$, Extends, If, Ifp, Yield1$ } from './common';
-import type {
-  Apply1,
-  Assume,
-  Flow2,
-  HKT1,
-  HKT2,
-  HKT3,
-  HKT4,
-  Pipe1,
-  Pipe2,
-} from './hkt';
+import type { Apply1, Assume, Flow2, HKT1, HKT2, HKT3, HKT4, Pipe1, Pipe2 } from './hkt';
 import type { IfpList, IfpList$, List } from './list';
 import type { Int, Num } from './num';
 
@@ -36,18 +26,13 @@ export namespace Obj {
   export interface ValueOf$ extends HKT1 {
     new: (o: Assume<this['_1'], unknown>) => ValueOf<typeof o>;
   }
-  export type ValueOfNullish<O> = Exclude<O, Nullish>[keyof Exclude<
-    O,
-    Nullish
-  >];
+  export type ValueOfNullish<O> = Exclude<O, Nullish>[keyof Exclude<O, Nullish>];
   export interface ValueOfNullish$ extends HKT1 {
     new: (o: Assume<this['_1'], unknown>) => ValueOfNullish<typeof o>;
   }
 
   export type OptionalKeyOf<O> = {
-    [K in keyof O]-?: NonNullable<unknown> extends { [P in K]: O[K] }
-      ? K
-      : never;
+    [K in keyof O]-?: NonNullable<unknown> extends { [P in K]: O[K] } ? K : never;
   }[keyof O];
   export interface OptionalKeyOf$ extends HKT1 {
     new: (o: Assume<this['_1'], Obj>) => OptionalKeyOf<typeof o>;
@@ -78,10 +63,7 @@ export namespace Obj {
     new: (o1: Assume<this['_1'], Obj>) => Merge2<typeof o1, O2>;
   }
   export interface Merge2$$ extends HKT2 {
-    new: (
-      o1: Assume<this['_1'], Obj>,
-      o2: Assume<this['_2'], Obj>,
-    ) => Merge2<typeof o1, typeof o2>;
+    new: (o1: Assume<this['_1'], Obj>, o2: Assume<this['_2'], Obj>) => Merge2<typeof o1, typeof o2>;
   }
   export type Merge3<O1, O2, O3> = _SpreadTwo<_SpreadTwo<O1, O2>, O3>;
   export interface Merge3$<O2, O3> extends HKT1 {
@@ -128,8 +110,7 @@ export namespace Obj {
     : K extends List<PropertyKey>
     ? Pipe1<K, List.Reduce$<Get$$, O>>
     : never;
-  export interface Get$<K extends PropertyKey | List<PropertyKey>>
-    extends HKT1 {
+  export interface Get$<K extends PropertyKey | List<PropertyKey>> extends HKT1 {
     new: (o: Assume<this['_1'], unknown>) => Get<typeof o, K>;
   }
   export interface Get$$ extends HKT2 {
@@ -149,15 +130,9 @@ export namespace Obj {
       k: Assume<this['_2'], unknown>,
     ) => KeyContains<typeof o, typeof k>;
   }
-  export type IfKeyContains<O, K, Then, Else> = If<
-    KeyContains<O, K>,
-    Then,
-    Else
-  >;
+  export type IfKeyContains<O, K, Then, Else> = If<KeyContains<O, K>, Then, Else>;
   export interface IfKeyContains$<K, Then, Else> extends HKT1 {
-    new: (
-      o: Assume<this['_1'], unknown>,
-    ) => IfKeyContains<typeof o, K, Then, Else>;
+    new: (o: Assume<this['_1'], unknown>) => IfKeyContains<typeof o, K, Then, Else>;
   }
   export interface IfKeyContains$$<Then, Else> extends HKT2 {
     new: (
@@ -180,20 +155,16 @@ export namespace Obj {
       else_: Assume<this['_4'], unknown>,
     ) => IfKeyContains<typeof o, typeof k, typeof then, typeof else_>;
   }
-  export type IfpKeyContains<
+  export type IfpKeyContains<O, K, ThenFn extends HKT1, ElseFn extends HKT1> = KeyContains<
     O,
-    K,
-    ThenFn extends HKT1,
-    ElseFn extends HKT1,
-  > = KeyContains<O, K> extends True ? Apply1<ThenFn, O> : Apply1<ElseFn, O>;
-  export interface IfpKeyContains$<K, ThenFn extends HKT1, ElseFn extends HKT1>
-    extends HKT1 {
-    new: (
-      o: Assume<this['_1'], unknown>,
-    ) => IfpKeyContains<typeof o, K, ThenFn, ElseFn>;
+    K
+  > extends True
+    ? Apply1<ThenFn, O>
+    : Apply1<ElseFn, O>;
+  export interface IfpKeyContains$<K, ThenFn extends HKT1, ElseFn extends HKT1> extends HKT1 {
+    new: (o: Assume<this['_1'], unknown>) => IfpKeyContains<typeof o, K, ThenFn, ElseFn>;
   }
-  export interface IfpKeyContains$$<ThenFn extends HKT1, ElseFn extends HKT1>
-    extends HKT2 {
+  export interface IfpKeyContains$$<ThenFn extends HKT1, ElseFn extends HKT1> extends HKT2 {
     new: (
       o: Assume<this['_1'], unknown>,
       k: Assume<this['_2'], unknown>,
@@ -239,19 +210,12 @@ export namespace Obj {
     Yield1$<_With__GenerateDefault<List.Get<P, 1>>>
   >;
   type _With__GenerateDefault<K> = Num.IfNat<K, [], NonNullable<unknown>>;
-  export type With<
-    O,
-    K extends PropertyKey | List<PropertyKey>,
-    V,
-  > = K extends PropertyKey
+  export type With<O, K extends PropertyKey | List<PropertyKey>, V> = K extends PropertyKey
     ? _Set<O, K, V>
     : K extends List<PropertyKey>
     ? K extends readonly [infer Head]
       ? _Set<O, Head, V>
-      : K extends readonly [
-          infer Head extends PropertyKey,
-          ...infer T extends List<PropertyKey>,
-        ]
+      : K extends readonly [infer Head extends PropertyKey, ...infer T extends List<PropertyKey>]
       ? List.ToReadonly<T> extends infer Tail extends List<PropertyKey>
         ? And2<Extends<O, Ary>, Num.IsNat<Head>> extends True
           ? IfpList<
@@ -262,10 +226,7 @@ export namespace Obj {
                   Extends<With<_With__Step<O, K>, Tail, V>, object>,
                   Extends<Pipe1<O, Ary.Elem$>, Obj>
                 > extends True
-                  ? Merge2<
-                      Pipe1<O, Ary.Elem$>,
-                      With<_With__Step<O, K>, Tail, V>
-                    >
+                  ? Merge2<Pipe1<O, Ary.Elem$>, With<_With__Step<O, K>, Tail, V>>
                   : Pipe1<O, Ary.Elem$> | With<_With__Step<O, K>, Tail, V>
               >
             >
@@ -293,8 +254,7 @@ export namespace Obj {
         : never
       : O
     : never;
-  export interface With$<K extends PropertyKey | List<PropertyKey>, V>
-    extends HKT1 {
+  export interface With$<K extends PropertyKey | List<PropertyKey>, V> extends HKT1 {
     new: (o: Assume<this['_1'], unknown>) => With<typeof o, K, V>;
   }
   export interface With$$<V> extends HKT2 {

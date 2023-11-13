@@ -17,7 +17,6 @@ import isObjectLike from './isObjectLike';
  */
 // eslint-disable-next-line @typescript-eslint/ban-types
 const isNumber = (value: unknown): value is number | Number =>
-  typeof value === 'number' ||
-  (isObjectLike(value) && getTag(value) === 'Number');
+  typeof value === 'number' || (isObjectLike(value) && getTag(value) === 'Number');
 
 export default isNumber;

@@ -18,9 +18,7 @@ declare global {
      * isEmpty(new Set()); // => true
      * ```
      */
-    isEmpty(
-      o: Map<unknown, unknown> | Set<unknown> | ArrayLike<unknown>,
-    ): boolean;
+    isEmpty(o: Map<unknown, unknown> | Set<unknown> | ArrayLike<unknown>): boolean;
     isEmpty(o: object): boolean;
   }
 }

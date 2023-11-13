@@ -166,23 +166,15 @@ export interface ApplyWith3$$$$ extends HKT4 {
 }
 
 export type Pipe1<T, F1 extends HKT1> = Apply1<F1, T>;
-export type Pipe2<T, F1 extends HKT1, F2 extends HKT1> = Apply1<
-  F2,
-  Apply1<F1, T>
+export type Pipe2<T, F1 extends HKT1, F2 extends HKT1> = Apply1<F2, Apply1<F1, T>>;
+export type Pipe3<T, F1 extends HKT1, F2 extends HKT1, F3 extends HKT1> = Apply1<
+  F3,
+  Apply1<F2, Apply1<F1, T>>
 >;
-export type Pipe3<
-  T,
-  F1 extends HKT1,
-  F2 extends HKT1,
-  F3 extends HKT1,
-> = Apply1<F3, Apply1<F2, Apply1<F1, T>>>;
-export type Pipe4<
-  T,
-  F1 extends HKT1,
-  F2 extends HKT1,
-  F3 extends HKT1,
-  F4 extends HKT1,
-> = Apply1<F4, Apply1<F3, Apply1<F2, Apply1<F1, T>>>>;
+export type Pipe4<T, F1 extends HKT1, F2 extends HKT1, F3 extends HKT1, F4 extends HKT1> = Apply1<
+  F4,
+  Apply1<F3, Apply1<F2, Apply1<F1, T>>>
+>;
 export type Pipe5<
   T,
   F1 extends HKT1,
@@ -209,10 +201,7 @@ export type Pipe7<
   F5 extends HKT1,
   F6 extends HKT1,
   F7 extends HKT1,
-> = Apply1<
-  F7,
-  Apply1<F6, Apply1<F5, Apply1<F4, Apply1<F3, Apply1<F2, Apply1<F1, T>>>>>>
->;
+> = Apply1<F7, Apply1<F6, Apply1<F5, Apply1<F4, Apply1<F3, Apply1<F2, Apply1<F1, T>>>>>>>;
 export type Pipe8<
   T,
   F1 extends HKT1,
@@ -225,31 +214,19 @@ export type Pipe8<
   F8 extends HKT1,
 > = Apply1<
   F8,
-  Apply1<
-    F7,
-    Apply1<F6, Apply1<F5, Apply1<F4, Apply1<F3, Apply1<F2, Apply1<F1, T>>>>>>
-  >
+  Apply1<F7, Apply1<F6, Apply1<F5, Apply1<F4, Apply1<F3, Apply1<F2, Apply1<F1, T>>>>>>>
 >;
 
 export type Flow1<F1 extends HKT1> = F1;
 export interface Flow2<F1 extends HKT1, F2 extends HKT1> extends HKT1 {
   new: (x: Assume<this['_1'], unknown>) => Apply1<F2, Apply1<F1, typeof x>>;
 }
-export interface Flow3<F1 extends HKT1, F2 extends HKT1, F3 extends HKT1>
-  extends HKT1 {
-  new: (
-    x: Assume<this['_1'], unknown>,
-  ) => Apply1<F3, Apply1<F2, Apply1<F1, typeof x>>>;
+export interface Flow3<F1 extends HKT1, F2 extends HKT1, F3 extends HKT1> extends HKT1 {
+  new: (x: Assume<this['_1'], unknown>) => Apply1<F3, Apply1<F2, Apply1<F1, typeof x>>>;
 }
-export interface Flow4<
-  F1 extends HKT1,
-  F2 extends HKT1,
-  F3 extends HKT1,
-  F4 extends HKT1,
-> extends HKT1 {
-  new: (
-    x: Assume<this['_1'], unknown>,
-  ) => Apply1<F4, Apply1<F3, Apply1<F2, Apply1<F1, typeof x>>>>;
+export interface Flow4<F1 extends HKT1, F2 extends HKT1, F3 extends HKT1, F4 extends HKT1>
+  extends HKT1 {
+  new: (x: Assume<this['_1'], unknown>) => Apply1<F4, Apply1<F3, Apply1<F2, Apply1<F1, typeof x>>>>;
 }
 export interface Flow5<
   F1 extends HKT1,
@@ -272,10 +249,7 @@ export interface Flow6<
 > extends HKT1 {
   new: (
     x: Assume<this['_1'], unknown>,
-  ) => Apply1<
-    F6,
-    Apply1<F5, Apply1<F4, Apply1<F3, Apply1<F2, Apply1<F1, typeof x>>>>>
-  >;
+  ) => Apply1<F6, Apply1<F5, Apply1<F4, Apply1<F3, Apply1<F2, Apply1<F1, typeof x>>>>>>;
 }
 export interface Flow7<
   F1 extends HKT1,
@@ -288,13 +262,7 @@ export interface Flow7<
 > extends HKT1 {
   new: (
     x: Assume<this['_1'], unknown>,
-  ) => Apply1<
-    F7,
-    Apply1<
-      F6,
-      Apply1<F5, Apply1<F4, Apply1<F3, Apply1<F2, Apply1<F1, typeof x>>>>>
-    >
-  >;
+  ) => Apply1<F7, Apply1<F6, Apply1<F5, Apply1<F4, Apply1<F3, Apply1<F2, Apply1<F1, typeof x>>>>>>>;
 }
 export interface Flow8<
   F1 extends HKT1,
@@ -310,13 +278,7 @@ export interface Flow8<
     x: Assume<this['_1'], unknown>,
   ) => Apply1<
     F8,
-    Apply1<
-      F7,
-      Apply1<
-        F6,
-        Apply1<F5, Apply1<F4, Apply1<F3, Apply1<F2, Apply1<F1, typeof x>>>>>
-      >
-    >
+    Apply1<F7, Apply1<F6, Apply1<F5, Apply1<F4, Apply1<F3, Apply1<F2, Apply1<F1, typeof x>>>>>>>
   >;
 }
 
@@ -324,21 +286,12 @@ export type Compose1<F1 extends HKT1> = F1;
 export interface Compose2<F1 extends HKT1, F2 extends HKT1> extends HKT1 {
   new: (x: Assume<this['_1'], unknown>) => Apply1<F1, Apply1<F2, typeof x>>;
 }
-export interface Compose3<F1 extends HKT1, F2 extends HKT1, F3 extends HKT1>
-  extends HKT1 {
-  new: (
-    x: Assume<this['_1'], unknown>,
-  ) => Apply1<F1, Apply1<F2, Apply1<F3, typeof x>>>;
+export interface Compose3<F1 extends HKT1, F2 extends HKT1, F3 extends HKT1> extends HKT1 {
+  new: (x: Assume<this['_1'], unknown>) => Apply1<F1, Apply1<F2, Apply1<F3, typeof x>>>;
 }
-export interface Compose4<
-  F1 extends HKT1,
-  F2 extends HKT1,
-  F3 extends HKT1,
-  F4 extends HKT1,
-> extends HKT1 {
-  new: (
-    x: Assume<this['_1'], unknown>,
-  ) => Apply1<F1, Apply1<F2, Apply1<F3, Apply1<F4, typeof x>>>>;
+export interface Compose4<F1 extends HKT1, F2 extends HKT1, F3 extends HKT1, F4 extends HKT1>
+  extends HKT1 {
+  new: (x: Assume<this['_1'], unknown>) => Apply1<F1, Apply1<F2, Apply1<F3, Apply1<F4, typeof x>>>>;
 }
 export interface Compose5<
   F1 extends HKT1,
@@ -361,10 +314,7 @@ export interface Compose6<
 > extends HKT1 {
   new: (
     x: Assume<this['_1'], unknown>,
-  ) => Apply1<
-    F1,
-    Apply1<F2, Apply1<F3, Apply1<F4, Apply1<F5, Apply1<F6, typeof x>>>>>
-  >;
+  ) => Apply1<F1, Apply1<F2, Apply1<F3, Apply1<F4, Apply1<F5, Apply1<F6, typeof x>>>>>>;
 }
 export interface Compose7<
   F1 extends HKT1,
@@ -377,13 +327,7 @@ export interface Compose7<
 > extends HKT1 {
   new: (
     x: Assume<this['_1'], unknown>,
-  ) => Apply1<
-    F1,
-    Apply1<
-      F2,
-      Apply1<F3, Apply1<F4, Apply1<F5, Apply1<F6, Apply1<F7, typeof x>>>>>
-    >
-  >;
+  ) => Apply1<F1, Apply1<F2, Apply1<F3, Apply1<F4, Apply1<F5, Apply1<F6, Apply1<F7, typeof x>>>>>>>;
 }
 export interface Compose8<
   F1 extends HKT1,
@@ -399,12 +343,6 @@ export interface Compose8<
     x: Assume<this['_1'], unknown>,
   ) => Apply1<
     F1,
-    Apply1<
-      F2,
-      Apply1<
-        F3,
-        Apply1<F4, Apply1<F5, Apply1<F6, Apply1<F7, Apply1<F8, typeof x>>>>>
-      >
-    >
+    Apply1<F2, Apply1<F3, Apply1<F4, Apply1<F5, Apply1<F6, Apply1<F7, Apply1<F8, typeof x>>>>>>>
   >;
 }

@@ -16,7 +16,6 @@ import isObjectLike from './isObjectLike';
  */
 // eslint-disable-next-line @typescript-eslint/ban-types
 const isSymbol = (value: unknown): value is symbol | Symbol =>
-  typeof value === 'symbol' ||
-  (isObjectLike(value) && getTag(value) === 'Symbol');
+  typeof value === 'symbol' || (isObjectLike(value) && getTag(value) === 'Symbol');
 
 export default isSymbol;

@@ -42,9 +42,7 @@ const is: {
   <T>(a: unknown, b: T): a is T;
   <T>(b: T): (a: unknown) => a is T;
 } = ((...args: unknown[]) =>
-  args.length === 1
-    ? (a: unknown) => Object.is(a, args[0])
-    : Object.is(args[0], args[1])) as {
+  args.length === 1 ? (a: unknown) => Object.is(a, args[0]) : Object.is(args[0], args[1])) as {
   <T>(b: T): (a: unknown) => a is T;
   <T>(a: unknown, b: T): a is T;
 };

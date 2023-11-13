@@ -9,7 +9,6 @@
  * (0).isBetween(1, 5); // => false
  * ```
  */
-const isBetween = (n: number, min: number, max: number): boolean =>
-  n >= min && n <= max;
+const isBetween = (n: number, min: number, max: number): boolean => n >= min && n <= max;
 
 export default isBetween;

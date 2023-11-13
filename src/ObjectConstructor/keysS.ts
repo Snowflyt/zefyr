@@ -23,7 +23,6 @@ export type StrictKeys<T extends object> = keyof T extends symbol
  *
  * @see {@link Object.keys}
  */
-const keysS = <T extends object>(o: T): StrictKeys<T> =>
-  Object.keys(o) as StrictKeys<T>;
+const keysS = <T extends object>(o: T): StrictKeys<T> => Object.keys(o) as StrictKeys<T>;
 
 export default keysS;

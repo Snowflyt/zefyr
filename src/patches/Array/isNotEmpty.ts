@@ -13,9 +13,7 @@ declare global {
      * [1, 2, 3].isNotEmpty(); // => true
      * ```
      */
-    isNotEmpty<const AS extends unknown[]>(
-      this: AS,
-    ): this is Exclude<AS, [] | readonly []>;
+    isNotEmpty<const AS extends unknown[]>(this: AS): this is Exclude<AS, [] | readonly []>;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars

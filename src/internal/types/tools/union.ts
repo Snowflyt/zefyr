@@ -7,14 +7,12 @@ type _ToList<U, LN extends List = [], LastU = Last<U>> = {
   0: _ToList<Exclude<U, LastU>, [LastU, ...LN]>;
   1: LN;
 }[[U] extends [never] ? 1 : 0];
-type Last<U> = IntersectOf<U extends unknown ? (x: U) => void : never> extends (
-  x: infer P,
-) => void
+type Last<U> = IntersectOf<U extends unknown ? (x: U) => void : never> extends (x: infer P) => void
   ? P
   : never;
-export type IntersectOf<U> = (
-  U extends unknown ? (k: U) => void : never
-) extends (k: infer I) => void
+export type IntersectOf<U> = (U extends unknown ? (k: U) => void : never) extends (
+  k: infer I,
+) => void
   ? I
   : never;
 

@@ -82,27 +82,12 @@ declare global {
      * 111.2345.toFormattedString('rounded', { significant: true }); // => '111'
      * ```
      */
-    toFormattedString(
-      format: 'currency',
-      options?: FormatCurrencyOptions,
-    ): string;
-    toFormattedString(
-      format: 'delimited',
-      options?: FormatDelimitedOptions,
-    ): string;
-    toFormattedString(
-      format: 'human-size',
-      options?: FormatHumanSizeOptions,
-    ): string;
-    toFormattedString(
-      format: 'percentage',
-      options?: FormatPercentageOptions,
-    ): string;
+    toFormattedString(format: 'currency', options?: FormatCurrencyOptions): string;
+    toFormattedString(format: 'delimited', options?: FormatDelimitedOptions): string;
+    toFormattedString(format: 'human-size', options?: FormatHumanSizeOptions): string;
+    toFormattedString(format: 'percentage', options?: FormatPercentageOptions): string;
     toFormattedString(format: 'phone', options?: FormatPhoneOptions): string;
-    toFormattedString(
-      format: 'rounded',
-      options?: FormatRoundedOptions,
-    ): string;
+    toFormattedString(format: 'rounded', options?: FormatRoundedOptions): string;
     toFormattedString(format: string, options?: object): string;
   }
 }

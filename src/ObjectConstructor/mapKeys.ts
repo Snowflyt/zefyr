@@ -23,12 +23,7 @@ const mapKeys = <const O extends object, R extends string>(
   const result: Record<PropertyKey, unknown> = {};
   let index = -1;
   for (const key in o) {
-    const newKey = callbackfn.call(
-      thisArg,
-      key as StrictKeys<O>[number],
-      ++index,
-      o,
-    );
+    const newKey = callbackfn.call(thisArg, key as StrictKeys<O>[number], ++index, o);
     result[newKey] = o[key];
   }
   return result as {

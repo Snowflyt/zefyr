@@ -21,11 +21,7 @@ declare global {
      */
     mapValues<const O extends object, const R>(
       o: O,
-      callbackfn: (
-        value: StrictValues<O>[number],
-        index: number,
-        object: O,
-      ) => R,
+      callbackfn: (value: StrictValues<O>[number], index: number, object: O) => R,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       thisArg?: any,
     ): { [P in StrictKeys<O>[number]]: R };

@@ -16,9 +16,6 @@
  * ```
  */
 const isLength = (value: unknown): value is number =>
-  typeof value == 'number' &&
-  value > -1 &&
-  value % 1 == 0 &&
-  value <= Number.MAX_SAFE_INTEGER;
+  typeof value == 'number' && value > -1 && value % 1 == 0 && value <= Number.MAX_SAFE_INTEGER;
 
 export default isLength;

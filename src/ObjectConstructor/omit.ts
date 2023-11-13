@@ -1,11 +1,6 @@
 import { zTag } from '../internal/zTag';
 
-import type {
-  BasePath,
-  BasePathArray,
-  OmitByPath,
-  PathFn,
-} from '../global/path';
+import type { BasePath, BasePathArray, OmitByPath, PathFn } from '../global/path';
 import type { PropFn } from '../global/prop';
 
 declare const omitPropFallback: unique symbol;

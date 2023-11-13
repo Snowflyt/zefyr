@@ -15,8 +15,7 @@ import equals from '../global/equals';
  */
 const unique = <T>(array: T[]): T[] => {
   const result: T[] = [];
-  for (const item of array)
-    if (!result.some((newItem) => equals(newItem, item))) result.push(item);
+  for (const item of array) if (!result.some((newItem) => equals(newItem, item))) result.push(item);
   return result;
 };
 

@@ -15,11 +15,9 @@ export type Dec<N extends number | string> = N extends number
   : `${DecMap['__']}`;
 
 export type Range<S extends number, E extends number> = _Range<S, Dec<E>, []>;
-type _Range<
-  S extends number,
-  E extends number,
-  R extends number[],
-> = S extends E ? [...R, S] : _Range<Inc<S>, E, [...R, S]>;
+type _Range<S extends number, E extends number, R extends number[]> = S extends E
+  ? [...R, S]
+  : _Range<Inc<S>, E, [...R, S]>;
 
 /* Maps */
 type IncMap = {

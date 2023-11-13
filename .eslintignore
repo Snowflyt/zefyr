@@ -1,6 +1,0 @@
-.eslintrc.cjs
-prettier.config.cjs
-vite.config.ts
-vitest.config.ts
-prebuild.cjs
-postbuild.cjs

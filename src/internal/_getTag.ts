@@ -19,10 +19,7 @@ const getTag = (value: unknown): string => {
 
   // For objects with a toStringTag, return the raw tag
   if (Symbol.toStringTag in Object(value)) {
-    const isOwn = Object.prototype.hasOwnProperty.call(
-      value,
-      Symbol.toStringTag,
-    );
+    const isOwn = Object.prototype.hasOwnProperty.call(value, Symbol.toStringTag);
     const tag = value[Symbol.toStringTag as keyof typeof value];
 
     let unmasked = false;

@@ -15,7 +15,6 @@ export type StrictValues<T extends object> = keyof T extends symbol
  *
  * @see {@link Object.values}
  */
-const valuesS = <T extends object>(o: T): StrictValues<T> =>
-  Object.values(o) as StrictValues<T>;
+const valuesS = <T extends object>(o: T): StrictValues<T> => Object.values(o) as StrictValues<T>;
 
 export default valuesS;

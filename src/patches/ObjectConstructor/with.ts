@@ -51,10 +51,7 @@ declare global {
       <O extends object, const PP extends BasePath<O> | BasePathArray<O>>(
         o: O,
         path: PathFn<O, PP>,
-        value: Obj.Get<
-          O,
-          Path<PP> extends List<PropertyKey> ? Path<PP> : never
-        >,
+        value: Obj.Get<O, Path<PP> extends List<PropertyKey> ? Path<PP> : never>,
       ): O;
       /**
        * Returns a new object with the specified property set to the given value.
@@ -74,10 +71,7 @@ declare global {
       <O extends object, const PP extends BasePathArray<O>>(
         o: O,
         path: PP,
-        value: Obj.Get<
-          O,
-          Path<PP> extends List<PropertyKey> ? Path<PP> : never
-        >,
+        value: Obj.Get<O, Path<PP> extends List<PropertyKey> ? Path<PP> : never>,
       ): O;
     };
   }

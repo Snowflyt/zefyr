@@ -19,9 +19,6 @@ import lcm from './lcm';
  * @see {@link gcd}
  * @see {@link lcm}
  */
-const gcdlcm = (...values: number[]): [number, number] => [
-  gcd(...values),
-  lcm(...values),
-];
+const gcdlcm = (...values: number[]): [number, number] => [gcd(...values), lcm(...values)];
 
 export default gcdlcm;

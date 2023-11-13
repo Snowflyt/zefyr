@@ -61,10 +61,7 @@ export declare namespace Int {
     new: (n: Assume<this['_1'], Int>) => Add<typeof n, M>;
   }
   interface Add$$ extends HKT2 {
-    new: (
-      n: Assume<this['_1'], Int>,
-      m: Assume<this['_2'], Int>,
-    ) => Add<typeof n, typeof m>;
+    new: (n: Assume<this['_1'], Int>, m: Assume<this['_2'], Int>) => Add<typeof n, typeof m>;
   }
 
   type Sub<N extends Int, M extends Nat> = M extends 0

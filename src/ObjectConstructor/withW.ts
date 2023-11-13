@@ -1,11 +1,6 @@
 import objWith from './with';
 
-import type {
-  BasePath,
-  BasePathArray,
-  GetByPath,
-  PathFn,
-} from '../global/path';
+import type { BasePath, BasePathArray, GetByPath, PathFn } from '../global/path';
 import type { PropFn } from '../global/prop';
 import type { Obj, Path } from '../internal/types/tools';
 
@@ -91,11 +86,7 @@ const objWithW: {
   }[keyof O],
   const PP extends BasePath<O> | BasePathArray<O>,
 >(
-  ...args: [
-    o: O,
-    rawPath: K | PropFn<O, K> | PathFn<O, PP>,
-    value: O[K] | GetByPath<O, PP>,
-  ]
+  ...args: [o: O, rawPath: K | PropFn<O, K> | PathFn<O, PP>, value: O[K] | GetByPath<O, PP>]
 ) => objWith(...(args as [never, never, never]));
 
 export default objWithW;

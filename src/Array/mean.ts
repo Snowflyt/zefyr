@@ -13,36 +13,40 @@ type HasOnlyNumberOrBigInt<AS extends readonly unknown[]> = [
   HasOnlyBigIntAndHaltAtNonNumeric<AS>,
 ] extends [true, false]
   ? true
-  : [
-      HasOnlyNumberAndHaltAtNonNumeric<AS>,
-      HasOnlyBigIntAndHaltAtNonNumeric<AS>,
-    ] extends [false, true]
+  : [HasOnlyNumberAndHaltAtNonNumeric<AS>, HasOnlyBigIntAndHaltAtNonNumeric<AS>] extends [
+      false,
+      true,
+    ]
   ? true
   : false;
-type HasOnlyNumberAndHaltAtNonNumeric<AS extends readonly unknown[]> =
-  AS extends readonly [infer THead, ...infer TTail]
-    ? TTail extends []
-      ? THead extends number
-        ? true
-        : false
-      : THead extends number
-      ? HasOnlyNumberAndHaltAtNonNumeric<TTail> extends true
-        ? true
-        : false
+type HasOnlyNumberAndHaltAtNonNumeric<AS extends readonly unknown[]> = AS extends readonly [
+  infer THead,
+  ...infer TTail,
+]
+  ? TTail extends []
+    ? THead extends number
+      ? true
       : false
-    : never;
-type HasOnlyBigIntAndHaltAtNonNumeric<AS extends readonly unknown[]> =
-  AS extends readonly [infer THead, ...infer TTail]
-    ? TTail extends []
-      ? THead extends bigint
-        ? true
-        : false
-      : THead extends bigint
-      ? HasOnlyBigIntAndHaltAtNonNumeric<TTail> extends true
-        ? true
-        : false
+    : THead extends number
+    ? HasOnlyNumberAndHaltAtNonNumeric<TTail> extends true
+      ? true
       : false
-    : never;
+    : false
+  : never;
+type HasOnlyBigIntAndHaltAtNonNumeric<AS extends readonly unknown[]> = AS extends readonly [
+  infer THead,
+  ...infer TTail,
+]
+  ? TTail extends []
+    ? THead extends bigint
+      ? true
+      : false
+    : THead extends bigint
+    ? HasOnlyBigIntAndHaltAtNonNumeric<TTail> extends true
+      ? true
+      : false
+    : false
+  : never;
 
 type GeneralizeNumeric<N extends number | bigint> = number extends N
   ? N
@@ -76,15 +80,10 @@ const mean = <T>(array: T[] | readonly T[]): Mean<typeof array> => {
     if (typeof cur !== 'number' && typeof cur !== 'bigint')
       throw new TypeError('Cannot get the mean of an array of non-numbers');
     if (typeof cur !== type)
-      throw new TypeError(
-        'Cannot get the mean of an array of mixed numbers and bigints',
-      );
+      throw new TypeError('Cannot get the mean of an array of mixed numbers and bigints');
     return ((acc as number) + (cur as number)) as T;
   }, (type === 'bigint' ? 0n : 0) as T) as R;
-  return (sum /
-    ((typeof sum === 'bigint'
-      ? BigInt(array.length)
-      : array.length) as R)) as R;
+  return (sum / ((typeof sum === 'bigint' ? BigInt(array.length) : array.length) as R)) as R;
 };
 
 export default mean;

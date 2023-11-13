@@ -9,7 +9,6 @@
  * isBigIntPrimitive(''); // => false
  * ```
  */
-const isBigIntPrimitive = (value: unknown): value is bigint =>
-  typeof value === 'bigint';
+const isBigIntPrimitive = (value: unknown): value is bigint => typeof value === 'bigint';
 
 export default isBigIntPrimitive;

@@ -10,19 +10,14 @@ export interface NonNullable$ extends HKT1 {
   new: (x: Assume<this['_1'], unknown>) => NonNullable<typeof x>;
 }
 
-export type Eq<T, U> = (<G>() => G extends T ? 1 : 2) extends <
-  G,
->() => G extends U ? 1 : 2
+export type Eq<T, U> = (<G>() => G extends T ? 1 : 2) extends <G>() => G extends U ? 1 : 2
   ? True
   : False;
 export interface Eq$<U> extends HKT1 {
   new: (x: Assume<this['_1'], unknown>) => Eq<typeof x, U>;
 }
 export interface Eq$$ extends HKT2 {
-  new: (
-    x: Assume<this['_1'], unknown>,
-    y: Assume<this['_2'], unknown>,
-  ) => Eq<typeof x, typeof y>;
+  new: (x: Assume<this['_1'], unknown>, y: Assume<this['_2'], unknown>) => Eq<typeof x, typeof y>;
 }
 export type IfEq<T, U, Then, Else> = If<Eq<T, U>, Then, Else>;
 export interface IfEq$<U, Then, Else> extends HKT1 {
@@ -49,18 +44,13 @@ export interface IfEq$$$$ extends HKT4 {
     else_: Assume<this['_4'], unknown>,
   ) => IfEq<typeof x, typeof y, typeof then, typeof else_>;
 }
-export type IfpEq<T, U, ThenFn extends HKT1, ElseFn extends HKT1> = Eq<
-  T,
-  U
-> extends True
+export type IfpEq<T, U, ThenFn extends HKT1, ElseFn extends HKT1> = Eq<T, U> extends True
   ? Apply1<ThenFn, T>
   : Apply1<ElseFn, T>;
-export interface IfpEq$<U, ThenFn extends HKT1, ElseFn extends HKT1>
-  extends HKT1 {
+export interface IfpEq$<U, ThenFn extends HKT1, ElseFn extends HKT1> extends HKT1 {
   new: (x: Assume<this['_1'], unknown>) => IfpEq<typeof x, U, ThenFn, ElseFn>;
 }
-export interface IfpEq$$<ThenFn extends HKT1, ElseFn extends HKT1>
-  extends HKT2 {
+export interface IfpEq$$<ThenFn extends HKT1, ElseFn extends HKT1> extends HKT2 {
   new: (
     x: Assume<this['_1'], unknown>,
     y: Assume<this['_2'], unknown>,
@@ -122,10 +112,7 @@ export interface Yield1$<T> extends HKT1 {
   new: (x: Assume<this['_1'], unknown>) => T;
 }
 export interface Yield1$$ extends HKT2 {
-  new: (
-    x: Assume<this['_1'], unknown>,
-    y: Assume<this['_2'], unknown>,
-  ) => typeof y;
+  new: (x: Assume<this['_1'], unknown>, y: Assume<this['_2'], unknown>) => typeof y;
 }
 export interface Yield2$$<T> extends HKT2 {
   new: (x: Assume<this['_1'], unknown>, y: Assume<this['_2'], unknown>) => T;
@@ -138,17 +125,13 @@ export interface Yield2$$$ extends HKT3 {
   ) => typeof z;
 }
 
-export type Ifp<
-  T,
-  Pred extends HKT1,
-  ThenFn extends HKT1,
-  ElseFn extends HKT1,
-> = Apply1<Pred, T> extends True ? Apply1<ThenFn, T> : Apply1<ElseFn, T>;
-export interface Ifp$<
-  Pred extends HKT1,
-  ThenFn extends HKT1,
-  ElseFn extends HKT1,
-> extends HKT1 {
+export type Ifp<T, Pred extends HKT1, ThenFn extends HKT1, ElseFn extends HKT1> = Apply1<
+  Pred,
+  T
+> extends True
+  ? Apply1<ThenFn, T>
+  : Apply1<ElseFn, T>;
+export interface Ifp$<Pred extends HKT1, ThenFn extends HKT1, ElseFn extends HKT1> extends HKT1 {
   new: (x: Assume<this['_1'], unknown>) => Ifp<typeof x, Pred, ThenFn, ElseFn>;
 }
 export interface Ifp$$<ThenFn extends HKT1, ElseFn extends HKT1> extends HKT2 {
@@ -173,23 +156,16 @@ export interface Ifp$$$$ extends HKT4 {
   ) => Ifp<typeof x, typeof pred, typeof thenFn, typeof elseFn>;
 }
 
-export type IfNotP<
-  T,
-  Pred extends HKT1,
-  ThenFn extends HKT1,
-  ElseFn extends HKT1,
-> = Apply1<Pred, T> extends False ? Apply1<ThenFn, T> : Apply1<ElseFn, T>;
-export interface IfNotP$<
-  Pred extends HKT1,
-  ThenFn extends HKT1,
-  ElseFn extends HKT1,
-> extends HKT1 {
-  new: (
-    x: Assume<this['_1'], unknown>,
-  ) => IfNotP<typeof x, Pred, ThenFn, ElseFn>;
+export type IfNotP<T, Pred extends HKT1, ThenFn extends HKT1, ElseFn extends HKT1> = Apply1<
+  Pred,
+  T
+> extends False
+  ? Apply1<ThenFn, T>
+  : Apply1<ElseFn, T>;
+export interface IfNotP$<Pred extends HKT1, ThenFn extends HKT1, ElseFn extends HKT1> extends HKT1 {
+  new: (x: Assume<this['_1'], unknown>) => IfNotP<typeof x, Pred, ThenFn, ElseFn>;
 }
-export interface IfNotP$$<ThenFn extends HKT1, ElseFn extends HKT1>
-  extends HKT2 {
+export interface IfNotP$$<ThenFn extends HKT1, ElseFn extends HKT1> extends HKT2 {
   new: (
     x: Assume<this['_1'], unknown>,
     pred: Assume<this['_2'], HKT1>,
@@ -262,10 +238,7 @@ export interface In$<AS extends List> extends HKT1 {
   new: (x: Assume<this['_1'], unknown>) => In<typeof x, AS>;
 }
 export interface In$$ extends HKT2 {
-  new: (
-    x: Assume<this['_1'], unknown>,
-    as: Assume<this['_2'], List>,
-  ) => In<typeof x, typeof as>;
+  new: (x: Assume<this['_1'], unknown>, as: Assume<this['_2'], List>) => In<typeof x, typeof as>;
 }
 export type IfIn<T, AS extends List, Then, Else> = If<In<T, AS>, Then, Else>;
 export interface IfIn$<AS extends List, Then, Else> extends HKT1 {
@@ -292,21 +265,16 @@ export interface IfIn$$$$ extends HKT4 {
     else_: Assume<this['_4'], unknown>,
   ) => IfIn<typeof x, typeof as, typeof then, typeof else_>;
 }
-export type IfpIn<
+export type IfpIn<T, AS extends List, ThenFn extends HKT1, ElseFn extends HKT1> = In<
   T,
-  AS extends List,
-  ThenFn extends HKT1,
-  ElseFn extends HKT1,
-> = In<T, AS> extends True ? Apply1<ThenFn, T> : Apply1<ElseFn, T>;
-export interface IfpIn$<
-  AS extends List,
-  ThenFn extends HKT1,
-  ElseFn extends HKT1,
-> extends HKT1 {
+  AS
+> extends True
+  ? Apply1<ThenFn, T>
+  : Apply1<ElseFn, T>;
+export interface IfpIn$<AS extends List, ThenFn extends HKT1, ElseFn extends HKT1> extends HKT1 {
   new: (x: Assume<this['_1'], unknown>) => IfpIn<typeof x, AS, ThenFn, ElseFn>;
 }
-export interface IfpIn$$<ThenFn extends HKT1, ElseFn extends HKT1>
-  extends HKT2 {
+export interface IfpIn$$<ThenFn extends HKT1, ElseFn extends HKT1> extends HKT2 {
   new: (
     x: Assume<this['_1'], unknown>,
     as: Assume<this['_2'], List>,
@@ -419,10 +387,7 @@ export interface IfCovers$$$$ extends HKT4 {
   ) => IfCovers<typeof x, typeof y, typeof then, typeof else_>;
 }
 
-export type All<AS extends readonly Bool[]> = AS extends readonly [
-  infer Head,
-  ...infer Tail,
-]
+export type All<AS extends readonly Bool[]> = AS extends readonly [infer Head, ...infer Tail]
   ? Head extends True
     ? // @ts-expect-error - TS doesn't know `Tail` is a tuple
       All<Tail>
@@ -432,10 +397,7 @@ export interface All$ extends HKT1 {
   new: (x: Assume<this['_1'], readonly Bool[]>) => All<typeof x>;
 }
 
-export type None<AS extends readonly Bool[]> = AS extends readonly [
-  infer Head,
-  ...infer Tail,
-]
+export type None<AS extends readonly Bool[]> = AS extends readonly [infer Head, ...infer Tail]
   ? Head extends False
     ? // @ts-expect-error - TS doesn't know `Tail` is a tuple
       None<Tail>
@@ -445,10 +407,7 @@ export interface None$ extends HKT1 {
   new: (x: Assume<this['_1'], readonly Bool[]>) => None<typeof x>;
 }
 
-export type Any<AS extends readonly Bool[]> = AS extends readonly [
-  infer Head,
-  ...infer Tail,
-]
+export type Any<AS extends readonly Bool[]> = AS extends readonly [infer Head, ...infer Tail]
   ? Head extends True
     ? True
     : // @ts-expect-error - TS doesn't know `Tail` is a tuple
@@ -467,24 +426,18 @@ export interface And2$<B extends Bool> extends HKT1 {
   new: (a: Assume<this['_1'], Bool>) => And2<typeof a, B>;
 }
 export interface And2$$ extends HKT2 {
-  new: (
-    a: Assume<this['_1'], Bool>,
-    b: Assume<this['_2'], Bool>,
-  ) => And2<typeof a, typeof b>;
+  new: (a: Assume<this['_1'], Bool>, b: Assume<this['_2'], Bool>) => And2<typeof a, typeof b>;
 }
-export type And3<
-  A extends Bool,
-  B extends Bool,
-  C extends Bool,
-> = A extends True ? (B extends True ? C : False) : False;
+export type And3<A extends Bool, B extends Bool, C extends Bool> = A extends True
+  ? B extends True
+    ? C
+    : False
+  : False;
 export interface And3$<B extends Bool, C extends Bool> extends HKT1 {
   new: (a: Assume<this['_1'], Bool>) => And3<typeof a, B, C>;
 }
 export interface And3$$<C extends Bool> extends HKT2 {
-  new: (
-    a: Assume<this['_1'], Bool>,
-    b: Assume<this['_2'], Bool>,
-  ) => And3<typeof a, typeof b, C>;
+  new: (a: Assume<this['_1'], Bool>, b: Assume<this['_2'], Bool>) => And3<typeof a, typeof b, C>;
 }
 export interface And3$$$ extends HKT3 {
   new: (
@@ -494,9 +447,7 @@ export interface And3$$$ extends HKT3 {
   ) => And3<typeof a, typeof b, typeof c>;
 }
 
-export type Path<T extends Str | List> = T extends Str
-  ? List.ToReadonly<_ParsePath<T>>
-  : T;
+export type Path<T extends Str | List> = T extends Str ? List.ToReadonly<_ParsePath<T>> : T;
 type _ParsePath<
   S extends Str,
   Prev extends Str = '',
@@ -529,6 +480,4 @@ type _ParsePath<
     ? _ParsePath<R, '', L, False, StringQuote, _AppendPrev<Result, Prev>>
     : _ParsePath<R, `${Prev}${L}`, L, False, StringQuote, Result>
   : _AppendPrev<Result, Prev>;
-type _AppendPrev<AS extends List<Str>, S extends Str> = S extends ''
-  ? AS
-  : [...AS, S];
+type _AppendPrev<AS extends List<Str>, S extends Str> = S extends '' ? AS : [...AS, S];

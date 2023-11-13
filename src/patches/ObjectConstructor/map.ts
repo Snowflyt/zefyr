@@ -20,11 +20,7 @@ declare global {
      */
     map<const O extends object, const R extends readonly [string, unknown]>(
       o: O,
-      callbackfn: (
-        entry: StrictEntries<O>[number],
-        index: number,
-        object: O,
-      ) => R,
+      callbackfn: (entry: StrictEntries<O>[number], index: number, object: O) => R,
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       thisArg?: any,
     ): { [P in R[0]]: R[1] };

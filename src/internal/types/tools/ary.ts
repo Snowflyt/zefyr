@@ -109,9 +109,6 @@ export declare namespace Ary {
     new: (as: Assume<this['_1'], Ary>) => Mix<typeof as, T>;
   }
   interface Mix$$ extends HKT2 {
-    new: (
-      as: Assume<this['_1'], Ary>,
-      x: Assume<this['_2'], unknown>,
-    ) => Mix<typeof as, typeof x>;
+    new: (as: Assume<this['_1'], Ary>, x: Assume<this['_2'], unknown>) => Mix<typeof as, typeof x>;
   }
 }

@@ -12,8 +12,6 @@ export type First<AS extends readonly unknown[]> = number extends AS['length']
  * first(arr); // => 1
  * ```
  */
-const first = <AS extends unknown[] | readonly unknown[]>(
-  array: AS,
-): First<AS> => array[0];
+const first = <AS extends unknown[] | readonly unknown[]>(array: AS): First<AS> => array[0];
 
 export default first;

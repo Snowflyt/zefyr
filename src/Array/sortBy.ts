@@ -12,10 +12,7 @@ import type { Ord } from '../internal/types/alias';
  * sortBy(objs, prop('a'), prop('b')); // => [{ a: 1, b: 4 }, { a: 3, b: 1 }, { a: 3, b: 2 }]
  * ```
  */
-const sortBy = <T>(
-  array: T[] | readonly T[],
-  ...fns: Array<(value: T) => Ord>
-): T[] => {
+const sortBy = <T>(array: T[] | readonly T[], ...fns: Array<(value: T) => Ord>): T[] => {
   const result = [...array];
   result.sort((a, b) => {
     for (const fn of fns) {

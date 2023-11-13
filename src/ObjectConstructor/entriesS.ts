@@ -7,10 +7,10 @@ export type StrictEntries<T extends object> = keyof T extends symbol
   : number extends keyof T
   ? [`${Exclude<keyof T, symbol>}`, T[Exclude<keyof T, symbol>]][]
   : _StrictEntries<T, ListOf<keyof T>>[];
-type _StrictEntries<
-  T,
-  TKeys extends readonly (string | number | symbol)[],
-> = TKeys extends [infer THead, ...infer TTail]
+type _StrictEntries<T, TKeys extends readonly (string | number | symbol)[]> = TKeys extends [
+  infer THead,
+  ...infer TTail,
+]
   ? THead extends keyof T
     ? TTail extends (string | number | symbol)[]
       ? THead extends symbol

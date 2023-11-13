@@ -16,8 +16,7 @@ type Falsy = null | undefined | false | '' | 0 | 0n;
  * arr.compact(); // => [1, 2, 3]
  * ```
  */
-const compact = <AS extends unknown[] | readonly unknown[]>(
-  array: AS,
-): Compact<AS> => array.filter((v) => !!v) as Compact<AS>;
+const compact = <AS extends unknown[] | readonly unknown[]>(array: AS): Compact<AS> =>
+  array.filter((v) => !!v) as Compact<AS>;
 
 export default compact;

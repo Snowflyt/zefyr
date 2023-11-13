@@ -27,7 +27,6 @@ export type NonNullish<T> = Exclude<T, null | undefined>;
  *
  * @see {@link isNullish}
  */
-const isNonNullish = <T>(value: T): value is NonNullish<T> =>
-  value !== null && value !== undefined;
+const isNonNullish = <T>(value: T): value is NonNullish<T> => value !== null && value !== undefined;
 
 export default isNonNullish;

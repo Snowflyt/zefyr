@@ -12,9 +12,7 @@ describe('groupBy', () => {
       b: { value: 2, nested: { v: 2 } },
       c: { value: 2, nested: { v: 3 } },
     };
-    expect(
-      ex(obj).groupBy(([, value]) => (value % 2 === 0 ? 'even' : 'odd')),
-    ).toEqual({
+    expect(ex(obj).groupBy(([, value]) => (value % 2 === 0 ? 'even' : 'odd'))).toEqual({
       odd: [1],
       even: [42, 2],
     });

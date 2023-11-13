@@ -31,10 +31,7 @@ export type MethodKey<T> = IsAny<T> extends true
       | 'reverse'
       | 'trimIndent'
   : _MethodKey<T, ListOf<keyof T>>;
-type _MethodKey<T, AS extends readonly PropertyKey[]> = AS extends readonly [
-  infer A,
-  ...infer B,
-]
+type _MethodKey<T, AS extends readonly PropertyKey[]> = AS extends readonly [infer A, ...infer B]
   ? A extends keyof T
     ? B extends readonly PropertyKey[]
       ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -66,8 +63,6 @@ const iv =
     <const T, const P extends MethodKey<T>>(name: P) =>
     // @ts-expect-error - TS doesn't know T[P] is a function
     (x: T): ReturnType<T[P]> =>
-      (
-        x[name as unknown as keyof T] as (...args: unknown[]) => unknown
-      )() as never;
+      (x[name as unknown as keyof T] as (...args: unknown[]) => unknown)() as never;
 
 export default iv;

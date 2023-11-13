@@ -30,7 +30,6 @@ type _Words<
  * const trafficLightsState = words(trafficLights); // trafficLightsState :: string[]
  * ```
  */
-const words = <S extends string>(str: S): Words<S> =>
-  str.trim().split(/\s+/) as Words<S>;
+const words = <S extends string>(str: S): Words<S> => str.trim().split(/\s+/) as Words<S>;
 
 export default words;

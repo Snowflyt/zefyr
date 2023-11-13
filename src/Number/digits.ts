@@ -17,9 +17,7 @@ import type { CallableArray } from '../CallableArray';
  * digits(12345)(100); // => [45, 23, 1]
  * ```
  */
-const digits = (
-  n: number,
-): CallableArray<number, (radix?: number) => number[]> => {
+const digits = (n: number): CallableArray<number, (radix?: number) => number[]> => {
   const digits = (radix: number = 10): number[] => {
     const result: number[] = [];
     let num = n;

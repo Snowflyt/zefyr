@@ -16,11 +16,7 @@ const dropUntil = <AS extends readonly unknown[]>(
   pred: (value: AS[number], index: number, array: AS) => boolean,
 ): Ary.Mutate<AS, AS[number]> => {
   const index = array.findIndex(
-    pred as (
-      value: AS[number],
-      index: number,
-      array: readonly AS[number][],
-    ) => boolean,
+    pred as (value: AS[number], index: number, array: readonly AS[number][]) => boolean,
   );
   return index === -1 ? [] : array.slice(index);
 };

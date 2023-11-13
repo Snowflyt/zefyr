@@ -10,7 +10,6 @@ import { format as formatDate } from 'date-fns';
  *
  * @see {@link https://date-fns.org/v2.30.0/docs/format}
  */
-const format = (date: Date, ...args: Parameters<Date['format']>) =>
-  formatDate(date, ...args);
+const format = (date: Date, ...args: Parameters<Date['format']>) => formatDate(date, ...args);
 
 export default format;

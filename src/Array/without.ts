@@ -59,13 +59,9 @@ type WillBeExcluded<A, TS extends readonly unknown[]> = ExcludeBySequence<
  *
  * @see {@link equals}
  */
-const without = <
-  const AS extends readonly unknown[],
-  const BS extends readonly AS[number][],
->(
+const without = <const AS extends readonly unknown[], const BS extends readonly AS[number][]>(
   array: AS,
   ...values: BS
-): Without<AS, BS> =>
-  array.filter((a) => !values.some((b) => equals(a, b))) as Without<AS, BS>;
+): Without<AS, BS> => array.filter((a) => !values.some((b) => equals(a, b))) as Without<AS, BS>;
 
 export default without;

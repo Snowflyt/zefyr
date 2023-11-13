@@ -132,9 +132,7 @@ type _ParsePath<
     ? _ParsePath<R, '', L, false, TStringQuote, AppendPrev<TResult, TPrev>>
     : _ParsePath<R, `${TPrev}${L}`, L, false, TStringQuote, TResult>
   : AppendPrev<TResult, TPrev>;
-type AppendPrev<AS extends readonly string[], S extends string> = S extends ''
-  ? AS
-  : [...AS, S];
+type AppendPrev<AS extends readonly string[], S extends string> = S extends '' ? AS : [...AS, S];
 
 const parsePath = <const P extends string>(path: P): ParsePath<P> => {
   let prev = '';
@@ -315,11 +313,7 @@ type _GetByPath<O, P extends readonly unknown[]> = P extends readonly []
     ? __GetByPath<Exclude<O, undefined>, L, R> | undefined
     : __GetByPath<O, L, R>
   : undefined;
-type __GetByPath<
-  O,
-  L,
-  R extends readonly unknown[],
-> = O extends readonly unknown[]
+type __GetByPath<O, L, R extends readonly unknown[]> = O extends readonly unknown[]
   ? `${number}` extends L
     ? _GetByPath<O[number], R> | undefined
     : L extends `${number}`
@@ -354,9 +348,7 @@ type PathExtensions<P> = {
    * ```
    */
   satisfies: <O extends object>(
-    pred: P extends BasePath<O> | BasePathArray<O>
-      ? (value: GetByPath<O, P>) => boolean
-      : never,
+    pred: P extends BasePath<O> | BasePathArray<O> ? (value: GetByPath<O, P>) => boolean : never,
   ) => (o: O) => boolean;
   /**
    * Returns `true` if the value of the path is equal to the given value (using `===`).
@@ -732,15 +724,13 @@ export type PathFn<O = any, P = any> = ((
  */
 const path = <
   const O extends object,
-  const P extends object extends O
-    ? string | readonly string[]
-    : BasePath<O> | BasePathArray<O>,
+  const P extends object extends O ? string | readonly string[] : BasePath<O> | BasePathArray<O>,
 >(
   path: P,
 ): PathFn<O, P> => {
-  const parsedPath = (
-    Array.isArray(path) ? path : parsePath(path as string)
-  ) as P extends string ? ParsePath<P> : P;
+  const parsedPath = (Array.isArray(path) ? path : parsePath(path as string)) as P extends string
+    ? ParsePath<P>
+    : P;
 
   const result = (o: object): unknown => {
     let result: unknown = o;
@@ -755,8 +745,7 @@ const path = <
     return result;
   };
 
-  const _satisfies = (pred: (value: unknown) => boolean) => (o: object) =>
-    pred(result(o));
+  const _satisfies = (pred: (value: unknown) => boolean) => (o: object) => pred(result(o));
   const _eq = (value: unknown) => (o: object) => value === result(o);
   const _eqW = (value: unknown) => _eq(value);
   const _notEq = (value: unknown) => (o: object) => value !== result(o);
@@ -767,24 +756,19 @@ const path = <
   const _notLooselyEqW = (value: unknown) => _notLooselyEq(value);
   const _equals = (value: unknown) => (o: object) => equals(value, result(o));
   const _equalsW = (value: unknown) => _equals(value);
-  const _notEquals = (value: unknown) => (o: object) =>
-    !equals(value, result(o));
+  const _notEquals = (value: unknown) => (o: object) => !equals(value, result(o));
   const _notEqualsW = (value: unknown) => _notEquals(value);
   const _is = (value: unknown) => (o: object) => is(value, result(o));
   const _isW = (value: unknown) => _is(value);
   const _isNot = (value: unknown) => (o: object) => !is(value, result(o));
   const _isNotW = (value: unknown) => _isNot(value);
-  const _gt = (value: unknown) => (o: object) =>
-    (result(o) as number) > (value as number);
+  const _gt = (value: unknown) => (o: object) => (result(o) as number) > (value as number);
   const _gtW = (value: unknown) => _gt(value);
-  const _gte = (value: unknown) => (o: object) =>
-    (result(o) as number) >= (value as number);
+  const _gte = (value: unknown) => (o: object) => (result(o) as number) >= (value as number);
   const _gteW = (value: unknown) => _gte(value);
-  const _lt = (value: unknown) => (o: object) =>
-    (result(o) as number) < (value as number);
+  const _lt = (value: unknown) => (o: object) => (result(o) as number) < (value as number);
   const _ltW = (value: unknown) => _lt(value);
-  const _lte = (value: unknown) => (o: object) =>
-    (result(o) as number) <= (value as number);
+  const _lte = (value: unknown) => (o: object) => (result(o) as number) <= (value as number);
   const _lteW = (value: unknown) => _lte(value);
 
   const extensions = {
@@ -816,10 +800,7 @@ const path = <
     lteW: _lteW,
   };
 
-  return Object.assign(result, { ...extensions, [zTag]: 'Path' }) as PathFn<
-    O,
-    P
-  >;
+  return Object.assign(result, { ...extensions, [zTag]: 'Path' }) as PathFn<O, P>;
 };
 
 export default path;

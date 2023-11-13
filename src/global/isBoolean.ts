@@ -16,8 +16,6 @@ import isObjectLike from './isObjectLike';
  */
 // eslint-disable-next-line @typescript-eslint/ban-types
 const isBoolean = (value: unknown): value is boolean | Boolean =>
-  value === true ||
-  value === false ||
-  (isObjectLike(value) && getTag(value) === 'Boolean');
+  value === true || value === false || (isObjectLike(value) && getTag(value) === 'Boolean');
 
 export default isBoolean;

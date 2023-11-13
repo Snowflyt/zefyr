@@ -10,7 +10,6 @@
  * isNumberPrimitive(''); // => false
  * ```
  */
-const isNumberPrimitive = (value: unknown): value is number =>
-  typeof value === 'number';
+const isNumberPrimitive = (value: unknown): value is number => typeof value === 'number';
 
 export default isNumberPrimitive;
