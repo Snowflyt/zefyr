@@ -24,8 +24,7 @@ export default defineConfig((configEnv) => ({
       entry: path.resolve('src', 'zefyr.min.ts'),
       name: 'zefyr',
       formats: ['es', 'umd'],
-      fileName: (format) =>
-        format === 'es' ? 'zefyr.min.js' : `zefyr.${format}.min.js`,
+      fileName: (format) => (format === 'es' ? 'zefyr.min.js' : `zefyr.${format}.min.js`),
     },
   },
 }));

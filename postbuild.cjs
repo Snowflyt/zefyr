@@ -1,5 +1,7 @@
 // @ts-check
 
+/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument */
+
 const fs = require('node:fs');
 const path = require('node:path');
 
@@ -19,10 +21,7 @@ fs.writeFileSync(
     .replace('"types": "./dist/zefyr.min.d.ts"', '"types": "./index.d.ts"'),
 );
 
-fs.appendFileSync(
-  MIN_DTS_FILE_PATHNAME,
-  fs.readFileSync('global-declarations-temp.d.ts', 'utf-8'),
-);
+fs.appendFileSync(MIN_DTS_FILE_PATHNAME, fs.readFileSync('global-declarations-temp.d.ts', 'utf-8'));
 fs.rmSync('global-declarations-temp.d.ts');
 
 /**
@@ -34,10 +33,7 @@ const refactorCode = (filePath) => {
 
   for (const statement of sourceFile.getStatements()) {
     const text = statement.getText();
-    if (
-      /^\s*export\s+declare\s+const/.test(text) ||
-      /^\s*export\s+{/.test(text)
-    ) {
+    if (/^\s*export\s+declare\s+const/.test(text) || /^\s*export\s+{/.test(text)) {
       if (
         text
           .replace(/^\s*export\s+declare\s+const/, '')
@@ -45,24 +41,17 @@ const refactorCode = (filePath) => {
           .startsWith('patch: ')
       )
         statement.replaceWithText(
-          'declare global {\n' +
-            text.replace(/^\s*export\s+declare\s+const/, 'const') +
-            '\n}',
+          'declare global {\n' + text.replace(/^\s*export\s+declare\s+const/, 'const') + '\n}',
         );
       else statement.replaceWithText('\n');
-    } else if (
-      /^\s*(?:export\s+)?declare\s+((?:type)|(?:interface))/.test(text)
-    ) {
+    } else if (/^\s*(?:export\s+)?declare\s+((?:type)|(?:interface))/.test(text)) {
       const newStatementText = text.replace(
         /^\s*(?:export\s+)?declare\s+((?:type)|(?:interface))/,
         '$1',
       );
       statement.replaceWithText(newStatementText);
     } else if (/^\s*declare\s+interface/.test(text)) {
-      const newStatementText = text.replace(
-        /^\s*declare\s+interface/,
-        'interface',
-      );
+      const newStatementText = text.replace(/^\s*declare\s+interface/, 'interface');
       statement.replaceWithText(newStatementText);
     }
   }
@@ -112,15 +101,11 @@ const refactorCode = (filePath) => {
 
 refactorCode(MIN_DTS_FILE_PATHNAME);
 
-const prettierConfig = prettier.resolveConfig.sync(
-  path.join(__dirname, 'prettier.config.cjs'),
-);
-const formatted = prettier.format(
-  fs.readFileSync(MIN_DTS_FILE_PATHNAME, 'utf-8'),
-  {
-    ...prettierConfig,
-    parser: 'typescript',
-  },
-);
+const prettierConfig = prettier.resolveConfig.sync(path.join(__dirname, 'prettier.config.cjs'));
+const formatted = prettier.format(fs.readFileSync(MIN_DTS_FILE_PATHNAME, 'utf-8'), {
+  ...prettierConfig,
+  parser: 'typescript',
+  printWidth: 80,
+});
 
 fs.writeFileSync(MIN_DTS_FILE_PATHNAME, formatted);

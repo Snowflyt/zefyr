@@ -20,7 +20,7 @@
   "types": "./index.d.ts",
   "scripts": {
     "prebuild": "npm run clean",
-    "build": "tsc -p ./tsconfig.build.json && rimraf ./dist/zefyr.min.js && rimraf ./dist/zefyr.min.d.ts && rimraf ./dist/zefyr.min.d.ts.map && tsc-alias -p ./tsconfig.build.json && cpy ./dist/**/* ./build/ && rimraf dist && prettier --loglevel=silent --write ./build/ && node prebuild.cjs && vite build && cpy ./dist/*.min.js ./build/ && cpy ./dist/*.min.d.ts ./build/ && rimraf dist && cpy ./package.json ./build/ && cpy ./README.md ./build/ && cpy ./LICENSE ./build/",
+    "build": "tsc -p ./tsconfig.build.json && rimraf ./dist/zefyr.min.js && rimraf ./dist/zefyr.min.d.ts && rimraf ./dist/zefyr.min.d.ts.map && tsc-alias -p ./tsconfig.build.json && cpy ./dist/**/* ./build/ && rimraf dist && prettier --loglevel=silent --print-width 80 --write ./build/ && node prebuild.cjs && vite build && cpy ./dist/*.min.js ./build/ && cpy ./dist/*.min.d.ts ./build/ && rimraf dist && cpy ./package.json ./build/ && replace-in-file \"  \\\"private\\\": true,\" \"\" ./build/package.json && prettier --loglevel=silent --print-width 80 --write ./build/package.json && cpy ./README.md ./build/ && cpy ./LICENSE ./build/",
     "postbuild": "node postbuild.cjs",
     "clean": "rimraf dist build",
     "format": "prettier --write {src,test}/**/*.{json,js,jsx,ts,tsx}",
@@ -54,6 +54,7 @@
     "prettier": "^2.8.8",
     "prettier-plugin-packagejson": "^2.4.5",
     "ramda": "^0.29.0",
+    "replace-in-file": "^7.0.2",
     "rimraf": "^5.0.1",
     "ts-morph": "^20.0.0",
     "ts-toolbelt": "^9.6.0",
