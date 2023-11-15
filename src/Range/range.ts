@@ -19,7 +19,6 @@ export interface Range extends ReadonlyArray<number> {
    */
   readonly length: number;
 
-  readonly [n: number]: number;
   readonly [Symbol.iterator]: () => IterableIterator<number>;
 
   /**
