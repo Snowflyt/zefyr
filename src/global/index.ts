@@ -1,6 +1,7 @@
 export { default as clone } from './clone';
 export { default as cloneDeep } from './cloneDeep';
 export { default as curried } from './curried';
+export { default as enumerate } from './enumerate';
 export { default as equals } from './equals';
 export { default as iv } from './iv';
 export { default as list } from './list';

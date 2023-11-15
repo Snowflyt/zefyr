@@ -1,6 +1,7 @@
 import './clone';
 import './cloneDeep';
 import './curried';
+import './enumerate';
 import './equals';
 import './iv';
 import './list';
