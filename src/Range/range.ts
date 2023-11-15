@@ -23,6 +23,18 @@ export interface Range extends ReadonlyArray<number> {
   readonly [Symbol.iterator]: () => IterableIterator<number>;
 
   /**
+   * Returns a range with the same start, end, and step.
+   *
+   * @example
+   * ```typescript
+   * const rg = range(2, 5, 2);
+   * rg; // => 2..5 by 2
+   * rg.clone(); // => 2..5 by 2
+   * ```
+   */
+  readonly clone: () => this;
+
+  /**
    * Convert the range to an array.
    *
    * @example
