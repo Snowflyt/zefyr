@@ -34,6 +34,19 @@ export interface Range extends ReadonlyArray<number> {
    * ```
    */
   readonly toArray: () => number[];
+
+  /**
+   * Returns a string representation of the range.
+   *
+   * @example
+   * ```typescript
+   * range(3).toString(); // => '0..3'
+   * range(2, 5).toString(); // => '2..5'
+   * range(2, 5, 2).toString(); // => '2..5 by 2'
+   * range(5, 2, -1).toString(); // => '5..2 by -1'
+   * ```
+   */
+  readonly toString: () => string;
 }
 
 const range: {
@@ -92,6 +105,11 @@ const range: {
     return cachedArray;
   };
 
+  const toString = () => {
+    if (step === 1) return `${start}..${end}`;
+    return `${start}..${end} by ${step}`;
+  };
+
   const result = {
     start,
     end,
@@ -112,6 +130,8 @@ const range: {
     },
 
     toArray,
+
+    toString,
   } as Range;
 
   const ownKeys = Object.getOwnPropertyNames(result);
