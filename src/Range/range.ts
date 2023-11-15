@@ -2,15 +2,38 @@
  * An iterable object representing a range of numbers.
  */
 export interface Range extends ReadonlyArray<number> {
-  start: number;
-  end: number;
-  step: number;
-  length: number;
+  /**
+   * Start of the range.
+   */
+  readonly start: number;
+  /**
+   * End of the range (exclusive).
+   */
+  readonly end: number;
+  /**
+   * Step size of the range.
+   */
+  readonly step: number;
+  /**
+   * Gets or the length of the range.
+   */
+  readonly length: number;
 
-  [n: number]: number;
-  [Symbol.iterator](): IterableIterator<number>;
+  readonly [n: number]: number;
+  readonly [Symbol.iterator]: () => IterableIterator<number>;
 
-  toArray(): number[];
+  /**
+   * Convert the range to an array.
+   *
+   * @example
+   * ```typescript
+   * range(3).toArray(); // => [0, 1, 2]
+   * range(2, 5).toArray(); // => [2, 3, 4]
+   * range(2, 5, 2).toArray(); // => [2, 4]
+   * range(5, 2, -1).toArray(); // => [5, 4, 3]
+   * ```
+   */
+  readonly toArray: () => number[];
 }
 
 const range: {
@@ -47,6 +70,13 @@ const range: {
    */
   (end: number): Range;
 } = (startOrEnd: number, _end?: number, step: number = 1): Range => {
+  if (!Number.isInteger(startOrEnd))
+    if (_end === undefined) throw new TypeError('end of range must be an integer');
+    else throw new TypeError('start of range must be an integer');
+  if (_end !== undefined && !Number.isInteger(_end))
+    throw new TypeError('end of range must be an integer');
+  if (!Number.isInteger(step)) throw new TypeError('step of range must be an integer');
+
   const start = _end === undefined ? 0 : startOrEnd;
   const end = _end === undefined ? startOrEnd : _end;
 
