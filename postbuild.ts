@@ -1,12 +1,12 @@
-// @ts-check
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument */
+// @ts-expect-error - `prettier` is not typed
+import prettier from 'prettier';
+import { Project, ts } from 'ts-morph';
 
-const fs = require('node:fs');
-const path = require('node:path');
-
-const prettier = require('prettier');
-const { Project, ts } = require('ts-morph');
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const MIN_FILE_PATHNAME = path.join(__dirname, 'src', 'zefyr.min.ts');
 const MIN_DTS_FILE_PATHNAME = path.join(__dirname, 'build', 'zefyr.min.d.ts');
@@ -24,10 +24,7 @@ fs.writeFileSync(
 fs.appendFileSync(MIN_DTS_FILE_PATHNAME, fs.readFileSync('global-declarations-temp.d.ts', 'utf-8'));
 fs.rmSync('global-declarations-temp.d.ts');
 
-/**
- * @param {string} filePath
- */
-const refactorCode = (filePath) => {
+const refactorCode = (filePath: string) => {
   const project = new Project();
   const sourceFile = project.addSourceFileAtPath(filePath);
 
@@ -101,8 +98,10 @@ const refactorCode = (filePath) => {
 
 refactorCode(MIN_DTS_FILE_PATHNAME);
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 const prettierConfig = prettier.resolveConfig.sync(path.join(__dirname, 'prettier.config.cjs'));
-const formatted = prettier.format(fs.readFileSync(MIN_DTS_FILE_PATHNAME, 'utf-8'), {
+// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+const formatted: string = prettier.format(fs.readFileSync(MIN_DTS_FILE_PATHNAME, 'utf-8'), {
   ...prettierConfig,
   parser: 'typescript',
   printWidth: 80,

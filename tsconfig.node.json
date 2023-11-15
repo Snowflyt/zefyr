@@ -8,5 +8,5 @@
     "forceConsistentCasingInFileNames": true,
     "strict": true
   },
-  "include": ["prebuild.cjs", "postbuild.cjs", "vite.config.ts", "package.json"]
+  "include": ["prebuild.ts", "postbuild.ts", "vite.config.ts", "vitest.config.ts", "package.json"]
 }

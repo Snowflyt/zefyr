@@ -1,13 +1,13 @@
-// @ts-check
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-/* eslint-disable @typescript-eslint/no-var-requires, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument */
+// @ts-expect-error - `prettier` is not typed
+import prettier from 'prettier';
+import * as R from 'ramda';
+import { Project } from 'ts-morph';
 
-const fs = require('node:fs');
-const path = require('node:path');
-
-const prettier = require('prettier');
-const R = require('ramda');
-const { Project } = require('ts-morph');
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const MIN_FILE_PATHNAME = path.join(__dirname, 'src', 'zefyr.min.ts');
 const PACKAGEJSON_PATHNAME = path.join(__dirname, 'package.json');
@@ -19,18 +19,16 @@ fs.writeFileSync(
     .replace('"types": "./index.d.ts"', '"types": "./dist/zefyr.min.d.ts"'),
 );
 
-/** @type {Record<string, { type: ReturnType<typeof resolveImport>['symbols']; value: ReturnType<typeof resolveImport>['symbols'] }>} */
-let imports = {};
-/** @type {Set<string>} */
-const symbols = new Set();
+let imports: Record<
+  string,
+  {
+    type: ReturnType<typeof resolveImport>['symbols'];
+    value: ReturnType<typeof resolveImport>['symbols'];
+  }
+> = {};
+const symbols: Set<string> = new Set();
 
-/**
- * @param {string} code
- * @param {string} oldName
- * @param {string} newName
- * @returns
- */
-const renameImport = (code, oldName, newName = '') => {
+const renameImport = (code: string, oldName: string, newName: string = '') => {
   const project = new Project({});
   const sourceFile = project.createSourceFile('temp.ts', code);
 
@@ -38,10 +36,8 @@ const renameImport = (code, oldName, newName = '') => {
   const importDeclarations = sourceFile.getImportDeclarations();
 
   // Find import
-  /** @type {string} */
-  let importPath;
-  /** @type {(newName: string) => unknown} */
-  let rename;
+  let importPath: string;
+  let rename: (newName: string) => unknown;
   for (const importDeclaration of importDeclarations) {
     // Handle default import
     const defaultImport = importDeclaration.getDefaultImport();
@@ -69,14 +65,15 @@ const renameImport = (code, oldName, newName = '') => {
 
   // If new name is not provided, generate a new name
   if (newName === '') {
-    /**
-     * @param {string} str
-     * @returns
-     */
-    const capitalize = (str) => (str.length > 0 ? str[0].toUpperCase() + str.slice(1) : str);
+    const capitalize = (str: string) =>
+      str.length > 0 ? str[0].toUpperCase() + str.slice(1) : str;
 
     // @ts-expect-error - `importPath` should be assigned
-    const module = importPath.split('/').findLast((s) => s === 'global' || /^[A-Z]$/.test(s[0]));
+    const _importPath = importPath;
+    const module = _importPath
+      .split('/')
+      .reverse()
+      .find((s) => s === 'global' || /^[A-Z]$/.test(s[0]));
     if (module) {
       if (oldName.startsWith('is') && oldName.length > 2 && oldName[2] === oldName[2].toUpperCase())
         newName = `is${capitalize(module)}${oldName.slice(2)}`;
@@ -108,10 +105,12 @@ const renameImport = (code, oldName, newName = '') => {
   return sourceFile.getFullText();
 };
 
-/**
- * @param {{ defaultSymbol: string; nonDefaultSymbols: (string | [string, string])[]; type: 'value' | 'type'; path: string }} options
- */
-const stringifyImport = (options) => {
+const stringifyImport = (options: {
+  defaultSymbol: string;
+  nonDefaultSymbols: (string | [string, string])[];
+  type: 'value' | 'type';
+  path: string;
+}) => {
   const { defaultSymbol, nonDefaultSymbols, path, type } = options;
   let result = 'import ';
   if (type === 'type') result += 'type ';
@@ -134,13 +133,11 @@ const stringifyImport = (options) => {
   return result;
 };
 
-/**
- * @param {string} statement
- * @returns
- */
-const resolveImport = (statement) => {
+const resolveImport = (statement: string) => {
   const trimmed = statement.trim();
-  const type = trimmed.split('import', 2)[1].trim().startsWith('type') ? 'type' : 'value';
+  const type: 'type' | 'value' = trimmed.split('import', 2)[1].trim().startsWith('type')
+    ? 'type'
+    : 'value';
   const withoutHead = trimmed.replace(/^import\s+/, '').replace(/^type\s+/, '');
   const symbols = withoutHead.startsWith('{')
     ? {
@@ -154,28 +151,17 @@ const resolveImport = (statement) => {
           .map((s) => {
             const match = s.match(/^(\S+)\s+as\s+(\S+)$/);
             if (!match) return s;
-            /** @type {[string, string]} */
-            const result = [match[1], match[2]];
+            const result: [string, string] = [match[1], match[2]];
             return result;
           })
           .map((s) => s),
       }
     : { default: withoutHead.split(/\s+/, 2)[0].trim(), nonDefault: [] };
   const path = trimmed.match(/'(.*)'/)?.[1] ?? '';
-  return {
-    statement,
-    /** @type {'value' | 'type'} */
-    type: type,
-    symbols,
-    path,
-  };
+  return { statement, type, symbols, path };
 };
 
-/**
- * @param {string} content
- * @returns {string[]}
- */
-const extractImports = (content) =>
+const extractImports = (content: string): string[] =>
   content
     .split('\n')
     .map((line) => line.trim())
@@ -187,16 +173,11 @@ const patchesDir = path.join(__dirname, 'src', 'patches');
 const patchesIndex = path.join(patchesDir, 'index.ts');
 const modules = extractImports(fs.readFileSync(patchesIndex, 'utf-8'));
 
-/**
- * @param {string} code
- * @returns {string}
- */
-const renameDuplicateImports = (code) => {
+const renameDuplicateImports = (code: string): string => {
   const lines = code.split('\n');
 
   let final = true;
-  /** @type {ReturnType<typeof resolveImport>[]} */
-  const resolves = [];
+  const resolves: ReturnType<typeof resolveImport>[] = [];
 
   let i = 0;
   for (; i < lines.length; i++) {
@@ -394,12 +375,7 @@ for (const [path, { type: typeSymbols, value: valueSymbols }] of Object.entries(
   }
 }
 
-/**
- * @param {string} a
- * @param {string} b
- * @returns {number}
- */
-const compareImportPaths = (a, b) => {
+const compareImportPaths = (a: string, b: string): number => {
   const aPath = (a.match(/'(.*)'/) ?? ['', ''])[1];
   const bPath = (b.match(/'(.*)'/) ?? ['', ''])[1];
   if (aPath < bPath) return -1;
@@ -413,9 +389,9 @@ relativeTypeImports.sort(compareImportPaths);
 
 // Export
 /** @type {string[]} */
-const valueExports = [];
+const valueExports: string[] = [];
 /** @type {string[]} */
-const typeExports = [];
+const typeExports: string[] = [];
 for (const [, { type: typeSymbols, value: valueSymbols }] of Object.entries(imports)) {
   if (valueSymbols.default) valueExports.push(valueSymbols.default);
   valueExports.push(...valueSymbols.nonDefault.map((s) => (typeof s === 'string' ? s : s[1])));
@@ -444,8 +420,10 @@ const result = [
   .join('\n')
   .replace(/\n{3,}/g, '\n\n');
 
+// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 const prettierConfig = prettier.resolveConfig.sync(path.join(__dirname, 'prettier.config.cjs'));
-const formatted = prettier.format(result, {
+// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+const formatted: string = prettier.format(result, {
   ...prettierConfig,
   parser: 'typescript',
 });

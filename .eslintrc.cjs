@@ -15,7 +15,7 @@ const config = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.eslint.json'],
+    project: ['./tsconfig.json', './tsconfig.node.json', './tsconfig.eslint.json'],
     tsconfigRootDir: __dirname,
   },
   plugins: ['sort-destructure-keys'],
