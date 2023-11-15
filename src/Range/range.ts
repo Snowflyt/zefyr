@@ -105,6 +105,8 @@ const range: {
         }
         if (ownKeys.includes(prop)) return target[prop as keyof Range];
 
+        if (prop === 'clone') return () => range(start, end, step);
+
         const array = toArray();
         const res = array[prop as keyof typeof array];
         if (typeof res === 'function') return res.bind(array);
